@@ -143,21 +143,28 @@ function responseToIRTypeRef(
 export function schemaToIRType(
   schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject,
   types: Map<string, IRNamedType>,
+  visited: Set<unknown> = new Set(),
 ): IRType {
   if ('$ref' in schema) {
     const name = schema.$ref.split('/').pop() ?? 'unknown';
     return { kind: 'ref', name };
   }
 
+  // Guard against circular references in bundled specs
+  if (visited.has(schema)) {
+    return { kind: 'unknown' };
+  }
+  visited.add(schema);
+
   const s = schema as OpenAPIV3.SchemaObject;
 
   // Handle composition keywords
   if (s.allOf) {
-    const composed = s.allOf.map(sub => schemaToIRType(sub as OpenAPIV3.SchemaObject, types));
+    const composed = s.allOf.map(sub => schemaToIRType(sub as OpenAPIV3.SchemaObject, types, visited));
     return composed.length === 1 ? composed[0]! : { kind: 'intersection', types: composed };
   }
   if (s.oneOf ?? s.anyOf) {
-    const variants = (s.oneOf ?? s.anyOf)!.map(sub => schemaToIRType(sub as OpenAPIV3.SchemaObject, types));
+    const variants = (s.oneOf ?? s.anyOf)!.map(sub => schemaToIRType(sub as OpenAPIV3.SchemaObject, types, visited));
     return variants.length === 1 ? variants[0]! : { kind: 'union', types: variants };
   }
 
@@ -171,12 +178,12 @@ export function schemaToIRType(
     case 'boolean':
       return { kind: 'boolean' };
     case 'array':
-      return { kind: 'array', items: schemaToIRType((s.items ?? {}) as OpenAPIV3.SchemaObject, types) };
+      return { kind: 'array', items: schemaToIRType((s.items ?? {}) as OpenAPIV3.SchemaObject, types, visited) };
     case 'object':
     default: {
       if (s.additionalProperties === true || (s.additionalProperties && typeof s.additionalProperties === 'object')) {
         const valueType = typeof s.additionalProperties === 'object'
-          ? schemaToIRType(s.additionalProperties as OpenAPIV3.SchemaObject, types)
+          ? schemaToIRType(s.additionalProperties as OpenAPIV3.SchemaObject, types, visited)
           : { kind: 'unknown' as const };
         return { kind: 'record', values: valueType };
       }
@@ -188,7 +195,7 @@ export function schemaToIRType(
           name,
           required: required.has(name),
           readonly: ps.readOnly ?? false,
-          type: schemaToIRType(ps, types),
+          type: schemaToIRType(ps, types, visited),
           ...(ps.description !== undefined ? { description: ps.description } : {}),
           deprecated: ps.deprecated ?? false,
         };

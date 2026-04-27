@@ -51,7 +51,7 @@ export async function runSpecPipeline(opts: PipelineOptions = {}): Promise<void>
 }
 
 async function processSpec(target: SpecTarget, opts: PipelineOptions): Promise<void> {
-  console.log(`\n📋 Processing: ${target.title}`);
+  console.log(`\n📋 Processing: ${target.name}`);
 
   // Step 1: Download
   if (!opts.skipDownload) {
@@ -62,10 +62,12 @@ async function processSpec(target: SpecTarget, opts: PipelineOptions): Promise<v
   const rawPath = resolve(repoRoot, target.rawPath);
 
   // Step 2: Parse and validate
+  // Use bundle (not dereference) to avoid infinite recursion on circular $refs.
+  // Circular refs are preserved as $refs in the bundled output.
   console.log('  Parsing and validating...');
   let spec: OpenAPIV3.Document;
   try {
-    spec = await SwaggerParser.dereference(rawPath) as OpenAPIV3.Document;
+    spec = await SwaggerParser.bundle(rawPath) as OpenAPIV3.Document;
     console.log(`  Valid OpenAPI spec: ${Object.keys(spec.paths ?? {}).length} paths`);
   } catch (err) {
     console.error(`  ERROR: Failed to parse ${target.id}: ${(err as Error).message}`);
