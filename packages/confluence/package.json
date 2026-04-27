@@ -1,0 +1,50 @@
+{
+  "name": "@forge-clients/confluence",
+  "version": "0.1.0",
+  "description": "Type-safe Confluence Cloud REST API client for Atlassian Forge Apps (v1 + v2)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./v2": {
+      "import": "./dist/v2/index.js",
+      "require": "./dist/v2/index.cjs",
+      "types": "./dist/v2/index.d.ts"
+    },
+    "./v1": {
+      "import": "./dist/v1/index.js",
+      "require": "./dist/v1/index.cjs",
+      "types": "./dist/v1/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "generate": "pnpm --filter @forge-clients/generator run generate -- --spec confluence-v2,confluence-v1"
+  },
+  "dependencies": {
+    "@forge-clients/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@forge/api": "^7.1.4",
+    "@forge/bridge": "^5.16.0",
+    "typescript": "^5.5.0",
+    "tsup": "^8.0.0",
+    "vitest": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": ["atlassian", "forge", "confluence", "rest-api", "typescript", "client"]
+}

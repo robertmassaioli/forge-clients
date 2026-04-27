@@ -1,0 +1,69 @@
+{
+  "name": "@forge-clients/core",
+  "version": "0.1.0",
+  "description": "Shared Forge context adapters, error types, pagination helpers and retry logic for @forge-clients",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./adapters": {
+      "import": "./dist/adapters/index.js",
+      "require": "./dist/adapters/index.cjs",
+      "types": "./dist/adapters/index.d.ts"
+    },
+    "./errors": {
+      "import": "./dist/errors/index.js",
+      "require": "./dist/errors/index.cjs",
+      "types": "./dist/errors/index.d.ts"
+    },
+    "./pagination": {
+      "import": "./dist/pagination/index.js",
+      "require": "./dist/pagination/index.cjs",
+      "types": "./dist/pagination/index.d.ts"
+    },
+    "./retry": {
+      "import": "./dist/retry/index.js",
+      "require": "./dist/retry/index.cjs",
+      "types": "./dist/retry/index.d.ts"
+    },
+    "./auth": {
+      "import": "./dist/auth/index.js",
+      "require": "./dist/auth/index.cjs",
+      "types": "./dist/auth/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "@forge/api": ">=10.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@forge/api": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@forge/api": "^7.1.4",
+    "@forge/bridge": "^5.16.0",
+    "typescript": "^5.5.0",
+    "tsup": "^8.0.0",
+    "vitest": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "@forge-clients/jira",
+  "version": "0.1.0",
+  "description": "Type-safe Jira Cloud REST API client for Atlassian Forge Apps (v2 + v3)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./v3": {
+      "import": "./dist/v3/index.js",
+      "require": "./dist/v3/index.cjs",
+      "types": "./dist/v3/index.d.ts"
+    },
+    "./v2": {
+      "import": "./dist/v2/index.js",
+      "require": "./dist/v2/index.cjs",
+      "types": "./dist/v2/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "generate": "pnpm --filter @forge-clients/generator run generate -- --spec jira-v3,jira-v2"
+  },
+  "dependencies": {
+    "@forge-clients/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@forge/api": "^7.1.4",
+    "@forge/bridge": "^5.16.0",
+    "typescript": "^5.5.0",
+    "tsup": "^8.0.0",
+    "vitest": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": ["atlassian", "forge", "jira", "rest-api", "typescript", "client"]
+}

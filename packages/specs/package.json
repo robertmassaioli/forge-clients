@@ -1,0 +1,27 @@
+{
+  "name": "@forge-clients/specs",
+  "version": "0.1.0",
+  "description": "Cleaned and patched Atlassian OpenAPI specifications for Jira and Confluence Cloud",
+  "type": "module",
+  "exports": {
+    "./jira-v3": "./src/cleaned/jira-v3.json",
+    "./jira-v2": "./src/cleaned/jira-v2.json",
+    "./confluence-v2": "./src/cleaned/confluence-v2.json",
+    "./confluence-v1": "./src/cleaned/confluence-v1.json",
+    "./jira-software": "./src/cleaned/jira-software.json",
+    "./jira-sm": "./src/cleaned/jira-sm.json"
+  },
+  "files": ["src/cleaned"],
+  "scripts": {
+    "build": "echo 'No build step needed — specs are JSON files'",
+    "typecheck": "echo 'No TypeScript sources in specs package'",
+    "clean": "rm -rf src/raw src/diffs",
+    "download": "node scripts/download-specs.js",
+    "patch": "node scripts/patch-specs.js",
+    "diff": "node scripts/diff-specs.js",
+    "update": "pnpm download && pnpm patch && pnpm diff"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# Generated files (committed separately after review)
+packages/jira/src/*.gen.ts
+packages/confluence/src/*.gen.ts
+
+# Raw downloaded specs (cleaned specs in packages/specs/src/ ARE committed)
+packages/specs/raw/
+
+# Environment
+.env
+.env.local
+
+# Editor
+.vscode/settings.json
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
