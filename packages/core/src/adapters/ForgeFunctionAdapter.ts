@@ -5,30 +5,73 @@
  * which handle all Forge authentication automatically.
  *
  * NOT available in Forge Containers — use ForgeContainerAdapter there.
+ *
+ * Authentication note:
+ * Uses assumeTrustedRoute rather than route tagged template literal because the
+ * path comes from generated code (compile-time constants), never from user input.
+ * Path manipulation is not a concern here — the security benefit of route`` does
+ * not apply to generated client paths.
  */
-
-// NOTE: @forge/api is a peer dependency, available only inside Forge Functions.
-// This adapter will throw at runtime if used outside a Forge Function context.
 
 import type { ForgeAdapter, ForgeRequestOptions } from './ForgeAdapter.js';
 
 export interface ForgeFunctionAdapterOptions {
   product: 'jira' | 'confluence';
+  /** Default auth context for all requests. Default: asApp */
+  defaultContext?: 'asApp' | 'asUser';
 }
 
 export class ForgeFunctionAdapter implements ForgeAdapter {
   readonly product: 'jira' | 'confluence';
+  private readonly defaultContext: 'asApp' | 'asUser';
 
   constructor(options: ForgeFunctionAdapterOptions) {
     this.product = options.product;
+    this.defaultContext = options.defaultContext ?? 'asApp';
   }
 
-  async fetch(_options: ForgeRequestOptions): Promise<Response> {
-    // Implementation will be completed in a later step.
-    // Requires @forge/api which is only available inside the Forge runtime.
-    throw new Error(
-      'ForgeFunctionAdapter.fetch() — implementation pending. ' +
-      'See the generator implementation phase.'
-    );
+  async fetch(options: ForgeRequestOptions): Promise<Response> {
+    // Dynamic import: @forge/api only available inside Forge runtime
+    const { default: api, assumeTrustedRoute } = await import('@forge/api');
+    const { method, path, queryParams, body, headers, authContext } = options;
+
+    const fullPath = `${path}${buildQueryString(queryParams)}`;
+
+    const useAsUser =
+      authContext.type === 'asUser' ||
+      (authContext.type === 'asApp' && this.defaultContext === 'asUser');
+
+    const userId =
+      authContext.type === 'asUser' && 'userId' in authContext
+        ? authContext.userId
+        : undefined;
+
+    const forgeCtx = useAsUser ? api.asUser(userId) : api.asApp();
+    const requestFn = this.product === 'jira'
+      ? forgeCtx.requestJira.bind(forgeCtx)
+      : forgeCtx.requestConfluence.bind(forgeCtx);
+
+    const allHeaders: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      ...headers,
+    };
+
+    const init = body !== undefined
+      ? { method, headers: allHeaders, body: JSON.stringify(body) }
+      : { method, headers: allHeaders };
+
+    return requestFn(assumeTrustedRoute(fullPath), init) as unknown as Response;
   }
+}
+
+function buildQueryString(
+  params?: Record<string, string | number | boolean | string[] | number[] | undefined>,
+): string {
+  if (!params) return '';
+  const entries = Object.entries(params)
+    .filter((e): e is [string, string | number | boolean] => e[1] !== undefined)
+    .map(([k, v]) => [k, String(v)]);
+  if (entries.length === 0) return '';
+  return '?' + new URLSearchParams(entries).toString();
 }
