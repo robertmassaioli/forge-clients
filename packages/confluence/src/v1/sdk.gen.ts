@@ -288,7 +288,7 @@ export interface MovePageParams {
  * Move a page to a new location relative to a target page
  * @forge-scopes-asApp read:jira-work
  */
-export async function movePage(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: MovePageParams): Promise<{ pageId?: Types.ContentId }> {
+export async function movePage(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: MovePageParams): Promise<{ pageId?: ContentId }> {
     const path = `/wiki/rest/api/content/${params.path.pageId}/move/${params.path.position}/${params.path.targetId}`;
     const response = await adapter.fetch({
       method: 'PUT',
@@ -296,7 +296,7 @@ export async function movePage(adapter: ForgeAdapter, authContext: AuthContext =
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<{ pageId?: Types.ContentId }>;
+    return response.json() as Promise<{ pageId?: ContentId }>;
 }
 
 export interface CreateAttachmentParams {
@@ -853,7 +853,7 @@ export interface GetRestrictionsByOperationParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getRestrictionsByOperation(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRestrictionsByOperationParams): Promise<Record<string, { operationType?: Types.ContentRestriction; _links?: Types.GenericLinks }>> {
+export async function getRestrictionsByOperation(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRestrictionsByOperationParams): Promise<Record<string, { operationType?: ContentRestriction; _links?: GenericLinks }>> {
     const path = `/wiki/rest/api/content/${params.path.id}/restriction/byOperation`;
     const queryParams = {
       expand: params.expand,
@@ -865,7 +865,7 @@ export async function getRestrictionsByOperation(adapter: ForgeAdapter, authCont
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Record<string, { operationType?: Types.ContentRestriction; _links?: Types.GenericLinks }>>;
+    return response.json() as Promise<Record<string, { operationType?: ContentRestriction; _links?: GenericLinks }>>;
 }
 
 export interface GetRestrictionsForOperationParams {

@@ -25,7 +25,7 @@ export async function getBanner(adapter: ForgeAdapter, authContext: AuthContext 
 }
 
 export interface SetBannerParams {
-    body?: AnnouncementBannerConfigurationUpdate;
+    body?: Types.AnnouncementBannerConfigurationUpdate;
 }
 
 /**
@@ -53,7 +53,7 @@ export interface GetCustomFieldsConfigurationsParams {
     issueTypeId?: string;
     startAt?: number;
     maxResults?: number;
-    body?: ConfigurationsListParameters;
+    body?: Types.ConfigurationsListParameters;
 }
 
 /**
@@ -85,7 +85,7 @@ export async function getCustomFieldsConfigurations(adapter: ForgeAdapter, authC
 
 export interface UpdateMultipleCustomFieldValuesParams {
     generateChangelog?: boolean;
-    body?: MultipleCustomFieldValuesUpdateDetails;
+    body?: Types.MultipleCustomFieldValuesUpdateDetails;
 }
 
 /**
@@ -148,7 +148,7 @@ export async function getCustomFieldConfiguration(adapter: ForgeAdapter, authCon
 
 export interface UpdateCustomFieldConfigurationParams {
     path: { fieldIdOrKey: string };
-    body?: CustomFieldConfigurations;
+    body?: Types.CustomFieldConfigurations;
 }
 
 /**
@@ -171,7 +171,7 @@ export async function updateCustomFieldConfiguration(adapter: ForgeAdapter, auth
 export interface UpdateCustomFieldValueParams {
     path: { fieldIdOrKey: string };
     generateChangelog?: boolean;
-    body?: CustomFieldValueUpdateDetails;
+    body?: Types.CustomFieldValueUpdateDetails;
 }
 
 /**
@@ -206,7 +206,7 @@ export interface GetApplicationPropertyParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getApplicationProperty(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetApplicationPropertyParams): Promise<Array<ApplicationProperty>> {
+export async function getApplicationProperty(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetApplicationPropertyParams): Promise<Array<Types.ApplicationProperty>> {
     const path = '/rest/api/3/application-properties';
     const queryParams = {
       key: params.key,
@@ -220,7 +220,7 @@ export async function getApplicationProperty(adapter: ForgeAdapter, authContext:
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ApplicationProperty>>;
+    return response.json() as Promise<Array<Types.ApplicationProperty>>;
 }
 
 /**
@@ -228,7 +228,7 @@ export async function getApplicationProperty(adapter: ForgeAdapter, authContext:
  * @forge-scopes-asApp read:jira-work, manage:jira-configuration
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAdvancedSettings(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ApplicationProperty>> {
+export async function getAdvancedSettings(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ApplicationProperty>> {
     const path = '/rest/api/3/application-properties/advanced-settings';
     const response = await adapter.fetch({
       method: 'GET',
@@ -236,12 +236,12 @@ export async function getAdvancedSettings(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ApplicationProperty>>;
+    return response.json() as Promise<Array<Types.ApplicationProperty>>;
 }
 
 export interface SetApplicationPropertyParams {
     path: { id: string };
-    body?: SimpleApplicationPropertyBean;
+    body?: Types.SimpleApplicationPropertyBean;
 }
 
 /**
@@ -266,7 +266,7 @@ export async function setApplicationProperty(adapter: ForgeAdapter, authContext:
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAllApplicationRoles(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ApplicationRole>> {
+export async function getAllApplicationRoles(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ApplicationRole>> {
     const path = '/rest/api/3/applicationrole';
     const response = await adapter.fetch({
       method: 'GET',
@@ -274,7 +274,7 @@ export async function getAllApplicationRoles(adapter: ForgeAdapter, authContext:
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ApplicationRole>>;
+    return response.json() as Promise<Array<Types.ApplicationRole>>;
 }
 
 export interface GetApplicationRoleParams {
@@ -497,7 +497,7 @@ export async function getAllSystemAvatars(adapter: ForgeAdapter, authContext: Au
 }
 
 export interface SubmitBulkDeleteParams {
-    body?: IssueBulkDeletePayload;
+    body?: Types.IssueBulkDeletePayload;
 }
 
 /**
@@ -547,7 +547,7 @@ export async function getBulkEditableFields(adapter: ForgeAdapter, authContext: 
 }
 
 export interface SubmitBulkEditParams {
-    body?: IssueBulkEditPayload;
+    body?: Types.IssueBulkEditPayload;
 }
 
 /**
@@ -567,7 +567,7 @@ export async function submitBulkEdit(adapter: ForgeAdapter, authContext: AuthCon
 }
 
 export interface SubmitBulkMoveParams {
-    body?: IssueBulkMovePayload;
+    body?: Types.IssueBulkMovePayload;
 }
 
 /**
@@ -615,7 +615,7 @@ export async function getAvailableTransitions(adapter: ForgeAdapter, authContext
 }
 
 export interface SubmitBulkTransitionParams {
-    body?: IssueBulkTransitionPayload;
+    body?: Types.IssueBulkTransitionPayload;
 }
 
 /**
@@ -635,7 +635,7 @@ export async function submitBulkTransition(adapter: ForgeAdapter, authContext: A
 }
 
 export interface SubmitBulkUnwatchParams {
-    body?: IssueBulkWatchOrUnwatchPayload;
+    body?: Types.IssueBulkWatchOrUnwatchPayload;
 }
 
 /**
@@ -655,7 +655,7 @@ export async function submitBulkUnwatch(adapter: ForgeAdapter, authContext: Auth
 }
 
 export interface SubmitBulkWatchParams {
-    body?: IssueBulkWatchOrUnwatchPayload;
+    body?: Types.IssueBulkWatchOrUnwatchPayload;
 }
 
 /**
@@ -695,7 +695,7 @@ export async function getBulkOperationProgress(adapter: ForgeAdapter, authContex
 }
 
 export interface GetBulkChangelogsParams {
-    body?: BulkChangelogRequestBean;
+    body?: Types.BulkChangelogRequestBean;
 }
 
 /**
@@ -743,7 +743,7 @@ export async function getAllUserDataClassificationLevels(adapter: ForgeAdapter, 
 
 export interface GetCommentsByIdsParams {
     expand?: string;
-    body?: IssueCommentListRequestBean;
+    body?: Types.IssueCommentListRequestBean;
 }
 
 /**
@@ -881,7 +881,7 @@ export async function findComponentsForProjects(adapter: ForgeAdapter, authConte
 }
 
 export interface CreateComponentParams {
-    body?: ProjectComponent;
+    body?: Types.ProjectComponent;
 }
 
 /**
@@ -923,7 +923,7 @@ export async function getComponent(adapter: ForgeAdapter, authContext: AuthConte
 
 export interface UpdateComponentParams {
     path: { id: string };
-    body?: ProjectComponent;
+    body?: Types.ProjectComponent;
 }
 
 /**
@@ -1018,7 +1018,7 @@ export async function getFieldAssociationSchemes(adapter: ForgeAdapter, authCont
 }
 
 export interface CreateFieldAssociationSchemeParams {
-    body?: CreateFieldAssociationSchemeRequest;
+    body?: Types.CreateFieldAssociationSchemeRequest;
 }
 
 /**
@@ -1039,7 +1039,7 @@ export async function createFieldAssociationScheme(adapter: ForgeAdapter, authCo
 }
 
 export interface UpdateFieldsAssociatedWithSchemesParams {
-    body?: Record<string, Array<UpdateFieldAssociationsRequestItem>>;
+    body?: Record<string, Array<Types.UpdateFieldAssociationsRequestItem>>;
 }
 
 /**
@@ -1060,7 +1060,7 @@ export async function updateFieldsAssociatedWithSchemes(adapter: ForgeAdapter, a
 }
 
 export interface RemoveFieldsAssociatedWithSchemesParams {
-    body?: Record<string, RemoveFieldAssociationsRequestItem>;
+    body?: Record<string, Types.RemoveFieldAssociationsRequestItem>;
 }
 
 /**
@@ -1081,7 +1081,7 @@ export async function removeFieldsAssociatedWithSchemes(adapter: ForgeAdapter, a
 }
 
 export interface UpdateFieldAssociationSchemeItemParametersParams {
-    body?: Record<string, Array<UpdateFieldSchemeParametersRequest>>;
+    body?: Record<string, Array<Types.UpdateFieldSchemeParametersRequest>>;
 }
 
 /**
@@ -1102,7 +1102,7 @@ export async function updateFieldAssociationSchemeItemParameters(adapter: ForgeA
 }
 
 export interface RemoveFieldAssociationSchemeItemParametersParams {
-    body?: Record<string, Array<ParameterRemovalDetails>>;
+    body?: Record<string, Array<Types.ParameterRemovalDetails>>;
 }
 
 /**
@@ -1150,7 +1150,7 @@ export async function getProjectsWithFieldSchemes(adapter: ForgeAdapter, authCon
 }
 
 export interface AssociateProjectsToFieldAssociationSchemesParams {
-    body?: Record<string, FieldSchemeToProjectsRequest>;
+    body?: Record<string, Types.FieldSchemeToProjectsRequest>;
 }
 
 /**
@@ -1192,7 +1192,7 @@ export async function getFieldAssociationSchemeById(adapter: ForgeAdapter, authC
 
 export interface UpdateFieldAssociationSchemeParams {
     path: { id: string };
-    body?: UpdateFieldAssociationSchemeRequest;
+    body?: Types.UpdateFieldAssociationSchemeRequest;
 }
 
 /**
@@ -1234,7 +1234,7 @@ export async function deleteFieldAssociationScheme(adapter: ForgeAdapter, authCo
 
 export interface CloneFieldAssociationSchemeParams {
     path: { id: string };
-    body?: CreateFieldAssociationSchemeRequest;
+    body?: Types.CreateFieldAssociationSchemeRequest;
 }
 
 /**
@@ -1364,7 +1364,7 @@ export async function getSelectedTimeTrackingImplementation(adapter: ForgeAdapte
 }
 
 export interface SelectTimeTrackingImplementationParams {
-    body?: TimeTrackingProvider;
+    body?: Types.TimeTrackingProvider;
 }
 
 /**
@@ -1388,7 +1388,7 @@ export async function selectTimeTrackingImplementation(adapter: ForgeAdapter, au
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAvailableTimeTrackingImplementations(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<TimeTrackingProvider>> {
+export async function getAvailableTimeTrackingImplementations(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.TimeTrackingProvider>> {
     const path = '/rest/api/3/configuration/timetracking/list';
     const response = await adapter.fetch({
       method: 'GET',
@@ -1396,7 +1396,7 @@ export async function getAvailableTimeTrackingImplementations(adapter: ForgeAdap
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<TimeTrackingProvider>>;
+    return response.json() as Promise<Array<Types.TimeTrackingProvider>>;
 }
 
 /**
@@ -1416,7 +1416,7 @@ export async function getSharedTimeTrackingConfiguration(adapter: ForgeAdapter, 
 }
 
 export interface SetSharedTimeTrackingConfigurationParams {
-    body?: TimeTrackingConfiguration;
+    body?: Types.TimeTrackingConfiguration;
 }
 
 /**
@@ -1486,7 +1486,7 @@ export async function getAllDashboards(adapter: ForgeAdapter, authContext: AuthC
 
 export interface CreateDashboardParams {
     extendAdminPermissions?: boolean;
-    body?: DashboardDetails;
+    body?: Types.DashboardDetails;
 }
 
 /**
@@ -1511,7 +1511,7 @@ export async function createDashboard(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface BulkEditDashboardsParams {
-    body?: BulkEditShareableEntityRequest;
+    body?: Types.BulkEditShareableEntityRequest;
 }
 
 /**
@@ -1621,7 +1621,7 @@ export async function getAllGadgets(adapter: ForgeAdapter, authContext: AuthCont
 
 export interface AddGadgetParams {
     path: { dashboardId: string };
-    body?: DashboardGadgetSettings;
+    body?: Types.DashboardGadgetSettings;
 }
 
 /**
@@ -1643,7 +1643,7 @@ export async function addGadget(adapter: ForgeAdapter, authContext: AuthContext 
 
 export interface UpdateGadgetParams {
     path: { dashboardId: string; gadgetId: string };
-    body?: DashboardGadgetUpdateRequest;
+    body?: Types.DashboardGadgetUpdateRequest;
 }
 
 /**
@@ -1788,7 +1788,7 @@ export async function getDashboard(adapter: ForgeAdapter, authContext: AuthConte
 export interface UpdateDashboardParams {
     path: { id: string };
     extendAdminPermissions?: boolean;
-    body?: DashboardDetails;
+    body?: Types.DashboardDetails;
 }
 
 /**
@@ -1834,7 +1834,7 @@ export async function deleteDashboard(adapter: ForgeAdapter, authContext: AuthCo
 export interface CopyDashboardParams {
     path: { id: string };
     extendAdminPermissions?: boolean;
-    body?: DashboardDetails;
+    body?: Types.DashboardDetails;
 }
 
 /**
@@ -1902,7 +1902,7 @@ export async function getPolicies(adapter: ForgeAdapter, authContext: AuthContex
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getEvents(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<IssueEvent>> {
+export async function getEvents(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.IssueEvent>> {
     const path = '/rest/api/3/events';
     const response = await adapter.fetch({
       method: 'GET',
@@ -1910,12 +1910,12 @@ export async function getEvents(adapter: ForgeAdapter, authContext: AuthContext 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<IssueEvent>>;
+    return response.json() as Promise<Array<Types.IssueEvent>>;
 }
 
 export interface AnalyseExpressionParams {
     check?: "syntax" | "type" | "complexity";
-    body?: JiraExpressionForAnalysis;
+    body?: Types.JiraExpressionForAnalysis;
 }
 
 /**
@@ -1940,7 +1940,7 @@ export async function analyseExpression(adapter: ForgeAdapter, authContext: Auth
 
 export interface EvaluateJiraExpressionParams {
     expand?: string;
-    body?: JiraExpressionEvalRequestBean;
+    body?: Types.JiraExpressionEvalRequestBean;
 }
 
 /**
@@ -1966,7 +1966,7 @@ export async function evaluateJiraExpression(adapter: ForgeAdapter, authContext:
 
 export interface EvaluateJSISJiraExpressionParams {
     expand?: string;
-    body?: JiraExpressionEvaluateRequestBean;
+    body?: Types.JiraExpressionEvaluateRequestBean;
 }
 
 /**
@@ -1994,7 +1994,7 @@ export async function evaluateJSISJiraExpression(adapter: ForgeAdapter, authCont
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getFields(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<FieldDetails>> {
+export async function getFields(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.FieldDetails>> {
     const path = '/rest/api/3/field';
     const response = await adapter.fetch({
       method: 'GET',
@@ -2002,11 +2002,11 @@ export async function getFields(adapter: ForgeAdapter, authContext: AuthContext 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<FieldDetails>>;
+    return response.json() as Promise<Array<Types.FieldDetails>>;
 }
 
 export interface CreateCustomFieldParams {
-    body?: CustomFieldDefinitionJsonBean;
+    body?: Types.CustomFieldDefinitionJsonBean;
 }
 
 /**
@@ -2027,7 +2027,7 @@ export async function createCustomField(adapter: ForgeAdapter, authContext: Auth
 }
 
 export interface CreateAssociationsParams {
-    body?: FieldAssociationsRequest;
+    body?: Types.FieldAssociationsRequest;
 }
 
 /**
@@ -2048,7 +2048,7 @@ export async function createAssociations(adapter: ForgeAdapter, authContext: Aut
 }
 
 export interface RemoveAssociationsParams {
-    body?: FieldAssociationsRequest;
+    body?: Types.FieldAssociationsRequest;
 }
 
 /**
@@ -2142,7 +2142,7 @@ export async function getTrashedFieldsPaginated(adapter: ForgeAdapter, authConte
 
 export interface UpdateCustomFieldParams {
     path: { fieldId: string };
-    body?: UpdateCustomFieldDetails;
+    body?: Types.UpdateCustomFieldDetails;
 }
 
 /**
@@ -2224,7 +2224,7 @@ export async function getContextsForField(adapter: ForgeAdapter, authContext: Au
 
 export interface CreateCustomFieldContextParams {
     path: { fieldId: string };
-    body?: CreateCustomFieldContext;
+    body?: Types.CreateCustomFieldContext;
 }
 
 /**
@@ -2276,7 +2276,7 @@ export async function getDefaultValues(adapter: ForgeAdapter, authContext: AuthC
 
 export interface SetDefaultValuesParams {
     path: { fieldId: string };
-    body?: CustomFieldContextDefaultValueUpdate;
+    body?: Types.CustomFieldContextDefaultValueUpdate;
 }
 
 /**
@@ -2330,7 +2330,7 @@ export interface GetCustomFieldContextsForProjectsAndIssueTypesParams {
     path: { fieldId: string };
     startAt?: number;
     maxResults?: number;
-    body?: ProjectIssueTypeMappings;
+    body?: Types.ProjectIssueTypeMappings;
 }
 
 /**
@@ -2386,7 +2386,7 @@ export async function getProjectContextMapping(adapter: ForgeAdapter, authContex
 
 export interface UpdateCustomFieldContextParams {
     path: { fieldId: string; contextId: string };
-    body?: CustomFieldContextUpdateDetails;
+    body?: Types.CustomFieldContextUpdateDetails;
 }
 
 /**
@@ -2428,7 +2428,7 @@ export async function deleteCustomFieldContext(adapter: ForgeAdapter, authContex
 
 export interface AddIssueTypesToContextParams {
     path: { fieldId: string; contextId: string };
-    body?: IssueTypeIds;
+    body?: Types.IssueTypeIds;
 }
 
 /**
@@ -2450,7 +2450,7 @@ export async function addIssueTypesToContext(adapter: ForgeAdapter, authContext:
 
 export interface RemoveIssueTypesFromContextParams {
     path: { fieldId: string; contextId: string };
-    body?: IssueTypeIds;
+    body?: Types.IssueTypeIds;
 }
 
 /**
@@ -2503,7 +2503,7 @@ export async function getOptionsForContext(adapter: ForgeAdapter, authContext: A
 
 export interface CreateCustomFieldOptionParams {
     path: { fieldId: string; contextId: string };
-    body?: BulkCustomFieldOptionCreateRequest;
+    body?: Types.BulkCustomFieldOptionCreateRequest;
 }
 
 /**
@@ -2525,7 +2525,7 @@ export async function createCustomFieldOption(adapter: ForgeAdapter, authContext
 
 export interface UpdateCustomFieldOptionParams {
     path: { fieldId: string; contextId: string };
-    body?: BulkCustomFieldOptionUpdateRequest;
+    body?: Types.BulkCustomFieldOptionUpdateRequest;
 }
 
 /**
@@ -2547,7 +2547,7 @@ export async function updateCustomFieldOption(adapter: ForgeAdapter, authContext
 
 export interface ReorderCustomFieldOptionsParams {
     path: { fieldId: string; contextId: string };
-    body?: OrderOfCustomFieldOptions;
+    body?: Types.OrderOfCustomFieldOptions;
 }
 
 /**
@@ -2612,7 +2612,7 @@ export async function replaceCustomFieldOption(adapter: ForgeAdapter, authContex
 
 export interface AssignProjectsToCustomFieldContextParams {
     path: { fieldId: string; contextId: string };
-    body?: ProjectIds;
+    body?: Types.ProjectIds;
 }
 
 /**
@@ -2634,7 +2634,7 @@ export async function assignProjectsToCustomFieldContext(adapter: ForgeAdapter, 
 
 export interface RemoveCustomFieldContextFromProjectsParams {
     path: { fieldId: string; contextId: string };
-    body?: ProjectIds;
+    body?: Types.ProjectIds;
 }
 
 /**
@@ -2740,7 +2740,7 @@ export async function getAllIssueFieldOptions(adapter: ForgeAdapter, authContext
 
 export interface CreateIssueFieldOptionParams {
     path: { fieldKey: string };
-    body?: IssueFieldOptionCreateBean;
+    body?: Types.IssueFieldOptionCreateBean;
 }
 
 /**
@@ -2840,7 +2840,7 @@ export async function getIssueFieldOption(adapter: ForgeAdapter, authContext: Au
 
 export interface UpdateIssueFieldOptionParams {
     path: { fieldKey: string; optionId: string };
-    body?: IssueFieldOption;
+    body?: Types.IssueFieldOption;
 }
 
 /**
@@ -3000,7 +3000,7 @@ export async function getAllFieldConfigurations(adapter: ForgeAdapter, authConte
 }
 
 export interface CreateFieldConfigurationParams {
-    body?: FieldConfigurationDetails;
+    body?: Types.FieldConfigurationDetails;
 }
 
 /**
@@ -3023,7 +3023,7 @@ export async function createFieldConfiguration(adapter: ForgeAdapter, authContex
 
 export interface UpdateFieldConfigurationParams {
     path: { id: string };
-    body?: FieldConfigurationDetails;
+    body?: Types.FieldConfigurationDetails;
 }
 
 /**
@@ -3095,7 +3095,7 @@ export async function getFieldConfigurationItems(adapter: ForgeAdapter, authCont
 
 export interface UpdateFieldConfigurationItemsParams {
     path: { id: string };
-    body?: FieldConfigurationItemsDetails;
+    body?: Types.FieldConfigurationItemsDetails;
 }
 
 /**
@@ -3146,7 +3146,7 @@ export async function getAllFieldConfigurationSchemes(adapter: ForgeAdapter, aut
 }
 
 export interface CreateFieldConfigurationSchemeParams {
-    body?: UpdateFieldConfigurationSchemeDetails;
+    body?: Types.UpdateFieldConfigurationSchemeDetails;
 }
 
 /**
@@ -3226,7 +3226,7 @@ export async function getFieldConfigurationSchemeProjectMapping(adapter: ForgeAd
 }
 
 export interface AssignFieldConfigurationSchemeToProjectParams {
-    body?: FieldConfigurationSchemeProjectAssociation;
+    body?: Types.FieldConfigurationSchemeProjectAssociation;
 }
 
 /**
@@ -3249,7 +3249,7 @@ export async function assignFieldConfigurationSchemeToProject(adapter: ForgeAdap
 
 export interface UpdateFieldConfigurationSchemeParams {
     path: { id: string };
-    body?: UpdateFieldConfigurationSchemeDetails;
+    body?: Types.UpdateFieldConfigurationSchemeDetails;
 }
 
 /**
@@ -3293,7 +3293,7 @@ export async function deleteFieldConfigurationScheme(adapter: ForgeAdapter, auth
 
 export interface SetFieldConfigurationSchemeMappingParams {
     path: { id: string };
-    body?: AssociateFieldConfigurationsWithIssueTypesRequest;
+    body?: Types.AssociateFieldConfigurationsWithIssueTypesRequest;
 }
 
 /**
@@ -3316,7 +3316,7 @@ export async function setFieldConfigurationSchemeMapping(adapter: ForgeAdapter, 
 
 export interface RemoveIssueTypesFromGlobalFieldConfigurationSchemeParams {
     path: { id: string };
-    body?: IssueTypeIdsToRemove;
+    body?: Types.IssueTypeIdsToRemove;
 }
 
 /**
@@ -3340,7 +3340,7 @@ export async function removeIssueTypesFromGlobalFieldConfigurationScheme(adapter
 export interface CreateFilterParams {
     expand?: string;
     overrideSharePermissions?: boolean;
-    body?: Filter;
+    body?: Types.Filter;
 }
 
 /**
@@ -3382,7 +3382,7 @@ export async function getDefaultShareScope(adapter: ForgeAdapter, authContext: A
 }
 
 export interface SetDefaultShareScopeParams {
-    body?: DefaultShareScope;
+    body?: Types.DefaultShareScope;
 }
 
 /**
@@ -3411,7 +3411,7 @@ export interface GetFavouriteFiltersParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getFavouriteFilters(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetFavouriteFiltersParams): Promise<Array<Filter>> {
+export async function getFavouriteFilters(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetFavouriteFiltersParams): Promise<Array<Types.Filter>> {
     const path = '/rest/api/3/filter/favourite';
     const queryParams = {
       expand: params.expand,
@@ -3423,7 +3423,7 @@ export async function getFavouriteFilters(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Filter>>;
+    return response.json() as Promise<Array<Types.Filter>>;
 }
 
 export interface GetMyFiltersParams {
@@ -3436,7 +3436,7 @@ export interface GetMyFiltersParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getMyFilters(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetMyFiltersParams): Promise<Array<Filter>> {
+export async function getMyFilters(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetMyFiltersParams): Promise<Array<Types.Filter>> {
     const path = '/rest/api/3/filter/my';
     const queryParams = {
       expand: params.expand,
@@ -3449,7 +3449,7 @@ export async function getMyFilters(adapter: ForgeAdapter, authContext: AuthConte
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Filter>>;
+    return response.json() as Promise<Array<Types.Filter>>;
 }
 
 export interface GetFiltersPaginatedParams {
@@ -3531,7 +3531,7 @@ export interface UpdateFilterParams {
     path: { id: string };
     expand?: string;
     overrideSharePermissions?: boolean;
-    body?: Filter;
+    body?: Types.Filter;
 }
 
 /**
@@ -3584,7 +3584,7 @@ export interface GetColumnsParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getColumns(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetColumnsParams): Promise<Array<ColumnItem>> {
+export async function getColumns(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetColumnsParams): Promise<Array<Types.ColumnItem>> {
     const path = `/rest/api/3/filter/${params.path.id}/columns`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -3592,12 +3592,12 @@ export async function getColumns(adapter: ForgeAdapter, authContext: AuthContext
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ColumnItem>>;
+    return response.json() as Promise<Array<Types.ColumnItem>>;
 }
 
 export interface SetColumnsParams {
     path: { id: string };
-    body?: ColumnRequestBody;
+    body?: Types.ColumnRequestBody;
 }
 
 /**
@@ -3687,7 +3687,7 @@ export async function deleteFavouriteForFilter(adapter: ForgeAdapter, authContex
 
 export interface ChangeFilterOwnerParams {
     path: { id: string };
-    body?: ChangeFilterOwner;
+    body?: Types.ChangeFilterOwner;
 }
 
 /**
@@ -3715,7 +3715,7 @@ export interface GetSharePermissionsParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getSharePermissions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetSharePermissionsParams): Promise<Array<SharePermission>> {
+export async function getSharePermissions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetSharePermissionsParams): Promise<Array<Types.SharePermission>> {
     const path = `/rest/api/3/filter/${params.path.id}/permission`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -3723,12 +3723,12 @@ export async function getSharePermissions(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<SharePermission>>;
+    return response.json() as Promise<Array<Types.SharePermission>>;
 }
 
 export interface AddSharePermissionParams {
     path: { id: string };
-    body?: SharePermissionInputBean;
+    body?: Types.SharePermissionInputBean;
 }
 
 /**
@@ -3736,7 +3736,7 @@ export interface AddSharePermissionParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function addSharePermission(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddSharePermissionParams): Promise<Array<SharePermission>> {
+export async function addSharePermission(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddSharePermissionParams): Promise<Array<Types.SharePermission>> {
     const path = `/rest/api/3/filter/${params.path.id}/permission`;
     const response = await adapter.fetch({
       method: 'POST',
@@ -3745,7 +3745,7 @@ export async function addSharePermission(adapter: ForgeAdapter, authContext: Aut
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<SharePermission>>;
+    return response.json() as Promise<Array<Types.SharePermission>>;
 }
 
 export interface GetSharePermissionParams {
@@ -3788,7 +3788,7 @@ export async function deleteSharePermission(adapter: ForgeAdapter, authContext: 
 }
 
 export interface BulkPinUnpinProjectsAsyncParams {
-    body?: ForgePanelProjectPinRequest;
+    body?: Types.ForgePanelProjectPinRequest;
 }
 
 /**
@@ -3838,7 +3838,7 @@ export async function getGroup(adapter: ForgeAdapter, authContext: AuthContext =
 }
 
 export interface CreateGroupParams {
-    body?: AddGroupBean;
+    body?: Types.AddGroupBean;
 }
 
 /**
@@ -3955,7 +3955,7 @@ export async function getUsersFromGroup(adapter: ForgeAdapter, authContext: Auth
 export interface AddUserToGroupParams {
     groupname?: string;
     groupId?: string;
-    body?: UpdateUserToGroupBean;
+    body?: Types.UpdateUserToGroupBean;
 }
 
 /**
@@ -4103,7 +4103,7 @@ export async function getLicense(adapter: ForgeAdapter, authContext: AuthContext
 
 export interface CreateIssueParams {
     updateHistory?: boolean;
-    body?: IssueUpdateDetails;
+    body?: Types.IssueUpdateDetails;
 }
 
 /**
@@ -4128,7 +4128,7 @@ export async function createIssue(adapter: ForgeAdapter, authContext: AuthContex
 }
 
 export interface ArchiveIssuesAsyncParams {
-    body?: ArchiveIssueAsyncRequest;
+    body?: Types.ArchiveIssueAsyncRequest;
 }
 
 /**
@@ -4148,7 +4148,7 @@ export async function archiveIssuesAsync(adapter: ForgeAdapter, authContext: Aut
 }
 
 export interface ArchiveIssuesParams {
-    body?: IssueArchivalSyncRequest;
+    body?: Types.IssueArchivalSyncRequest;
 }
 
 /**
@@ -4168,7 +4168,7 @@ export async function archiveIssues(adapter: ForgeAdapter, authContext: AuthCont
 }
 
 export interface CreateIssuesParams {
-    body?: IssuesUpdateBean;
+    body?: Types.IssuesUpdateBean;
 }
 
 /**
@@ -4189,7 +4189,7 @@ export async function createIssues(adapter: ForgeAdapter, authContext: AuthConte
 }
 
 export interface BulkFetchIssuesParams {
-    body?: BulkFetchIssueRequestBean;
+    body?: Types.BulkFetchIssueRequestBean;
 }
 
 /**
@@ -4355,7 +4355,7 @@ export async function getIssuePickerResource(adapter: ForgeAdapter, authContext:
 }
 
 export interface BulkSetIssuesPropertiesListParams {
-    body?: IssueEntityProperties;
+    body?: Types.IssueEntityProperties;
 }
 
 /**
@@ -4374,7 +4374,7 @@ export async function bulkSetIssuesPropertiesList(adapter: ForgeAdapter, authCon
 }
 
 export interface BulkSetIssuePropertiesByIssueParams {
-    body?: MultiIssueEntityProperties;
+    body?: Types.MultiIssueEntityProperties;
 }
 
 /**
@@ -4394,7 +4394,7 @@ export async function bulkSetIssuePropertiesByIssue(adapter: ForgeAdapter, authC
 
 export interface BulkSetIssuePropertyParams {
     path: { propertyKey: string };
-    body?: BulkIssuePropertyUpdateRequest;
+    body?: Types.BulkIssuePropertyUpdateRequest;
 }
 
 /**
@@ -4414,7 +4414,7 @@ export async function bulkSetIssueProperty(adapter: ForgeAdapter, authContext: A
 
 export interface BulkDeleteIssuePropertyParams {
     path: { propertyKey: string };
-    body?: IssueFilterForBulkPropertyDelete;
+    body?: Types.IssueFilterForBulkPropertyDelete;
 }
 
 /**
@@ -4433,7 +4433,7 @@ export async function bulkDeleteIssueProperty(adapter: ForgeAdapter, authContext
 }
 
 export interface UnarchiveIssuesParams {
-    body?: IssueArchivalSyncRequest;
+    body?: Types.IssueArchivalSyncRequest;
 }
 
 /**
@@ -4453,7 +4453,7 @@ export async function unarchiveIssues(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface GetIsWatchingIssueBulkParams {
-    body?: IssueList;
+    body?: Types.IssueList;
 }
 
 /**
@@ -4515,7 +4515,7 @@ export interface EditIssueParams {
     overrideEditableFlag?: boolean;
     returnIssue?: boolean;
     expand?: string;
-    body?: IssueUpdateDetails;
+    body?: Types.IssueUpdateDetails;
 }
 
 /**
@@ -4569,7 +4569,7 @@ export async function deleteIssue(adapter: ForgeAdapter, authContext: AuthContex
 
 export interface AssignIssueParams {
     path: { issueIdOrKey: string };
-    body?: User;
+    body?: Types.User;
 }
 
 /**
@@ -4598,7 +4598,7 @@ export interface AddAttachmentParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function addAttachment(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddAttachmentParams): Promise<Array<Attachment>> {
+export async function addAttachment(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddAttachmentParams): Promise<Array<Types.Attachment>> {
     const path = `/rest/api/3/issue/${params.path.issueIdOrKey}/attachments`;
     const response = await adapter.fetch({
       method: 'POST',
@@ -4607,7 +4607,7 @@ export async function addAttachment(adapter: ForgeAdapter, authContext: AuthCont
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Attachment>>;
+    return response.json() as Promise<Array<Types.Attachment>>;
 }
 
 export interface GetChangeLogsParams {
@@ -4639,7 +4639,7 @@ export async function getChangeLogs(adapter: ForgeAdapter, authContext: AuthCont
 
 export interface GetChangeLogsByIdsParams {
     path: { issueIdOrKey: string };
-    body?: IssueChangelogIds;
+    body?: Types.IssueChangelogIds;
 }
 
 /**
@@ -4693,7 +4693,7 @@ export async function getComments(adapter: ForgeAdapter, authContext: AuthContex
 export interface AddCommentParams {
     path: { issueIdOrKey: string };
     expand?: string;
-    body?: Comment;
+    body?: Types.Comment;
 }
 
 /**
@@ -4747,7 +4747,7 @@ export interface UpdateCommentParams {
     notifyUsers?: boolean;
     overrideEditableFlag?: boolean;
     expand?: string;
-    body?: Comment;
+    body?: Types.Comment;
 }
 
 /**
@@ -4821,7 +4821,7 @@ export async function getEditIssueMeta(adapter: ForgeAdapter, authContext: AuthC
 
 export interface NotifyParams {
     path: { issueIdOrKey: string };
-    body?: Notification;
+    body?: Types.Notification;
 }
 
 /**
@@ -4931,7 +4931,7 @@ export interface GetRemoteIssueLinksParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getRemoteIssueLinks(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRemoteIssueLinksParams): Promise<Array<RemoteIssueLink> | RemoteIssueLink> {
+export async function getRemoteIssueLinks(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRemoteIssueLinksParams): Promise<Array<Types.RemoteIssueLink> | Types.RemoteIssueLink> {
     const path = `/rest/api/3/issue/${params.path.issueIdOrKey}/remotelink`;
     const queryParams = {
       globalId: params.globalId,
@@ -4943,12 +4943,12 @@ export async function getRemoteIssueLinks(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<RemoteIssueLink> | RemoteIssueLink>;
+    return response.json() as Promise<Array<Types.RemoteIssueLink> | Types.RemoteIssueLink>;
 }
 
 export interface CreateOrUpdateRemoteIssueLinkParams {
     path: { issueIdOrKey: string };
-    body?: RemoteIssueLinkRequest;
+    body?: Types.RemoteIssueLinkRequest;
 }
 
 /**
@@ -5014,7 +5014,7 @@ export async function getRemoteIssueLinkById(adapter: ForgeAdapter, authContext:
 
 export interface UpdateRemoteIssueLinkParams {
     path: { issueIdOrKey: string; linkId: string };
-    body?: RemoteIssueLinkRequest;
+    body?: Types.RemoteIssueLinkRequest;
 }
 
 /**
@@ -5088,7 +5088,7 @@ export async function getTransitions(adapter: ForgeAdapter, authContext: AuthCon
 
 export interface DoTransitionParams {
     path: { issueIdOrKey: string };
-    body?: IssueUpdateDetails;
+    body?: Types.IssueUpdateDetails;
 }
 
 /**
@@ -5275,7 +5275,7 @@ export interface AddWorklogParams {
     reduceBy?: string;
     expand?: string;
     overrideEditableFlag?: boolean;
-    body?: Worklog;
+    body?: Types.Worklog;
 }
 
 /**
@@ -5308,7 +5308,7 @@ export interface BulkDeleteWorklogsParams {
     path: { issueIdOrKey: string };
     adjustEstimate?: "leave" | "auto";
     overrideEditableFlag?: boolean;
-    body?: WorklogIdsRequestBean;
+    body?: Types.WorklogIdsRequestBean;
 }
 
 /**
@@ -5335,7 +5335,7 @@ export interface BulkMoveWorklogsParams {
     path: { issueIdOrKey: string };
     adjustEstimate?: "leave" | "auto";
     overrideEditableFlag?: boolean;
-    body?: WorklogsMoveRequestBean;
+    body?: Types.WorklogsMoveRequestBean;
 }
 
 /**
@@ -5390,7 +5390,7 @@ export interface UpdateWorklogParams {
     newEstimate?: string;
     expand?: string;
     overrideEditableFlag?: boolean;
-    body?: Worklog;
+    body?: Types.Worklog;
 }
 
 /**
@@ -5532,7 +5532,7 @@ export async function deleteWorklogProperty(adapter: ForgeAdapter, authContext: 
 }
 
 export interface LinkIssuesParams {
-    body?: LinkIssueRequestJsonBean;
+    body?: Types.LinkIssueRequestJsonBean;
 }
 
 /**
@@ -5607,7 +5607,7 @@ export async function getIssueLinkTypes(adapter: ForgeAdapter, authContext: Auth
 }
 
 export interface CreateIssueLinkTypeParams {
-    body?: IssueLinkType;
+    body?: Types.IssueLinkType;
 }
 
 /**
@@ -5649,7 +5649,7 @@ export async function getIssueLinkType(adapter: ForgeAdapter, authContext: AuthC
 
 export interface UpdateIssueLinkTypeParams {
     path: { issueLinkTypeId: string };
-    body?: IssueLinkType;
+    body?: Types.IssueLinkType;
 }
 
 /**
@@ -5689,7 +5689,7 @@ export async function deleteIssueLinkType(adapter: ForgeAdapter, authContext: Au
 }
 
 export interface ExportArchivedIssuesParams {
-    body?: ArchivedIssuesFilterRequest;
+    body?: Types.ArchivedIssuesFilterRequest;
 }
 
 /**
@@ -5725,7 +5725,7 @@ export async function getIssueSecuritySchemes(adapter: ForgeAdapter, authContext
 }
 
 export interface CreateIssueSecuritySchemeParams {
-    body?: CreateIssueSecuritySchemeDetails;
+    body?: Types.CreateIssueSecuritySchemeDetails;
 }
 
 /**
@@ -5778,7 +5778,7 @@ export async function getSecurityLevels(adapter: ForgeAdapter, authContext: Auth
 }
 
 export interface SetDefaultLevelsParams {
-    body?: SetDefaultLevelsRequest;
+    body?: Types.SetDefaultLevelsRequest;
 }
 
 /**
@@ -5863,7 +5863,7 @@ export async function searchProjectsUsingSecuritySchemes(adapter: ForgeAdapter, 
 }
 
 export interface AssociateSchemesToProjectsParams {
-    body?: AssociateSecuritySchemeWithProjectDetails;
+    body?: Types.AssociateSecuritySchemeWithProjectDetails;
 }
 
 /**
@@ -5934,7 +5934,7 @@ export async function getIssueSecurityScheme(adapter: ForgeAdapter, authContext:
 
 export interface UpdateIssueSecuritySchemeParams {
     path: { id: string };
-    body?: UpdateIssueSecuritySchemeRequestBean;
+    body?: Types.UpdateIssueSecuritySchemeRequestBean;
 }
 
 /**
@@ -6007,7 +6007,7 @@ export async function deleteSecurityScheme(adapter: ForgeAdapter, authContext: A
 
 export interface AddSecurityLevelParams {
     path: { schemeId: string };
-    body?: AddSecuritySchemeLevelsRequestBean;
+    body?: Types.AddSecuritySchemeLevelsRequestBean;
 }
 
 /**
@@ -6029,7 +6029,7 @@ export async function addSecurityLevel(adapter: ForgeAdapter, authContext: AuthC
 
 export interface UpdateSecurityLevelParams {
     path: { schemeId: string; levelId: string };
-    body?: UpdateIssueSecurityLevelDetails;
+    body?: Types.UpdateIssueSecurityLevelDetails;
 }
 
 /**
@@ -6075,7 +6075,7 @@ export async function removeLevel(adapter: ForgeAdapter, authContext: AuthContex
 
 export interface AddSecurityLevelMembersParams {
     path: { schemeId: string; levelId: string };
-    body?: SecuritySchemeMembersRequest;
+    body?: Types.SecuritySchemeMembersRequest;
 }
 
 /**
@@ -6120,7 +6120,7 @@ export async function removeMemberFromSecurityLevel(adapter: ForgeAdapter, authC
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getIssueAllTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<IssueTypeDetails>> {
+export async function getIssueAllTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.IssueTypeDetails>> {
     const path = '/rest/api/3/issuetype';
     const response = await adapter.fetch({
       method: 'GET',
@@ -6128,11 +6128,11 @@ export async function getIssueAllTypes(adapter: ForgeAdapter, authContext: AuthC
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<IssueTypeDetails>>;
+    return response.json() as Promise<Array<Types.IssueTypeDetails>>;
 }
 
 export interface CreateIssueTypeParams {
-    body?: IssueTypeCreateBean;
+    body?: Types.IssueTypeCreateBean;
 }
 
 /**
@@ -6162,7 +6162,7 @@ export interface GetIssueTypesForProjectParams {
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getIssueTypesForProject(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetIssueTypesForProjectParams): Promise<Array<IssueTypeDetails>> {
+export async function getIssueTypesForProject(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetIssueTypesForProjectParams): Promise<Array<Types.IssueTypeDetails>> {
     const path = '/rest/api/3/issuetype/project';
     const queryParams = {
       projectId: params.projectId,
@@ -6175,7 +6175,7 @@ export async function getIssueTypesForProject(adapter: ForgeAdapter, authContext
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<IssueTypeDetails>>;
+    return response.json() as Promise<Array<Types.IssueTypeDetails>>;
 }
 
 export interface GetIssueTypeParams {
@@ -6200,7 +6200,7 @@ export async function getIssueType(adapter: ForgeAdapter, authContext: AuthConte
 
 export interface UpdateIssueTypeParams {
     path: { id: string };
-    body?: IssueTypeUpdateBean;
+    body?: Types.IssueTypeUpdateBean;
 }
 
 /**
@@ -6253,7 +6253,7 @@ export interface GetAlternativeIssueTypesParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAlternativeIssueTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAlternativeIssueTypesParams): Promise<Array<IssueTypeDetails>> {
+export async function getAlternativeIssueTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAlternativeIssueTypesParams): Promise<Array<Types.IssueTypeDetails>> {
     const path = `/rest/api/3/issuetype/${params.path.id}/alternatives`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -6261,7 +6261,7 @@ export async function getAlternativeIssueTypes(adapter: ForgeAdapter, authContex
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<IssueTypeDetails>>;
+    return response.json() as Promise<Array<Types.IssueTypeDetails>>;
 }
 
 export interface CreateIssueTypeAvatarParams {
@@ -6411,7 +6411,7 @@ export async function getAllIssueTypeSchemes(adapter: ForgeAdapter, authContext:
 }
 
 export interface CreateIssueTypeSchemeParams {
-    body?: IssueTypeSchemeDetails;
+    body?: Types.IssueTypeSchemeDetails;
 }
 
 /**
@@ -6488,7 +6488,7 @@ export async function getIssueTypeSchemeForProjects(adapter: ForgeAdapter, authC
 }
 
 export interface AssignIssueTypeSchemeToProjectParams {
-    body?: IssueTypeSchemeProjectAssociation;
+    body?: Types.IssueTypeSchemeProjectAssociation;
 }
 
 /**
@@ -6510,7 +6510,7 @@ export async function assignIssueTypeSchemeToProject(adapter: ForgeAdapter, auth
 
 export interface UpdateIssueTypeSchemeParams {
     path: { issueTypeSchemeId: string };
-    body?: IssueTypeSchemeUpdateDetails;
+    body?: Types.IssueTypeSchemeUpdateDetails;
 }
 
 /**
@@ -6552,7 +6552,7 @@ export async function deleteIssueTypeScheme(adapter: ForgeAdapter, authContext: 
 
 export interface AddIssueTypesToIssueTypeSchemeParams {
     path: { issueTypeSchemeId: string };
-    body?: IssueTypeIds;
+    body?: Types.IssueTypeIds;
 }
 
 /**
@@ -6574,7 +6574,7 @@ export async function addIssueTypesToIssueTypeScheme(adapter: ForgeAdapter, auth
 
 export interface ReorderIssueTypesInIssueTypeSchemeParams {
     path: { issueTypeSchemeId: string };
-    body?: OrderOfIssueTypes;
+    body?: Types.OrderOfIssueTypes;
 }
 
 /**
@@ -6648,7 +6648,7 @@ export async function getIssueTypeScreenSchemes(adapter: ForgeAdapter, authConte
 }
 
 export interface CreateIssueTypeScreenSchemeParams {
-    body?: IssueTypeScreenSchemeDetails;
+    body?: Types.IssueTypeScreenSchemeDetails;
 }
 
 /**
@@ -6725,7 +6725,7 @@ export async function getIssueTypeScreenSchemeProjectAssociations(adapter: Forge
 }
 
 export interface AssignIssueTypeScreenSchemeToProjectParams {
-    body?: IssueTypeScreenSchemeProjectAssociation;
+    body?: Types.IssueTypeScreenSchemeProjectAssociation;
 }
 
 /**
@@ -6747,7 +6747,7 @@ export async function assignIssueTypeScreenSchemeToProject(adapter: ForgeAdapter
 
 export interface UpdateIssueTypeScreenSchemeParams {
     path: { issueTypeScreenSchemeId: string };
-    body?: IssueTypeScreenSchemeUpdateDetails;
+    body?: Types.IssueTypeScreenSchemeUpdateDetails;
 }
 
 /**
@@ -6789,7 +6789,7 @@ export async function deleteIssueTypeScreenScheme(adapter: ForgeAdapter, authCon
 
 export interface AppendMappingsForIssueTypeScreenSchemeParams {
     path: { issueTypeScreenSchemeId: string };
-    body?: IssueTypeScreenSchemeMappingDetails;
+    body?: Types.IssueTypeScreenSchemeMappingDetails;
 }
 
 /**
@@ -6810,7 +6810,7 @@ export async function appendMappingsForIssueTypeScreenScheme(adapter: ForgeAdapt
 
 export interface UpdateDefaultScreenSchemeParams {
     path: { issueTypeScreenSchemeId: string };
-    body?: UpdateDefaultScreenScheme;
+    body?: Types.UpdateDefaultScreenScheme;
 }
 
 /**
@@ -6832,7 +6832,7 @@ export async function updateDefaultScreenScheme(adapter: ForgeAdapter, authConte
 
 export interface RemoveMappingsFromIssueTypeScreenSchemeParams {
     path: { issueTypeScreenSchemeId: string };
-    body?: IssueTypeIds;
+    body?: Types.IssueTypeIds;
 }
 
 /**
@@ -6898,7 +6898,7 @@ export async function getAutoComplete(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface GetAutoCompletePostParams {
-    body?: SearchAutoCompleteFilter;
+    body?: Types.SearchAutoCompleteFilter;
 }
 
 /**
@@ -6980,7 +6980,7 @@ export async function getPrecomputations(adapter: ForgeAdapter, authContext: Aut
 
 export interface UpdatePrecomputationsParams {
     skipNotFoundPrecomputations?: boolean;
-    body?: JqlFunctionPrecomputationUpdateRequestBean;
+    body?: Types.JqlFunctionPrecomputationUpdateRequestBean;
 }
 
 /**
@@ -7006,7 +7006,7 @@ export async function updatePrecomputations(adapter: ForgeAdapter, authContext: 
 
 export interface GetPrecomputationsByIDParams {
     orderBy?: string;
-    body?: JqlFunctionPrecomputationGetByIdRequest;
+    body?: Types.JqlFunctionPrecomputationGetByIdRequest;
 }
 
 /**
@@ -7031,7 +7031,7 @@ export async function getPrecomputationsByID(adapter: ForgeAdapter, authContext:
 }
 
 export interface MatchIssuesParams {
-    body?: IssuesAndJQLQueries;
+    body?: Types.IssuesAndJQLQueries;
 }
 
 /**
@@ -7052,7 +7052,7 @@ export async function matchIssues(adapter: ForgeAdapter, authContext: AuthContex
 
 export interface ParseJqlQueriesParams {
     validation: "strict" | "warn" | "none";
-    body?: JqlQueriesToParse;
+    body?: Types.JqlQueriesToParse;
 }
 
 /**
@@ -7076,7 +7076,7 @@ export async function parseJqlQueries(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface MigrateQueriesParams {
-    body?: JQLPersonalDataMigrationRequest;
+    body?: Types.JQLPersonalDataMigrationRequest;
 }
 
 /**
@@ -7096,7 +7096,7 @@ export async function migrateQueries(adapter: ForgeAdapter, authContext: AuthCon
 }
 
 export interface SanitiseJqlQueriesParams {
-    body?: JqlQueriesToSanitize;
+    body?: Types.JqlQueriesToSanitize;
 }
 
 /**
@@ -7305,7 +7305,7 @@ export async function getLocale(adapter: ForgeAdapter, authContext: AuthContext 
 }
 
 export interface SetLocaleParams {
-    body?: Locale;
+    body?: Types.Locale;
 }
 
 /**
@@ -7385,7 +7385,7 @@ export async function getNotificationSchemes(adapter: ForgeAdapter, authContext:
 }
 
 export interface CreateNotificationSchemeParams {
-    body?: CreateNotificationSchemeDetails;
+    body?: Types.CreateNotificationSchemeDetails;
 }
 
 /**
@@ -7462,7 +7462,7 @@ export async function getNotificationScheme(adapter: ForgeAdapter, authContext: 
 
 export interface UpdateNotificationSchemeParams {
     path: { id: string };
-    body?: UpdateNotificationSchemeDetails;
+    body?: Types.UpdateNotificationSchemeDetails;
 }
 
 /**
@@ -7484,7 +7484,7 @@ export async function updateNotificationScheme(adapter: ForgeAdapter, authContex
 
 export interface AddNotificationsParams {
     path: { id: string };
-    body?: AddNotificationsDetails;
+    body?: Types.AddNotificationsDetails;
 }
 
 /**
@@ -7561,7 +7561,7 @@ export async function getAllPermissions(adapter: ForgeAdapter, authContext: Auth
 }
 
 export interface GetBulkPermissionsParams {
-    body?: BulkPermissionsRequestBean;
+    body?: Types.BulkPermissionsRequestBean;
 }
 
 /**
@@ -7582,7 +7582,7 @@ export async function getBulkPermissions(adapter: ForgeAdapter, authContext: Aut
 }
 
 export interface GetPermittedProjectsParams {
-    body?: PermissionsKeysBean;
+    body?: Types.PermissionsKeysBean;
 }
 
 /**
@@ -7628,7 +7628,7 @@ export async function getAllPermissionSchemes(adapter: ForgeAdapter, authContext
 
 export interface CreatePermissionSchemeParams {
     expand?: string;
-    body?: PermissionScheme;
+    body?: Types.PermissionScheme;
 }
 
 /**
@@ -7680,7 +7680,7 @@ export async function getPermissionScheme(adapter: ForgeAdapter, authContext: Au
 export interface UpdatePermissionSchemeParams {
     path: { schemeId: string };
     expand?: string;
-    body?: PermissionScheme;
+    body?: Types.PermissionScheme;
 }
 
 /**
@@ -7751,7 +7751,7 @@ export async function getPermissionSchemeGrants(adapter: ForgeAdapter, authConte
 export interface CreatePermissionGrantParams {
     path: { schemeId: string };
     expand?: string;
-    body?: PermissionGrant;
+    body?: Types.PermissionGrant;
 }
 
 /**
@@ -7851,7 +7851,7 @@ export async function getPlans(adapter: ForgeAdapter, authContext: AuthContext =
 
 export interface CreatePlanParams {
     useGroupId?: boolean;
-    body?: CreatePlanRequest;
+    body?: Types.CreatePlanRequest;
 }
 
 /**
@@ -7948,7 +7948,7 @@ export async function archivePlan(adapter: ForgeAdapter, authContext: AuthContex
 
 export interface DuplicatePlanParams {
     path: { planId: string };
-    body?: DuplicatePlanRequest;
+    body?: Types.DuplicatePlanRequest;
 }
 
 /**
@@ -7996,7 +7996,7 @@ export async function getTeams(adapter: ForgeAdapter, authContext: AuthContext =
 
 export interface AddAtlassianTeamParams {
     path: { planId: string };
-    body?: AddAtlassianTeamRequest;
+    body?: Types.AddAtlassianTeamRequest;
 }
 
 /**
@@ -8080,7 +8080,7 @@ export async function removeAtlassianTeam(adapter: ForgeAdapter, authContext: Au
 
 export interface CreatePlanOnlyTeamParams {
     path: { planId: string };
-    body?: CreatePlanOnlyTeamRequest;
+    body?: Types.CreatePlanOnlyTeamRequest;
 }
 
 /**
@@ -8187,7 +8187,7 @@ export async function trashPlan(adapter: ForgeAdapter, authContext: AuthContext 
  * @forge-scopes-asUser read:jira-work
  * @deprecated
  */
-export async function getPriorities(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Priority>> {
+export async function getPriorities(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.Priority>> {
     const path = '/rest/api/3/priority';
     const response = await adapter.fetch({
       method: 'GET',
@@ -8195,11 +8195,11 @@ export async function getPriorities(adapter: ForgeAdapter, authContext: AuthCont
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Priority>>;
+    return response.json() as Promise<Array<Types.Priority>>;
 }
 
 export interface CreatePriorityParams {
-    body?: CreatePriorityDetails;
+    body?: Types.CreatePriorityDetails;
 }
 
 /**
@@ -8221,7 +8221,7 @@ export async function createPriority(adapter: ForgeAdapter, authContext: AuthCon
 }
 
 export interface SetDefaultPriorityParams {
-    body?: SetDefaultPriorityRequest;
+    body?: Types.SetDefaultPriorityRequest;
 }
 
 /**
@@ -8242,7 +8242,7 @@ export async function setDefaultPriority(adapter: ForgeAdapter, authContext: Aut
 }
 
 export interface MovePrioritiesParams {
-    body?: ReorderIssuePriorities;
+    body?: Types.ReorderIssuePriorities;
 }
 
 /**
@@ -8320,7 +8320,7 @@ export async function getPriority(adapter: ForgeAdapter, authContext: AuthContex
 
 export interface UpdatePriorityParams {
     path: { id: string };
-    body?: UpdatePriorityDetails;
+    body?: Types.UpdatePriorityDetails;
 }
 
 /**
@@ -8399,7 +8399,7 @@ export async function getPrioritySchemes(adapter: ForgeAdapter, authContext: Aut
 }
 
 export interface CreatePrioritySchemeParams {
-    body?: CreatePrioritySchemeDetails;
+    body?: Types.CreatePrioritySchemeDetails;
 }
 
 /**
@@ -8420,7 +8420,7 @@ export async function createPriorityScheme(adapter: ForgeAdapter, authContext: A
 }
 
 export interface SuggestedPrioritiesForMappingsParams {
-    body?: SuggestedMappingsRequestBean;
+    body?: Types.SuggestedMappingsRequestBean;
 }
 
 /**
@@ -8473,7 +8473,7 @@ export async function getAvailablePrioritiesByPriorityScheme(adapter: ForgeAdapt
 
 export interface UpdatePrioritySchemeParams {
     path: { schemeId: string };
-    body?: UpdatePrioritySchemeRequestBean;
+    body?: Types.UpdatePrioritySchemeRequestBean;
 }
 
 /**
@@ -8583,7 +8583,7 @@ export interface GetAllProjectsParams {
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  * @deprecated
  */
-export async function getAllProjects(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllProjectsParams): Promise<Array<Project>> {
+export async function getAllProjects(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllProjectsParams): Promise<Array<Types.Project>> {
     const path = '/rest/api/3/project';
     const queryParams = {
       expand: params.expand,
@@ -8597,11 +8597,11 @@ export async function getAllProjects(adapter: ForgeAdapter, authContext: AuthCon
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Project>>;
+    return response.json() as Promise<Array<Types.Project>>;
 }
 
 export interface CreateProjectParams {
-    body?: CreateProjectDetails;
+    body?: Types.CreateProjectDetails;
 }
 
 /**
@@ -8622,7 +8622,7 @@ export async function createProject(adapter: ForgeAdapter, authContext: AuthCont
 }
 
 export interface CreateProjectWithCustomTemplateParams {
-    body?: ProjectCustomTemplateCreateRequestDTO;
+    body?: Types.ProjectCustomTemplateCreateRequestDTO;
 }
 
 /**
@@ -8642,7 +8642,7 @@ export async function createProjectWithCustomTemplate(adapter: ForgeAdapter, aut
 }
 
 export interface EditTemplateParams {
-    body?: EditTemplateRequest;
+    body?: Types.EditTemplateRequest;
 }
 
 /**
@@ -8712,7 +8712,7 @@ export async function removeTemplate(adapter: ForgeAdapter, authContext: AuthCon
 }
 
 export interface SaveTemplateParams {
-    body?: SaveTemplateRequest;
+    body?: Types.SaveTemplateRequest;
 }
 
 /**
@@ -8741,7 +8741,7 @@ export interface GetRecentParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getRecent(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRecentParams): Promise<Array<Project>> {
+export async function getRecent(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRecentParams): Promise<Array<Types.Project>> {
     const path = '/rest/api/3/project/recent';
     const queryParams = {
       expand: params.expand,
@@ -8754,7 +8754,7 @@ export async function getRecent(adapter: ForgeAdapter, authContext: AuthContext 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Project>>;
+    return response.json() as Promise<Array<Types.Project>>;
 }
 
 export interface SearchProjectsParams {
@@ -8810,7 +8810,7 @@ export async function searchProjects(adapter: ForgeAdapter, authContext: AuthCon
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getAllProjectTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ProjectType>> {
+export async function getAllProjectTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ProjectType>> {
     const path = '/rest/api/3/project/type';
     const response = await adapter.fetch({
       method: 'GET',
@@ -8818,7 +8818,7 @@ export async function getAllProjectTypes(adapter: ForgeAdapter, authContext: Aut
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ProjectType>>;
+    return response.json() as Promise<Array<Types.ProjectType>>;
 }
 
 /**
@@ -8826,7 +8826,7 @@ export async function getAllProjectTypes(adapter: ForgeAdapter, authContext: Aut
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getAllAccessibleProjectTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ProjectType>> {
+export async function getAllAccessibleProjectTypes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ProjectType>> {
     const path = '/rest/api/3/project/type/accessible';
     const response = await adapter.fetch({
       method: 'GET',
@@ -8834,7 +8834,7 @@ export async function getAllAccessibleProjectTypes(adapter: ForgeAdapter, authCo
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ProjectType>>;
+    return response.json() as Promise<Array<Types.ProjectType>>;
 }
 
 export interface GetProjectTypeByKeyParams {
@@ -8907,7 +8907,7 @@ export async function getProject(adapter: ForgeAdapter, authContext: AuthContext
 export interface UpdateProjectParams {
     path: { projectIdOrKey: string };
     expand?: string;
-    body?: UpdateProjectDetails;
+    body?: Types.UpdateProjectDetails;
 }
 
 /**
@@ -8977,7 +8977,7 @@ export async function archiveProject(adapter: ForgeAdapter, authContext: AuthCon
 
 export interface UpdateProjectAvatarParams {
     path: { projectIdOrKey: string };
-    body?: Avatar;
+    body?: Types.Avatar;
 }
 
 /**
@@ -9109,7 +9109,7 @@ export async function getDefaultProjectClassification(adapter: ForgeAdapter, aut
 
 export interface UpdateDefaultProjectClassificationParams {
     path: { projectIdOrKey: string };
-    body?: UpdateDefaultProjectClassificationBean;
+    body?: Types.UpdateDefaultProjectClassificationBean;
 }
 
 /**
@@ -9192,7 +9192,7 @@ export interface GetProjectComponentsParams {
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getProjectComponents(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetProjectComponentsParams): Promise<Array<ProjectComponent>> {
+export async function getProjectComponents(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetProjectComponentsParams): Promise<Array<Types.ProjectComponent>> {
     const path = `/rest/api/3/project/${params.path.projectIdOrKey}/components`;
     const queryParams = {
       componentSource: params.componentSource,
@@ -9204,7 +9204,7 @@ export async function getProjectComponents(adapter: ForgeAdapter, authContext: A
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ProjectComponent>>;
+    return response.json() as Promise<Array<Types.ProjectComponent>>;
 }
 
 export interface DeleteProjectAsynchronouslyParams {
@@ -9248,7 +9248,7 @@ export async function getFeaturesForProject(adapter: ForgeAdapter, authContext: 
 
 export interface ToggleFeatureForProjectParams {
     path: { projectIdOrKey: string; featureKey: string };
-    body?: ProjectFeatureState;
+    body?: Types.ProjectFeatureState;
 }
 
 /**
@@ -9415,7 +9415,7 @@ export async function getProjectRole(adapter: ForgeAdapter, authContext: AuthCon
 
 export interface AddActorUsersParams {
     path: { projectIdOrKey: string; id: string };
-    body?: ActorsMap;
+    body?: Types.ActorsMap;
 }
 
 /**
@@ -9437,7 +9437,7 @@ export async function addActorUsers(adapter: ForgeAdapter, authContext: AuthCont
 
 export interface SetActorsParams {
     path: { projectIdOrKey: string; id: string };
-    body?: ProjectRoleActorsUpdateBean;
+    body?: Types.ProjectRoleActorsUpdateBean;
 }
 
 /**
@@ -9497,7 +9497,7 @@ export interface GetProjectRoleDetailsParams {
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getProjectRoleDetails(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetProjectRoleDetailsParams): Promise<Array<ProjectRoleDetails>> {
+export async function getProjectRoleDetails(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetProjectRoleDetailsParams): Promise<Array<Types.ProjectRoleDetails>> {
     const path = `/rest/api/3/project/${params.path.projectIdOrKey}/roledetails`;
     const queryParams = {
       currentMember: params.currentMember,
@@ -9511,7 +9511,7 @@ export async function getProjectRoleDetails(adapter: ForgeAdapter, authContext: 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ProjectRoleDetails>>;
+    return response.json() as Promise<Array<Types.ProjectRoleDetails>>;
 }
 
 export interface GetAllStatusesParams {
@@ -9523,7 +9523,7 @@ export interface GetAllStatusesParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAllStatuses(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllStatusesParams): Promise<Array<IssueTypeWithStatus>> {
+export async function getAllStatuses(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllStatusesParams): Promise<Array<Types.IssueTypeWithStatus>> {
     const path = `/rest/api/3/project/${params.path.projectIdOrKey}/statuses`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -9531,7 +9531,7 @@ export async function getAllStatuses(adapter: ForgeAdapter, authContext: AuthCon
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<IssueTypeWithStatus>>;
+    return response.json() as Promise<Array<Types.IssueTypeWithStatus>>;
 }
 
 export interface GetProjectVersionsPaginatedParams {
@@ -9579,7 +9579,7 @@ export interface GetProjectVersionsParams {
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getProjectVersions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetProjectVersionsParams): Promise<Array<Version>> {
+export async function getProjectVersions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetProjectVersionsParams): Promise<Array<Types.Version>> {
     const path = `/rest/api/3/project/${params.path.projectIdOrKey}/versions`;
     const queryParams = {
       expand: params.expand,
@@ -9591,7 +9591,7 @@ export async function getProjectVersions(adapter: ForgeAdapter, authContext: Aut
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Version>>;
+    return response.json() as Promise<Array<Types.Version>>;
 }
 
 export interface GetProjectEmailParams {
@@ -9616,7 +9616,7 @@ export async function getProjectEmail(adapter: ForgeAdapter, authContext: AuthCo
 
 export interface UpdateProjectEmailParams {
     path: { projectId: string };
-    body?: ProjectEmailAddress;
+    body?: Types.ProjectEmailAddress;
 }
 
 /**
@@ -9729,7 +9729,7 @@ export async function getAssignedPermissionScheme(adapter: ForgeAdapter, authCon
 export interface AssignPermissionSchemeParams {
     path: { projectKeyOrId: string };
     expand?: string;
-    body?: IdBean;
+    body?: Types.IdBean;
 }
 
 /**
@@ -9777,7 +9777,7 @@ export async function getSecurityLevelsForProject(adapter: ForgeAdapter, authCon
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getAllProjectCategories(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ProjectCategory>> {
+export async function getAllProjectCategories(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ProjectCategory>> {
     const path = '/rest/api/3/projectCategory';
     const response = await adapter.fetch({
       method: 'GET',
@@ -9785,11 +9785,11 @@ export async function getAllProjectCategories(adapter: ForgeAdapter, authContext
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ProjectCategory>>;
+    return response.json() as Promise<Array<Types.ProjectCategory>>;
 }
 
 export interface CreateProjectCategoryParams {
-    body?: ProjectCategory;
+    body?: Types.ProjectCategory;
 }
 
 /**
@@ -9831,7 +9831,7 @@ export async function getProjectCategoryById(adapter: ForgeAdapter, authContext:
 
 export interface UpdateProjectCategoryParams {
     path: { id: string };
-    body?: ProjectCategory;
+    body?: Types.ProjectCategory;
 }
 
 /**
@@ -9975,7 +9975,7 @@ export async function getValidProjectName(adapter: ForgeAdapter, authContext: Au
 }
 
 export interface RedactParams {
-    body?: BulkRedactionRequest;
+    body?: Types.BulkRedactionRequest;
 }
 
 /**
@@ -10020,7 +10020,7 @@ export async function getRedactionStatus(adapter: ForgeAdapter, authContext: Aut
  * @forge-scopes-asUser read:jira-work
  * @deprecated
  */
-export async function getResolutions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Resolution>> {
+export async function getResolutions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.Resolution>> {
     const path = '/rest/api/3/resolution';
     const response = await adapter.fetch({
       method: 'GET',
@@ -10028,11 +10028,11 @@ export async function getResolutions(adapter: ForgeAdapter, authContext: AuthCon
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Resolution>>;
+    return response.json() as Promise<Array<Types.Resolution>>;
 }
 
 export interface CreateResolutionParams {
-    body?: CreateResolutionDetails;
+    body?: Types.CreateResolutionDetails;
 }
 
 /**
@@ -10053,7 +10053,7 @@ export async function createResolution(adapter: ForgeAdapter, authContext: AuthC
 }
 
 export interface SetDefaultResolutionParams {
-    body?: SetDefaultResolutionRequest;
+    body?: Types.SetDefaultResolutionRequest;
 }
 
 /**
@@ -10074,7 +10074,7 @@ export async function setDefaultResolution(adapter: ForgeAdapter, authContext: A
 }
 
 export interface MoveResolutionsParams {
-    body?: ReorderIssueResolutionsRequest;
+    body?: Types.ReorderIssueResolutionsRequest;
 }
 
 /**
@@ -10145,7 +10145,7 @@ export async function getResolution(adapter: ForgeAdapter, authContext: AuthCont
 
 export interface UpdateResolutionParams {
     path: { id: string };
-    body?: UpdateResolutionDetails;
+    body?: Types.UpdateResolutionDetails;
 }
 
 /**
@@ -10194,7 +10194,7 @@ export async function deleteResolution(adapter: ForgeAdapter, authContext: AuthC
  * @forge-scopes-asApp read:jira-work, manage:jira-project
  * @forge-scopes-asUser read:jira-work, manage:jira-project
  */
-export async function getAllProjectRoles(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ProjectRole>> {
+export async function getAllProjectRoles(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ProjectRole>> {
     const path = '/rest/api/3/role';
     const response = await adapter.fetch({
       method: 'GET',
@@ -10202,11 +10202,11 @@ export async function getAllProjectRoles(adapter: ForgeAdapter, authContext: Aut
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ProjectRole>>;
+    return response.json() as Promise<Array<Types.ProjectRole>>;
 }
 
 export interface CreateProjectRoleParams {
-    body?: CreateUpdateRoleRequestBean;
+    body?: Types.CreateUpdateRoleRequestBean;
 }
 
 /**
@@ -10248,7 +10248,7 @@ export async function getProjectRoleById(adapter: ForgeAdapter, authContext: Aut
 
 export interface PartialUpdateProjectRoleParams {
     path: { id: string };
-    body?: CreateUpdateRoleRequestBean;
+    body?: Types.CreateUpdateRoleRequestBean;
 }
 
 /**
@@ -10270,7 +10270,7 @@ export async function partialUpdateProjectRole(adapter: ForgeAdapter, authContex
 
 export interface FullyUpdateProjectRoleParams {
     path: { id: string };
-    body?: CreateUpdateRoleRequestBean;
+    body?: Types.CreateUpdateRoleRequestBean;
 }
 
 /**
@@ -10336,7 +10336,7 @@ export async function getProjectRoleActorsForRole(adapter: ForgeAdapter, authCon
 
 export interface AddProjectRoleActorsToRoleParams {
     path: { id: string };
-    body?: ActorInputBean;
+    body?: Types.ActorInputBean;
 }
 
 /**
@@ -10420,7 +10420,7 @@ export async function getScreens(adapter: ForgeAdapter, authContext: AuthContext
 }
 
 export interface CreateScreenParams {
-    body?: ScreenDetails;
+    body?: Types.ScreenDetails;
 }
 
 /**
@@ -10491,7 +10491,7 @@ export async function getBulkScreenTabs(adapter: ForgeAdapter, authContext: Auth
 
 export interface UpdateScreenParams {
     path: { screenId: string };
-    body?: UpdateScreenDetails;
+    body?: Types.UpdateScreenDetails;
 }
 
 /**
@@ -10539,7 +10539,7 @@ export interface GetAvailableScreenFieldsParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAvailableScreenFields(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAvailableScreenFieldsParams): Promise<Array<ScreenableField>> {
+export async function getAvailableScreenFields(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAvailableScreenFieldsParams): Promise<Array<Types.ScreenableField>> {
     const path = `/rest/api/3/screens/${params.path.screenId}/availableFields`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -10547,7 +10547,7 @@ export async function getAvailableScreenFields(adapter: ForgeAdapter, authContex
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ScreenableField>>;
+    return response.json() as Promise<Array<Types.ScreenableField>>;
 }
 
 export interface GetAllScreenTabsParams {
@@ -10560,7 +10560,7 @@ export interface GetAllScreenTabsParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAllScreenTabs(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllScreenTabsParams): Promise<Array<ScreenableTab>> {
+export async function getAllScreenTabs(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllScreenTabsParams): Promise<Array<Types.ScreenableTab>> {
     const path = `/rest/api/3/screens/${params.path.screenId}/tabs`;
     const queryParams = {
       projectKey: params.projectKey,
@@ -10572,12 +10572,12 @@ export async function getAllScreenTabs(adapter: ForgeAdapter, authContext: AuthC
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ScreenableTab>>;
+    return response.json() as Promise<Array<Types.ScreenableTab>>;
 }
 
 export interface AddScreenTabParams {
     path: { screenId: string };
-    body?: ScreenableTab;
+    body?: Types.ScreenableTab;
 }
 
 /**
@@ -10599,7 +10599,7 @@ export async function addScreenTab(adapter: ForgeAdapter, authContext: AuthConte
 
 export interface RenameScreenTabParams {
     path: { screenId: string; tabId: string };
-    body?: ScreenableTab;
+    body?: Types.ScreenableTab;
 }
 
 /**
@@ -10647,7 +10647,7 @@ export interface GetAllScreenTabFieldsParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAllScreenTabFields(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllScreenTabFieldsParams): Promise<Array<ScreenableField>> {
+export async function getAllScreenTabFields(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllScreenTabFieldsParams): Promise<Array<Types.ScreenableField>> {
     const path = `/rest/api/3/screens/${params.path.screenId}/tabs/${params.path.tabId}/fields`;
     const queryParams = {
       projectKey: params.projectKey,
@@ -10659,12 +10659,12 @@ export async function getAllScreenTabFields(adapter: ForgeAdapter, authContext: 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ScreenableField>>;
+    return response.json() as Promise<Array<Types.ScreenableField>>;
 }
 
 export interface AddScreenTabFieldParams {
     path: { screenId: string; tabId: string };
-    body?: AddFieldBean;
+    body?: Types.AddFieldBean;
 }
 
 /**
@@ -10705,7 +10705,7 @@ export async function removeScreenTabField(adapter: ForgeAdapter, authContext: A
 
 export interface MoveScreenTabFieldParams {
     path: { screenId: string; tabId: string; id: string };
-    body?: MoveFieldBean;
+    body?: Types.MoveFieldBean;
 }
 
 /**
@@ -10778,7 +10778,7 @@ export async function getScreenSchemes(adapter: ForgeAdapter, authContext: AuthC
 }
 
 export interface CreateScreenSchemeParams {
-    body?: ScreenSchemeDetails;
+    body?: Types.ScreenSchemeDetails;
 }
 
 /**
@@ -10800,7 +10800,7 @@ export async function createScreenScheme(adapter: ForgeAdapter, authContext: Aut
 
 export interface UpdateScreenSchemeParams {
     path: { screenSchemeId: string };
-    body?: UpdateScreenSchemeDetails;
+    body?: Types.UpdateScreenSchemeDetails;
 }
 
 /**
@@ -10881,7 +10881,7 @@ export async function searchForIssuesUsingJql(adapter: ForgeAdapter, authContext
 }
 
 export interface SearchForIssuesUsingJqlPostParams {
-    body?: SearchRequestBean;
+    body?: Types.SearchRequestBean;
 }
 
 /**
@@ -10903,7 +10903,7 @@ export async function searchForIssuesUsingJqlPost(adapter: ForgeAdapter, authCon
 }
 
 export interface CountIssuesParams {
-    body?: JQLCountRequestBean;
+    body?: Types.JQLCountRequestBean;
 }
 
 /**
@@ -10963,7 +10963,7 @@ export async function searchAndReconsileIssuesUsingJql(adapter: ForgeAdapter, au
 }
 
 export interface SearchAndReconsileIssuesUsingJqlPostParams {
-    body?: SearchAndReconcileRequestBean;
+    body?: Types.SearchAndReconcileRequestBean;
 }
 
 /**
@@ -11024,7 +11024,7 @@ export async function getServerInfo(adapter: ForgeAdapter, authContext: AuthCont
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getIssueNavigatorDefaultColumns(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ColumnItem>> {
+export async function getIssueNavigatorDefaultColumns(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ColumnItem>> {
     const path = '/rest/api/3/settings/columns';
     const response = await adapter.fetch({
       method: 'GET',
@@ -11032,7 +11032,7 @@ export async function getIssueNavigatorDefaultColumns(adapter: ForgeAdapter, aut
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ColumnItem>>;
+    return response.json() as Promise<Array<Types.ColumnItem>>;
 }
 
 export interface SetIssueNavigatorDefaultColumnsParams {
@@ -11060,7 +11060,7 @@ export async function setIssueNavigatorDefaultColumns(adapter: ForgeAdapter, aut
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getStatuses(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<StatusDetails>> {
+export async function getStatuses(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.StatusDetails>> {
     const path = '/rest/api/3/status';
     const response = await adapter.fetch({
       method: 'GET',
@@ -11068,7 +11068,7 @@ export async function getStatuses(adapter: ForgeAdapter, authContext: AuthContex
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<StatusDetails>>;
+    return response.json() as Promise<Array<Types.StatusDetails>>;
 }
 
 export interface GetStatusParams {
@@ -11096,7 +11096,7 @@ export async function getStatus(adapter: ForgeAdapter, authContext: AuthContext 
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getStatusCategories(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<StatusCategory>> {
+export async function getStatusCategories(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.StatusCategory>> {
     const path = '/rest/api/3/statuscategory';
     const response = await adapter.fetch({
       method: 'GET',
@@ -11104,7 +11104,7 @@ export async function getStatusCategories(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<StatusCategory>>;
+    return response.json() as Promise<Array<Types.StatusCategory>>;
 }
 
 export interface GetStatusCategoryParams {
@@ -11136,7 +11136,7 @@ export interface GetStatusesByIdParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getStatusesById(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetStatusesByIdParams): Promise<Array<JiraStatus>> {
+export async function getStatusesById(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetStatusesByIdParams): Promise<Array<Types.JiraStatus>> {
     const path = '/rest/api/3/statuses';
     const queryParams = {
       id: params.id,
@@ -11148,11 +11148,11 @@ export async function getStatusesById(adapter: ForgeAdapter, authContext: AuthCo
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<JiraStatus>>;
+    return response.json() as Promise<Array<Types.JiraStatus>>;
 }
 
 export interface CreateStatusesParams {
-    body?: StatusCreateRequest;
+    body?: Types.StatusCreateRequest;
 }
 
 /**
@@ -11160,7 +11160,7 @@ export interface CreateStatusesParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function createStatuses(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: CreateStatusesParams): Promise<Array<JiraStatus>> {
+export async function createStatuses(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: CreateStatusesParams): Promise<Array<Types.JiraStatus>> {
     const path = '/rest/api/3/statuses';
     const response = await adapter.fetch({
       method: 'POST',
@@ -11169,11 +11169,11 @@ export async function createStatuses(adapter: ForgeAdapter, authContext: AuthCon
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<JiraStatus>>;
+    return response.json() as Promise<Array<Types.JiraStatus>>;
 }
 
 export interface UpdateStatusesParams {
-    body?: StatusUpdateRequest;
+    body?: Types.StatusUpdateRequest;
 }
 
 /**
@@ -11227,7 +11227,7 @@ export interface GetStatusesByNameParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getStatusesByName(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetStatusesByNameParams): Promise<Array<JiraStatus>> {
+export async function getStatusesByName(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetStatusesByNameParams): Promise<Array<Types.JiraStatus>> {
     const path = '/rest/api/3/statuses/byNames';
     const queryParams = {
       name: params.name,
@@ -11240,7 +11240,7 @@ export async function getStatusesByName(adapter: ForgeAdapter, authContext: Auth
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<JiraStatus>>;
+    return response.json() as Promise<Array<Types.JiraStatus>>;
 }
 
 export interface SearchParams {
@@ -11424,7 +11424,7 @@ export async function getUiModifications(adapter: ForgeAdapter, authContext: Aut
 }
 
 export interface CreateUiModificationParams {
-    body?: CreateUiModificationDetails;
+    body?: Types.CreateUiModificationDetails;
 }
 
 /**
@@ -11446,7 +11446,7 @@ export async function createUiModification(adapter: ForgeAdapter, authContext: A
 
 export interface UpdateUiModificationParams {
     path: { uiModificationId: string };
-    body?: UpdateUiModificationDetails;
+    body?: Types.UpdateUiModificationDetails;
 }
 
 /**
@@ -11667,7 +11667,7 @@ export async function getUser(adapter: ForgeAdapter, authContext: AuthContext = 
 }
 
 export interface CreateUserParams {
-    body?: NewUserDetails;
+    body?: Types.NewUserDetails;
 }
 
 /**
@@ -11728,7 +11728,7 @@ export interface FindBulkAssignableUsersParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function findBulkAssignableUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindBulkAssignableUsersParams): Promise<Array<User>> {
+export async function findBulkAssignableUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindBulkAssignableUsersParams): Promise<Array<Types.User>> {
     const path = '/rest/api/3/user/assignable/multiProjectSearch';
     const queryParams = {
       query: params.query,
@@ -11745,7 +11745,7 @@ export async function findBulkAssignableUsers(adapter: ForgeAdapter, authContext
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<User>>;
+    return response.json() as Promise<Array<Types.User>>;
 }
 
 export interface FindAssignableUsersParams {
@@ -11769,7 +11769,7 @@ export interface FindAssignableUsersParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function findAssignableUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindAssignableUsersParams): Promise<Array<User>> {
+export async function findAssignableUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindAssignableUsersParams): Promise<Array<Types.User>> {
     const path = '/rest/api/3/user/assignable/search';
     const queryParams = {
       query: params.query,
@@ -11793,7 +11793,7 @@ export async function findAssignableUsers(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<User>>;
+    return response.json() as Promise<Array<Types.User>>;
 }
 
 export interface BulkGetUsersParams {
@@ -11840,7 +11840,7 @@ export interface BulkGetUsersMigrationParams {
  * @forge-scopes-asApp read:jira-user
  * @forge-scopes-asUser read:jira-user
  */
-export async function bulkGetUsersMigration(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: BulkGetUsersMigrationParams): Promise<Array<UserMigrationBean>> {
+export async function bulkGetUsersMigration(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: BulkGetUsersMigrationParams): Promise<Array<Types.UserMigrationBean>> {
     const path = '/rest/api/3/user/bulk/migration';
     const queryParams = {
       startAt: params.startAt,
@@ -11855,7 +11855,7 @@ export async function bulkGetUsersMigration(adapter: ForgeAdapter, authContext: 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<UserMigrationBean>>;
+    return response.json() as Promise<Array<Types.UserMigrationBean>>;
 }
 
 export interface GetUserDefaultColumnsParams {
@@ -11868,7 +11868,7 @@ export interface GetUserDefaultColumnsParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function getUserDefaultColumns(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetUserDefaultColumnsParams): Promise<Array<ColumnItem>> {
+export async function getUserDefaultColumns(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetUserDefaultColumnsParams): Promise<Array<Types.ColumnItem>> {
     const path = '/rest/api/3/user/columns';
     const queryParams = {
       accountId: params.accountId,
@@ -11881,7 +11881,7 @@ export async function getUserDefaultColumns(adapter: ForgeAdapter, authContext: 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ColumnItem>>;
+    return response.json() as Promise<Array<Types.ColumnItem>>;
 }
 
 export interface SetUserColumnsParams {
@@ -11994,7 +11994,7 @@ export interface GetUserGroupsParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function getUserGroups(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetUserGroupsParams): Promise<Array<GroupName>> {
+export async function getUserGroups(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetUserGroupsParams): Promise<Array<Types.GroupName>> {
     const path = '/rest/api/3/user/groups';
     const queryParams = {
       accountId: params.accountId,
@@ -12008,7 +12008,7 @@ export async function getUserGroups(adapter: ForgeAdapter, authContext: AuthCont
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<GroupName>>;
+    return response.json() as Promise<Array<Types.GroupName>>;
 }
 
 export interface FindUsersWithAllPermissionsParams {
@@ -12027,7 +12027,7 @@ export interface FindUsersWithAllPermissionsParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function findUsersWithAllPermissions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindUsersWithAllPermissionsParams): Promise<Array<User>> {
+export async function findUsersWithAllPermissions(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindUsersWithAllPermissionsParams): Promise<Array<Types.User>> {
     const path = '/rest/api/3/user/permission/search';
     const queryParams = {
       query: params.query,
@@ -12046,7 +12046,7 @@ export async function findUsersWithAllPermissions(adapter: ForgeAdapter, authCon
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<User>>;
+    return response.json() as Promise<Array<Types.User>>;
 }
 
 export interface FindUsersForPickerParams {
@@ -12215,7 +12215,7 @@ export interface FindUsersParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function findUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindUsersParams): Promise<Array<User>> {
+export async function findUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindUsersParams): Promise<Array<Types.User>> {
     const path = '/rest/api/3/user/search';
     const queryParams = {
       query: params.query,
@@ -12232,7 +12232,7 @@ export async function findUsers(adapter: ForgeAdapter, authContext: AuthContext 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<User>>;
+    return response.json() as Promise<Array<Types.User>>;
 }
 
 export interface FindUsersByQueryParams {
@@ -12306,7 +12306,7 @@ export interface FindUsersWithBrowsePermissionParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function findUsersWithBrowsePermission(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindUsersWithBrowsePermissionParams): Promise<Array<User>> {
+export async function findUsersWithBrowsePermission(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FindUsersWithBrowsePermissionParams): Promise<Array<Types.User>> {
     const path = '/rest/api/3/user/viewissue/search';
     const queryParams = {
       query: params.query,
@@ -12324,7 +12324,7 @@ export async function findUsersWithBrowsePermission(adapter: ForgeAdapter, authC
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<User>>;
+    return response.json() as Promise<Array<Types.User>>;
 }
 
 export interface GetAllUsersDefaultParams {
@@ -12338,7 +12338,7 @@ export interface GetAllUsersDefaultParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function getAllUsersDefault(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllUsersDefaultParams): Promise<Array<User>> {
+export async function getAllUsersDefault(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllUsersDefaultParams): Promise<Array<Types.User>> {
     const path = '/rest/api/3/users';
     const queryParams = {
       startAt: params.startAt,
@@ -12352,7 +12352,7 @@ export async function getAllUsersDefault(adapter: ForgeAdapter, authContext: Aut
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<User>>;
+    return response.json() as Promise<Array<Types.User>>;
 }
 
 export interface GetAllUsersParams {
@@ -12366,7 +12366,7 @@ export interface GetAllUsersParams {
  * @forge-scopes-asApp read:jira-work, read:jira-user
  * @forge-scopes-asUser read:jira-work, read:jira-user
  */
-export async function getAllUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllUsersParams): Promise<Array<User>> {
+export async function getAllUsers(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllUsersParams): Promise<Array<Types.User>> {
     const path = '/rest/api/3/users/search';
     const queryParams = {
       startAt: params.startAt,
@@ -12380,11 +12380,11 @@ export async function getAllUsers(adapter: ForgeAdapter, authContext: AuthContex
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<User>>;
+    return response.json() as Promise<Array<Types.User>>;
 }
 
 export interface CreateVersionParams {
-    body?: Version;
+    body?: Types.Version;
 }
 
 /**
@@ -12431,7 +12431,7 @@ export async function getVersion(adapter: ForgeAdapter, authContext: AuthContext
 
 export interface UpdateVersionParams {
     path: { id: string };
-    body?: Version;
+    body?: Types.Version;
 }
 
 /**
@@ -12499,7 +12499,7 @@ export async function mergeVersions(adapter: ForgeAdapter, authContext: AuthCont
 
 export interface MoveVersionParams {
     path: { id: string };
-    body?: VersionMoveBean;
+    body?: Types.VersionMoveBean;
 }
 
 /**
@@ -12547,7 +12547,7 @@ export interface GetRelatedWorkParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getRelatedWork(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRelatedWorkParams): Promise<Array<VersionRelatedWork>> {
+export async function getRelatedWork(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRelatedWorkParams): Promise<Array<Types.VersionRelatedWork>> {
     const path = `/rest/api/3/version/${params.path.id}/relatedwork`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -12555,12 +12555,12 @@ export async function getRelatedWork(adapter: ForgeAdapter, authContext: AuthCon
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<VersionRelatedWork>>;
+    return response.json() as Promise<Array<Types.VersionRelatedWork>>;
 }
 
 export interface CreateRelatedWorkParams {
     path: { id: string };
-    body?: VersionRelatedWork;
+    body?: Types.VersionRelatedWork;
 }
 
 /**
@@ -12582,7 +12582,7 @@ export async function createRelatedWork(adapter: ForgeAdapter, authContext: Auth
 
 export interface UpdateRelatedWorkParams {
     path: { id: string };
-    body?: VersionRelatedWork;
+    body?: Types.VersionRelatedWork;
 }
 
 /**
@@ -12604,7 +12604,7 @@ export async function updateRelatedWork(adapter: ForgeAdapter, authContext: Auth
 
 export interface DeleteAndReplaceVersionParams {
     path: { id: string };
-    body?: DeleteAndReplaceVersionBean;
+    body?: Types.DeleteAndReplaceVersionBean;
 }
 
 /**
@@ -12690,7 +12690,7 @@ export async function getDynamicWebhooksForApp(adapter: ForgeAdapter, authContex
 }
 
 export interface RegisterDynamicWebhooksParams {
-    body?: WebhookRegistrationDetails;
+    body?: Types.WebhookRegistrationDetails;
 }
 
 /**
@@ -12710,7 +12710,7 @@ export async function registerDynamicWebhooks(adapter: ForgeAdapter, authContext
 }
 
 export interface DeleteWebhookByIdParams {
-    body?: ContainerForWebhookIDs;
+    body?: Types.ContainerForWebhookIDs;
 }
 
 /**
@@ -12756,7 +12756,7 @@ export async function getFailedWebhooks(adapter: ForgeAdapter, authContext: Auth
 }
 
 export interface RefreshWebhooksParams {
-    body?: ContainerForWebhookIDs;
+    body?: Types.ContainerForWebhookIDs;
 }
 
 /**
@@ -12785,7 +12785,7 @@ export interface GetAllWorkflowsParams {
  * @forge-scopes-asUser read:jira-work
  * @deprecated
  */
-export async function getAllWorkflows(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllWorkflowsParams): Promise<Array<DeprecatedWorkflow>> {
+export async function getAllWorkflows(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllWorkflowsParams): Promise<Array<Types.DeprecatedWorkflow>> {
     const path = '/rest/api/3/workflow';
     const queryParams = {
       workflowName: params.workflowName,
@@ -12797,11 +12797,11 @@ export async function getAllWorkflows(adapter: ForgeAdapter, authContext: AuthCo
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<DeprecatedWorkflow>>;
+    return response.json() as Promise<Array<Types.DeprecatedWorkflow>>;
 }
 
 export interface CreateWorkflowParams {
-    body?: CreateWorkflowDetails;
+    body?: Types.CreateWorkflowDetails;
 }
 
 /**
@@ -12823,7 +12823,7 @@ export async function createWorkflow(adapter: ForgeAdapter, authContext: AuthCon
 }
 
 export interface ReadWorkflowFromHistoryParams {
-    body?: WorkflowHistoryReadRequest;
+    body?: Types.WorkflowHistoryReadRequest;
 }
 
 /**
@@ -12844,7 +12844,7 @@ export async function readWorkflowFromHistory(adapter: ForgeAdapter, authContext
 
 export interface ListWorkflowHistoryParams {
     expand?: string;
-    body?: WorkflowHistoryListRequest;
+    body?: Types.WorkflowHistoryListRequest;
 }
 
 /**
@@ -12907,7 +12907,7 @@ export async function getWorkflowTransitionRuleConfigurations(adapter: ForgeAdap
 }
 
 export interface UpdateWorkflowTransitionRuleConfigurationsParams {
-    body?: WorkflowTransitionRulesUpdate;
+    body?: Types.WorkflowTransitionRulesUpdate;
 }
 
 /**
@@ -12928,7 +12928,7 @@ export async function updateWorkflowTransitionRuleConfigurations(adapter: ForgeA
 }
 
 export interface DeleteWorkflowTransitionRuleConfigurationsParams {
-    body?: WorkflowsWithTransitionRulesDetails;
+    body?: Types.WorkflowsWithTransitionRulesDetails;
 }
 
 /**
@@ -13022,7 +13022,7 @@ export interface CreateWorkflowTransitionPropertyParams {
     key: string;
     workflowName: string;
     workflowMode?: "live" | "draft";
-    body?: WorkflowTransitionProperty;
+    body?: Types.WorkflowTransitionProperty;
 }
 
 /**
@@ -13054,7 +13054,7 @@ export interface UpdateWorkflowTransitionPropertyParams {
     key: string;
     workflowName: string;
     workflowMode?: "live" | "draft";
-    body?: WorkflowTransitionProperty;
+    body?: Types.WorkflowTransitionProperty;
 }
 
 /**
@@ -13211,7 +13211,7 @@ export async function getWorkflowSchemeUsagesForWorkflow(adapter: ForgeAdapter, 
 }
 
 export interface ReadWorkflowsParams {
-    body?: WorkflowReadRequest;
+    body?: Types.WorkflowReadRequest;
 }
 
 /**
@@ -13258,7 +13258,7 @@ export async function workflowCapabilities(adapter: ForgeAdapter, authContext: A
 }
 
 export interface CreateWorkflowsParams {
-    body?: WorkflowCreateRequest;
+    body?: Types.WorkflowCreateRequest;
 }
 
 /**
@@ -13279,7 +13279,7 @@ export async function createWorkflows(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface ValidateCreateWorkflowsParams {
-    body?: WorkflowCreateValidateRequest;
+    body?: Types.WorkflowCreateValidateRequest;
 }
 
 /**
@@ -13315,7 +13315,7 @@ export async function getDefaultEditor(adapter: ForgeAdapter, authContext: AuthC
 }
 
 export interface ReadWorkflowPreviewsParams {
-    body?: WorkflowPreviewRequest;
+    body?: Types.WorkflowPreviewRequest;
 }
 
 /**
@@ -13371,7 +13371,7 @@ export async function searchWorkflows(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface UpdateWorkflowsParams {
-    body?: WorkflowUpdateRequest;
+    body?: Types.WorkflowUpdateRequest;
 }
 
 /**
@@ -13392,7 +13392,7 @@ export async function updateWorkflows(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface ValidateUpdateWorkflowsParams {
-    body?: WorkflowUpdateValidateRequestBean;
+    body?: Types.WorkflowUpdateValidateRequestBean;
 }
 
 /**
@@ -13438,7 +13438,7 @@ export async function getAllWorkflowSchemes(adapter: ForgeAdapter, authContext: 
 }
 
 export interface CreateWorkflowSchemeParams {
-    body?: WorkflowScheme;
+    body?: Types.WorkflowScheme;
 }
 
 /**
@@ -13483,7 +13483,7 @@ export async function getWorkflowSchemeProjectAssociations(adapter: ForgeAdapter
 }
 
 export interface AssignSchemeToProjectParams {
-    body?: WorkflowSchemeProjectAssociation;
+    body?: Types.WorkflowSchemeProjectAssociation;
 }
 
 /**
@@ -13504,7 +13504,7 @@ export async function assignSchemeToProject(adapter: ForgeAdapter, authContext: 
 }
 
 export interface SwitchWorkflowSchemeForProjectParams {
-    body?: WorkflowSchemeProjectSwitchBean;
+    body?: Types.WorkflowSchemeProjectSwitchBean;
 }
 
 /**
@@ -13524,14 +13524,14 @@ export async function switchWorkflowSchemeForProject(adapter: ForgeAdapter, auth
 }
 
 export interface ReadWorkflowSchemesParams {
-    body?: WorkflowSchemeReadRequest;
+    body?: Types.WorkflowSchemeReadRequest;
 }
 
 /**
  * Bulk get workflow schemes
  * @forge-scopes-asApp read:jira-work
  */
-export async function readWorkflowSchemes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ReadWorkflowSchemesParams): Promise<Array<WorkflowSchemeReadResponse>> {
+export async function readWorkflowSchemes(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ReadWorkflowSchemesParams): Promise<Array<Types.WorkflowSchemeReadResponse>> {
     const path = '/rest/api/3/workflowscheme/read';
     const response = await adapter.fetch({
       method: 'POST',
@@ -13540,11 +13540,11 @@ export async function readWorkflowSchemes(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<WorkflowSchemeReadResponse>>;
+    return response.json() as Promise<Array<Types.WorkflowSchemeReadResponse>>;
 }
 
 export interface UpdateSchemesParams {
-    body?: WorkflowSchemeUpdateRequest;
+    body?: Types.WorkflowSchemeUpdateRequest;
 }
 
 /**
@@ -13565,7 +13565,7 @@ export async function updateSchemes(adapter: ForgeAdapter, authContext: AuthCont
 }
 
 export interface GetRequiredWorkflowSchemeMappingsParams {
-    body?: WorkflowSchemeUpdateRequiredMappingsRequest;
+    body?: Types.WorkflowSchemeUpdateRequiredMappingsRequest;
 }
 
 /**
@@ -13612,7 +13612,7 @@ export async function getWorkflowScheme(adapter: ForgeAdapter, authContext: Auth
 
 export interface UpdateWorkflowSchemeParams {
     path: { id: string };
-    body?: WorkflowScheme;
+    body?: Types.WorkflowScheme;
 }
 
 /**
@@ -13699,7 +13699,7 @@ export async function getDefaultWorkflow(adapter: ForgeAdapter, authContext: Aut
 
 export interface UpdateDefaultWorkflowParams {
     path: { id: string };
-    body?: DefaultWorkflow;
+    body?: Types.DefaultWorkflow;
 }
 
 /**
@@ -13766,7 +13766,7 @@ export async function getWorkflowSchemeDraft(adapter: ForgeAdapter, authContext:
 
 export interface UpdateWorkflowSchemeDraftParams {
     path: { id: string };
-    body?: WorkflowScheme;
+    body?: Types.WorkflowScheme;
 }
 
 /**
@@ -13827,7 +13827,7 @@ export async function getDraftDefaultWorkflow(adapter: ForgeAdapter, authContext
 
 export interface UpdateDraftDefaultWorkflowParams {
     path: { id: string };
-    body?: DefaultWorkflow;
+    body?: Types.DefaultWorkflow;
 }
 
 /**
@@ -13889,7 +13889,7 @@ export async function getWorkflowSchemeDraftIssueType(adapter: ForgeAdapter, aut
 
 export interface SetWorkflowSchemeDraftIssueTypeParams {
     path: { id: string; issueType: string };
-    body?: IssueTypeWorkflowMapping;
+    body?: Types.IssueTypeWorkflowMapping;
 }
 
 /**
@@ -13932,7 +13932,7 @@ export async function deleteWorkflowSchemeDraftIssueType(adapter: ForgeAdapter, 
 export interface PublishDraftWorkflowSchemeParams {
     path: { id: string };
     validateOnly?: boolean;
-    body?: PublishDraftWorkflowScheme;
+    body?: Types.PublishDraftWorkflowScheme;
 }
 
 /**
@@ -13982,7 +13982,7 @@ export async function getDraftWorkflow(adapter: ForgeAdapter, authContext: AuthC
 export interface UpdateDraftWorkflowMappingParams {
     path: { id: string };
     workflowName: string;
-    body?: IssueTypesWorkflowMapping;
+    body?: Types.IssueTypesWorkflowMapping;
 }
 
 /**
@@ -14057,7 +14057,7 @@ export async function getWorkflowSchemeIssueType(adapter: ForgeAdapter, authCont
 
 export interface SetWorkflowSchemeIssueTypeParams {
     path: { id: string; issueType: string };
-    body?: IssueTypeWorkflowMapping;
+    body?: Types.IssueTypeWorkflowMapping;
 }
 
 /**
@@ -14132,7 +14132,7 @@ export async function getWorkflow(adapter: ForgeAdapter, authContext: AuthContex
 export interface UpdateWorkflowMappingParams {
     path: { id: string };
     workflowName: string;
-    body?: IssueTypesWorkflowMapping;
+    body?: Types.IssueTypesWorkflowMapping;
 }
 
 /**
@@ -14235,7 +14235,7 @@ export async function getIdsOfWorklogsDeletedSince(adapter: ForgeAdapter, authCo
 
 export interface GetWorklogsForIdsParams {
     expand?: string;
-    body?: WorklogIdsRequestBean;
+    body?: Types.WorklogIdsRequestBean;
 }
 
 /**
@@ -14243,7 +14243,7 @@ export interface GetWorklogsForIdsParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getWorklogsForIds(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetWorklogsForIdsParams): Promise<Array<Worklog>> {
+export async function getWorklogsForIds(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetWorklogsForIdsParams): Promise<Array<Types.Worklog>> {
     const path = '/rest/api/3/worklog/list';
     const queryParams = {
       expand: params.expand,
@@ -14256,7 +14256,7 @@ export async function getWorklogsForIds(adapter: ForgeAdapter, authContext: Auth
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<Worklog>>;
+    return response.json() as Promise<Array<Types.Worklog>>;
 }
 
 export interface GetIdsOfWorklogsModifiedSinceParams {
@@ -14285,7 +14285,7 @@ export async function getIdsOfWorklogsModifiedSince(adapter: ForgeAdapter, authC
     return response.json() as Promise<Types.ChangedWorklogs>;
 }
 
-export interface GetAddonPropertiesGetParamsParams {
+export interface GetAddonPropertiesGetParams {
     path: { addonKey: string };
 }
 
@@ -14294,7 +14294,7 @@ export interface GetAddonPropertiesGetParamsParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function getAddonPropertiesGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAddonPropertiesGetParamsParams): Promise<Types.PropertyKeys> {
+export async function getAddonPropertiesGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAddonPropertiesGetParams): Promise<Types.PropertyKeys> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -14305,7 +14305,7 @@ export async function getAddonPropertiesGet(adapter: ForgeAdapter, authContext: 
     return response.json() as Promise<Types.PropertyKeys>;
 }
 
-export interface GetAddonPropertyGetParamsParams {
+export interface GetAddonPropertyGetParams {
     path: { addonKey: string; propertyKey: string };
 }
 
@@ -14314,7 +14314,7 @@ export interface GetAddonPropertyGetParamsParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function getAddonPropertyGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAddonPropertyGetParamsParams): Promise<Types.EntityProperty> {
+export async function getAddonPropertyGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAddonPropertyGetParams): Promise<Types.EntityProperty> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties/${params.path.propertyKey}`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -14325,7 +14325,7 @@ export async function getAddonPropertyGet(adapter: ForgeAdapter, authContext: Au
     return response.json() as Promise<Types.EntityProperty>;
 }
 
-export interface PutAddonPropertyPutParamsParams {
+export interface PutAddonPropertyPutParams {
     path: { addonKey: string; propertyKey: string };
     body?: Record<string, unknown>;
 }
@@ -14335,7 +14335,7 @@ export interface PutAddonPropertyPutParamsParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function putAddonPropertyPut(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: PutAddonPropertyPutParamsParams): Promise<Types.OperationMessage> {
+export async function putAddonPropertyPut(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: PutAddonPropertyPutParams): Promise<Types.OperationMessage> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties/${params.path.propertyKey}`;
     const response = await adapter.fetch({
       method: 'PUT',
@@ -14347,7 +14347,7 @@ export async function putAddonPropertyPut(adapter: ForgeAdapter, authContext: Au
     return response.json() as Promise<Types.OperationMessage>;
 }
 
-export interface DeleteAddonPropertyDeleteParamsParams {
+export interface DeleteAddonPropertyDeleteParams {
     path: { addonKey: string; propertyKey: string };
 }
 
@@ -14356,7 +14356,7 @@ export interface DeleteAddonPropertyDeleteParamsParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function deleteAddonPropertyDelete(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: DeleteAddonPropertyDeleteParamsParams): Promise<void> {
+export async function deleteAddonPropertyDelete(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: DeleteAddonPropertyDeleteParams): Promise<void> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties/${params.path.propertyKey}`;
     const response = await adapter.fetch({
       method: 'DELETE',
@@ -14382,7 +14382,7 @@ export async function getModulesGet(adapter: ForgeAdapter, authContext: AuthCont
 }
 
 export interface RegisterModulesPostParams {
-    body?: ConnectModules;
+    body?: Types.ConnectModules;
 }
 
 /**
@@ -14423,7 +14423,7 @@ export async function removeModulesDelete(adapter: ForgeAdapter, authContext: Au
 }
 
 export interface UpdateIssueFieldsPutParams {
-    body?: ConnectCustomFieldValues;
+    body?: Types.ConnectCustomFieldValues;
 }
 
 /**
@@ -14444,7 +14444,7 @@ export async function updateIssueFieldsPut(adapter: ForgeAdapter, authContext: A
 
 export interface UpdateEntityPropertiesValuePutParams {
     path: { entityType: string };
-    body?: Array<EntityPropertyDetails>;
+    body?: Array<Types.EntityPropertyDetails>;
 }
 
 /**
@@ -14463,7 +14463,7 @@ export async function updateEntityPropertiesValuePut(adapter: ForgeAdapter, auth
 }
 
 export interface WorkflowRuleSearchPostParams {
-    body?: WorkflowRulesSearch;
+    body?: Types.WorkflowRulesSearch;
 }
 
 /**
@@ -14527,7 +14527,7 @@ export interface ServicesGetParams {
  * Retrieve the attributes of service registries
  * @forge-scopes-asApp read:jira-work
  */
-export async function servicesGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ServicesGetParams): Promise<Array<ServiceRegistry>> {
+export async function servicesGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ServicesGetParams): Promise<Array<Types.ServiceRegistry>> {
     const path = '/rest/atlassian-connect/1/service-registry';
     const queryParams = {
       serviceIds: params.serviceIds,
@@ -14539,7 +14539,7 @@ export async function servicesGet(adapter: ForgeAdapter, authContext: AuthContex
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ServiceRegistry>>;
+    return response.json() as Promise<Array<Types.ServiceRegistry>>;
 }
 
 /**
@@ -14619,7 +14619,7 @@ export async function deleteForgeAppProperty(adapter: ForgeAdapter, authContext:
 }
 
 export interface GetWorklogsByIssueIdAndWorklogIdParams {
-    body?: BulkWorklogKeyRequestBean;
+    body?: Types.BulkWorklogKeyRequestBean;
 }
 
 /**

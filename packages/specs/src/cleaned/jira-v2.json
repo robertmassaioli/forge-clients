@@ -23108,7 +23108,7 @@
             "type": "string"
           },
           "url": {
-            "description": "The URL of the configuration page for the time tracking provider app. For example, */example/config/url*. This property is only returned if the `adminPageKey` property is set in the module descriptor of the time tracking provider app.",
+            "description": "The URL of the configuration page for the time tracking provider app. For example, * /example/config/url*. This property is only returned if the `adminPageKey` property is set in the module descriptor of the time tracking provider app.",
             "readOnly": true,
             "type": "string"
           }
@@ -47719,7 +47719,7 @@
         ],
         "requestBody": {
           "content": {
-            "*/*": {
+            "* /*": {
               "schema": {
                 "$ref": "#/components/schemas/ColumnRequestBody"
               }
@@ -62587,7 +62587,7 @@
         ],
         "requestBody": {
           "content": {
-            "*/*": {
+            "* /*": {
               "schema": {}
             },
             "application/json": {
@@ -77576,7 +77576,7 @@
         ],
         "requestBody": {
           "content": {
-            "*/*": {
+            "* /*": {
               "schema": {}
             },
             "application/json": {
@@ -88286,7 +88286,7 @@
         "parameters": [],
         "requestBody": {
           "content": {
-            "*/*": {
+            "* /*": {
               "schema": {
                 "$ref": "#/components/schemas/ColumnRequestBody"
               }
@@ -90781,7 +90781,7 @@
         ],
         "requestBody": {
           "content": {
-            "*/*": {
+            "* /*": {
               "schema": {}
             },
             "application/json": {
@@ -91062,7 +91062,7 @@
         "responses": {
           "200": {
             "content": {
-              "*/*": {},
+              "* /*": {},
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StreamingResponseBody"
@@ -91075,7 +91075,7 @@
           },
           "401": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91094,7 +91094,7 @@
           },
           "403": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91113,7 +91113,7 @@
           },
           "404": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91260,7 +91260,7 @@
         "responses": {
           "200": {
             "content": {
-              "*/*": {},
+              "* /*": {},
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StreamingResponseBody"
@@ -91273,7 +91273,7 @@
           },
           "400": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91292,7 +91292,7 @@
           },
           "401": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91311,7 +91311,7 @@
           },
           "403": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91330,7 +91330,7 @@
           },
           "404": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91476,7 +91476,7 @@
         "responses": {
           "200": {
             "content": {
-              "*/*": {},
+              "* /*": {},
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StreamingResponseBody"
@@ -91489,7 +91489,7 @@
           },
           "400": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91508,7 +91508,7 @@
           },
           "401": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91527,7 +91527,7 @@
           },
           "403": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -91546,7 +91546,7 @@
           },
           "404": {
             "content": {
-              "*/*": {
+              "* /*": {
                 "example": "{\"errorMessages\":[\"Human readable error message\"],\"errors\":{}}"
               },
               "application/json": {
@@ -92880,7 +92880,7 @@
         ],
         "requestBody": {
           "content": {
-            "*/*": {
+            "* /*": {
               "schema": {
                 "$ref": "#/components/schemas/UserColumnRequestBody"
               }
@@ -108367,7 +108367,7 @@
       },
       {
         "anchor": "expansion",
-        "body": "### Expansion\n\nThe Jira REST API uses resource expansion, which means that some parts of a resource are not returned unless specified \nin the request. This simplifies responses and minimizes network traffic.\n\nTo expand part of a resource in a request, use the expand query parameter and specify the object(s) to be expanded. \nIf you need to expand nested objects, use the `.` dot notation. If you need to expand multiple objects, use a \ncomma-separated list. \n\nFor example, the following request expands the `names` and `renderedFields` properties for the _JRACLOUD-34423_ issue:\n\n`GET issue/JRACLOUD-34423?expand=names,renderedFields`\n\nTo discover which object can be expanded, refer to the `expand` property in the object. \nIn the JSON example below, the resource declares `widgets` as expandable.\n\n```json\n{\n  \"expand\": \"widgets\", \n  \"self\": \"https://your-domain.atlassian.net/rest/api/3/resource/KEY-1\", \n  \"widgets\": {\n    \"widgets\": [],\n    \"size\": 5\n   }\n}\n```\n\n### Pagination\n\nThe Jira REST API uses pagination to improve performance. Pagination is enforced for operations that could return a large \ncollection of items. When you make a request to a paginated resource, the response wraps the returned array of values in \na JSON object with paging metadata. For example:\n\n```json\n{\n    \"startAt\" : 0,\n    \"maxResults\" : 10,\n    \"total\": 200,\n    \"isLast\": false,\n    \"values\": [\n        { /* result 0 */ },\n        { /* result 1 */ },\n        { /* result 2 */ }\n    ]\n}\n```\n\n*   `startAt` is the index of the first item returned in the page.\n*   `maxResults` is the maximum number of items that a page can return. Each operation can have a different limit for\n    the number of items returned, and these limits may change without notice. To find the maximum number of items \n    that an operation could return, set `maxResults` to a large number—for example, over 1000—and if the returned value of `maxResults` is less than the requested value, the returned value is the maximum.\n*    `total` is the total number of items contained in all pages. This number **_may change_** as the client \nrequests the subsequent pages, therefore the client should always assume that the requested page can be empty. Note \nthat this property is not returned for all operations.\n*   `isLast` indicates whether the page returned is the last one. Note that this property is not returned for all operations.\n\n### Ordering\n\nSome operations support ordering the elements of a response by a field. Check the documentation for the operation to \nconfirm whether ordering of a response is supported and which fields can be used. Responses are listed in ascending order \nby default. You can change the order using the `orderby` query parameter with a `-` or `+` symbol. For example:\n\n*   `?orderBy=name` to order by `name` field ascending.\n*   `?orderBy=+name` to order by `name` field ascending.\n*   `?orderBy=-name` to order by `name` field descending.\n\n\n",
+        "body": "### Expansion\n\nThe Jira REST API uses resource expansion, which means that some parts of a resource are not returned unless specified \nin the request. This simplifies responses and minimizes network traffic.\n\nTo expand part of a resource in a request, use the expand query parameter and specify the object(s) to be expanded. \nIf you need to expand nested objects, use the `.` dot notation. If you need to expand multiple objects, use a \ncomma-separated list. \n\nFor example, the following request expands the `names` and `renderedFields` properties for the _JRACLOUD-34423_ issue:\n\n`GET issue/JRACLOUD-34423?expand=names,renderedFields`\n\nTo discover which object can be expanded, refer to the `expand` property in the object. \nIn the JSON example below, the resource declares `widgets` as expandable.\n\n```json\n{\n  \"expand\": \"widgets\", \n  \"self\": \"https://your-domain.atlassian.net/rest/api/3/resource/KEY-1\", \n  \"widgets\": {\n    \"widgets\": [],\n    \"size\": 5\n   }\n}\n```\n\n### Pagination\n\nThe Jira REST API uses pagination to improve performance. Pagination is enforced for operations that could return a large \ncollection of items. When you make a request to a paginated resource, the response wraps the returned array of values in \na JSON object with paging metadata. For example:\n\n```json\n{\n    \"startAt\" : 0,\n    \"maxResults\" : 10,\n    \"total\": 200,\n    \"isLast\": false,\n    \"values\": [\n        { /* result 0 * / },\n        { /* result 1 * / },\n        { /* result 2 * / }\n    ]\n}\n```\n\n*   `startAt` is the index of the first item returned in the page.\n*   `maxResults` is the maximum number of items that a page can return. Each operation can have a different limit for\n    the number of items returned, and these limits may change without notice. To find the maximum number of items \n    that an operation could return, set `maxResults` to a large number—for example, over 1000—and if the returned value of `maxResults` is less than the requested value, the returned value is the maximum.\n*    `total` is the total number of items contained in all pages. This number **_may change_** as the client \nrequests the subsequent pages, therefore the client should always assume that the requested page can be empty. Note \nthat this property is not returned for all operations.\n*   `isLast` indicates whether the page returned is the last one. Note that this property is not returned for all operations.\n\n### Ordering\n\nSome operations support ordering the elements of a response by a field. Check the documentation for the operation to \nconfirm whether ordering of a response is supported and which fields can be used. Responses are listed in ascending order \nby default. You can change the order using the `orderby` query parameter with a `-` or `+` symbol. For example:\n\n*   `?orderBy=name` to order by `name` field ascending.\n*   `?orderBy=+name` to order by `name` field ascending.\n*   `?orderBy=-name` to order by `name` field descending.\n\n\n",
         "title": "Expansion, pagination, and ordering"
       },
       {
