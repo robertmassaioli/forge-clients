@@ -55,7 +55,7 @@ export class SdkEmitter {
     if (op.requestBody) {
       properties.push({
         name: 'body',
-        type: this.typeRefToString(op.requestBody),
+        type: this.typeRefToString(op.requestBody, 'Types'),
         hasQuestionToken: true,
       });
     }
@@ -69,7 +69,7 @@ export class SdkEmitter {
 
   private emitOperationFunction(file: SourceFile, op: IROperation): void {
     const hasParams = op.pathParams.length > 0 || op.queryParams.length > 0 || op.requestBody;
-    const returnTypeStr = this.typeRefToString(op.successType);
+    const returnTypeStr = this.typeRefToString(op.successType, 'Types');
     const isVoid = returnTypeStr === 'void';
 
     // Build resolved path string
@@ -105,8 +105,9 @@ export class SdkEmitter {
     }
 
     // Build JSDoc as a plain string to avoid type narrowing issues
+    const sanitizeDoc = (s: string) => s.replace(/\*\//g, '* /');
     const docParts: string[] = [];
-    if (op.summary) docParts.push(op.summary);
+    if (op.summary) docParts.push(sanitizeDoc(op.summary));
     if (op.forgeScopes.asApp.length > 0) docParts.push(`@forge-scopes-asApp ${op.forgeScopes.asApp.join(', ')}`);
     if (op.forgeScopes.asUser.length > 0) docParts.push(`@forge-scopes-asUser ${op.forgeScopes.asUser.join(', ')}`);
     if (op.deprecated) docParts.push('@deprecated');
@@ -127,9 +128,9 @@ export class SdkEmitter {
     });
   }
 
-  private typeRefToString(ref: IRTypeRef): string {
+  private typeRefToString(ref: IRTypeRef, namespace?: string): string {
     if (ref.kind === 'named') return `Types.${ref.name}`;
-    return this.typeEmitter.irTypeToString(ref.type);
+    return this.typeEmitter.irTypeToString(ref.type, namespace);
   }
 }
 

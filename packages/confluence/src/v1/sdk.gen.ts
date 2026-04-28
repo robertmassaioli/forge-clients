@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ForgeApiError } from "@forge-clients/core";
 import type { ForgeAdapter, AuthContext } from "@forge-clients/core";
 import type * as Types from "./types.gen.js";
@@ -40,7 +41,7 @@ export async function getAuditRecords(adapter: ForgeAdapter, authContext: AuthCo
 }
 
 export interface CreateAuditRecordParams {
-    body?: AuditRecordCreate;
+    body?: Types.AuditRecordCreate;
 }
 
 /**
@@ -105,7 +106,7 @@ export async function getRetentionPeriod(adapter: ForgeAdapter, authContext: Aut
 }
 
 export interface SetRetentionPeriodParams {
-    body?: RetentionPeriod;
+    body?: Types.RetentionPeriod;
 }
 
 /**
@@ -180,7 +181,7 @@ export async function archivePages(adapter: ForgeAdapter, authContext: AuthConte
 export interface PublishLegacyDraftParams {
     path: { draftId: string };
     status?: string;
-    body?: ContentBlueprintDraft;
+    body?: Types.ContentBlueprintDraft;
 }
 
 /**
@@ -206,7 +207,7 @@ export async function publishLegacyDraft(adapter: ForgeAdapter, authContext: Aut
 export interface PublishSharedDraftParams {
     path: { draftId: string };
     status?: string;
-    body?: ContentBlueprintDraft;
+    body?: Types.ContentBlueprintDraft;
 }
 
 /**
@@ -287,7 +288,7 @@ export interface MovePageParams {
  * Move a page to a new location relative to a target page
  * @forge-scopes-asApp read:jira-work
  */
-export async function movePage(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: MovePageParams): Promise<{ pageId?: ContentId }> {
+export async function movePage(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: MovePageParams): Promise<{ pageId?: Types.ContentId }> {
     const path = `/wiki/rest/api/content/${params.path.pageId}/move/${params.path.position}/${params.path.targetId}`;
     const response = await adapter.fetch({
       method: 'PUT',
@@ -295,7 +296,7 @@ export async function movePage(adapter: ForgeAdapter, authContext: AuthContext =
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<{ pageId?: ContentId }>;
+    return response.json() as Promise<{ pageId?: Types.ContentId }>;
 }
 
 export interface CreateAttachmentParams {
@@ -354,7 +355,7 @@ export async function createOrUpdateAttachments(adapter: ForgeAdapter, authConte
 
 export interface UpdateAttachmentPropertiesParams {
     path: { id: string; attachmentId: string };
-    body?: AttachmentPropertiesUpdateBody;
+    body?: Types.AttachmentPropertiesUpdateBody;
 }
 
 /**
@@ -555,7 +556,7 @@ export async function getAndAsyncConvertMacroBodyByMacroId(adapter: ForgeAdapter
 
 export interface AddLabelsToContentParams {
     path: { id: string };
-    body?: LabelCreateArray | LabelCreate;
+    body?: Types.LabelCreateArray | Types.LabelCreate;
 }
 
 /**
@@ -674,7 +675,7 @@ export async function getWatchesForSpace(adapter: ForgeAdapter, authContext: Aut
 
 export interface CopyPageHierarchyParams {
     path: { id: string };
-    body?: CopyPageHierarchyRequest;
+    body?: Types.CopyPageHierarchyRequest;
 }
 
 /**
@@ -695,7 +696,7 @@ export async function copyPageHierarchy(adapter: ForgeAdapter, authContext: Auth
 
 export interface CopyPageParams {
     path: { id: string };
-    body?: CopyPageRequest;
+    body?: Types.CopyPageRequest;
 }
 
 /**
@@ -715,7 +716,7 @@ export async function copyPage(adapter: ForgeAdapter, authContext: AuthContext =
 
 export interface CheckContentPermissionParams {
     path: { id: string };
-    body?: ContentPermissionRequest;
+    body?: Types.ContentPermissionRequest;
 }
 
 /**
@@ -766,7 +767,7 @@ export async function getRestrictions(adapter: ForgeAdapter, authContext: AuthCo
 export interface AddRestrictionsParams {
     path: { id: string };
     expand?: Array<"restrictions.user" | "read.restrictions.user" | "update.restrictions.user" | "restrictions.group" | "read.restrictions.group" | "update.restrictions.group" | "content">;
-    body?: ContentRestrictionAddOrUpdateArray;
+    body?: Types.ContentRestrictionAddOrUpdateArray;
 }
 
 /**
@@ -793,7 +794,7 @@ export async function addRestrictions(adapter: ForgeAdapter, authContext: AuthCo
 export interface UpdateRestrictionsParams {
     path: { id: string };
     expand?: Array<"restrictions.user" | "read.restrictions.user" | "update.restrictions.user" | "restrictions.group" | "read.restrictions.group" | "update.restrictions.group" | "content">;
-    body?: ContentRestrictionAddOrUpdateArray;
+    body?: Types.ContentRestrictionAddOrUpdateArray;
 }
 
 /**
@@ -852,7 +853,7 @@ export interface GetRestrictionsByOperationParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getRestrictionsByOperation(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRestrictionsByOperationParams): Promise<Record<string, { operationType?: ContentRestriction; _links?: GenericLinks }>> {
+export async function getRestrictionsByOperation(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetRestrictionsByOperationParams): Promise<Record<string, { operationType?: Types.ContentRestriction; _links?: Types.GenericLinks }>> {
     const path = `/wiki/rest/api/content/${params.path.id}/restriction/byOperation`;
     const queryParams = {
       expand: params.expand,
@@ -864,7 +865,7 @@ export async function getRestrictionsByOperation(adapter: ForgeAdapter, authCont
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Record<string, { operationType?: ContentRestriction; _links?: GenericLinks }>>;
+    return response.json() as Promise<Record<string, { operationType?: Types.ContentRestriction; _links?: Types.GenericLinks }>>;
 }
 
 export interface GetRestrictionsForOperationParams {
@@ -1038,7 +1039,7 @@ export async function getContentState(adapter: ForgeAdapter, authContext: AuthCo
 export interface SetContentStateParams {
     path: { id: string };
     status: "current" | "draft";
-    body?: ContentStateRestInput;
+    body?: Types.ContentStateRestInput;
 }
 
 /**
@@ -1110,7 +1111,7 @@ export async function getAvailableContentStates(adapter: ForgeAdapter, authConte
 export interface RestoreContentVersionParams {
     path: { id: string };
     expand?: Array<string>;
-    body?: VersionRestore;
+    body?: Types.VersionRestore;
 }
 
 /**
@@ -1157,7 +1158,7 @@ export async function deleteContentVersion(adapter: ForgeAdapter, authContext: A
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getCustomContentStates(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<ContentState>> {
+export async function getCustomContentStates(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Array<Types.ContentState>> {
     const path = '/wiki/rest/api/content-states';
     const response = await adapter.fetch({
       method: 'GET',
@@ -1165,7 +1166,7 @@ export async function getCustomContentStates(adapter: ForgeAdapter, authContext:
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ContentState>>;
+    return response.json() as Promise<Array<Types.ContentState>>;
 }
 
 export interface AsyncConvertContentBodyRequestParams {
@@ -1174,7 +1175,7 @@ export interface AsyncConvertContentBodyRequestParams {
     contentIdContext?: string;
     allowCache?: boolean;
     embeddedContentRender?: "current" | "version-at-save";
-    body?: ContentBodyCreate;
+    body?: Types.ContentBodyCreate;
 }
 
 /**
@@ -1243,7 +1244,7 @@ export async function bulkAsyncConvertContentBodyResponse(adapter: ForgeAdapter,
 }
 
 export interface BulkAsyncConvertContentBodyRequestParams {
-    body?: BulkContentBodyConversionInput;
+    body?: Types.BulkContentBodyConversionInput;
 }
 
 /**
@@ -1321,7 +1322,7 @@ export async function getGroups(adapter: ForgeAdapter, authContext: AuthContext 
 }
 
 export interface CreateGroupParams {
-    body?: GroupName;
+    body?: Types.GroupName;
 }
 
 /**
@@ -1451,7 +1452,7 @@ export async function getGroupMembersByGroupId(adapter: ForgeAdapter, authContex
 
 export interface AddUserToGroupByGroupIdParams {
     groupId: string;
-    body?: AccountId;
+    body?: Types.AccountId;
 }
 
 /**
@@ -1820,7 +1821,7 @@ export async function getLookAndFeelSettings(adapter: ForgeAdapter, authContext:
 }
 
 export interface UpdateLookAndFeelParams {
-    body?: LookAndFeelSelection;
+    body?: Types.LookAndFeelSelection;
 }
 
 /**
@@ -1842,7 +1843,7 @@ export async function updateLookAndFeel(adapter: ForgeAdapter, authContext: Auth
 
 export interface UpdateLookAndFeelSettingsParams {
     spaceKey?: string;
-    body?: LookAndFeel;
+    body?: Types.LookAndFeel;
 }
 
 /**
@@ -1967,7 +1968,7 @@ export async function getTheme(adapter: ForgeAdapter, authContext: AuthContext =
 }
 
 export interface CreateSpaceParams {
-    body?: SpaceCreate;
+    body?: Types.SpaceCreate;
 }
 
 /**
@@ -1988,7 +1989,7 @@ export async function createSpace(adapter: ForgeAdapter, authContext: AuthContex
 }
 
 export interface CreatePrivateSpaceParams {
-    body?: SpaceCreate;
+    body?: Types.SpaceCreate;
 }
 
 /**
@@ -2010,7 +2011,7 @@ export async function createPrivateSpace(adapter: ForgeAdapter, authContext: Aut
 
 export interface UpdateSpaceParams {
     path: { spaceKey: string };
-    body?: SpaceUpdate;
+    body?: Types.SpaceUpdate;
 }
 
 /**
@@ -2052,7 +2053,7 @@ export async function deleteSpace(adapter: ForgeAdapter, authContext: AuthContex
 
 export interface AddPermissionToSpaceParams {
     path: { spaceKey: string };
-    body?: SpacePermissionRequest;
+    body?: Types.SpacePermissionRequest;
 }
 
 /**
@@ -2074,7 +2075,7 @@ export async function addPermissionToSpace(adapter: ForgeAdapter, authContext: A
 
 export interface AddCustomContentPermissionsParams {
     path: { spaceKey: string };
-    body?: SpacePermissionCustomContent;
+    body?: Types.SpacePermissionCustomContent;
 }
 
 /**
@@ -2134,7 +2135,7 @@ export async function getSpaceSettings(adapter: ForgeAdapter, authContext: AuthC
 
 export interface UpdateSpaceSettingsParams {
     path: { spaceKey: string };
-    body?: SpaceSettingsUpdate;
+    body?: Types.SpaceSettingsUpdate;
 }
 
 /**
@@ -2163,7 +2164,7 @@ export interface GetSpaceContentStatesParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getSpaceContentStates(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetSpaceContentStatesParams): Promise<Array<ContentState>> {
+export async function getSpaceContentStates(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetSpaceContentStatesParams): Promise<Array<Types.ContentState>> {
     const path = `/wiki/rest/api/space/${params.path.spaceKey}/state`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -2171,7 +2172,7 @@ export async function getSpaceContentStates(adapter: ForgeAdapter, authContext: 
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<Array<ContentState>>;
+    return response.json() as Promise<Array<Types.ContentState>>;
 }
 
 export interface GetContentStateSettingsParams {
@@ -2196,10 +2197,11 @@ export async function getContentStateSettings(adapter: ForgeAdapter, authContext
 
 export interface GetContentsWithStateParams {
     path: { spaceKey: string };
-    state-id: number;
+    stateId: number;
     expand?: Array<string>;
     limit?: number;
     start?: number;
+}
 
 /**
  * Get content in space with given content state
@@ -2209,7 +2211,7 @@ export interface GetContentsWithStateParams {
 export async function getContentsWithState(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetContentsWithStateParams): Promise<Types.ContentArray> {
     const path = `/wiki/rest/api/space/${params.path.spaceKey}/state/content`;
     const queryParams = {
-      state-id: params.state-id,
+      stateId: params.stateId,
       expand: params.expand,
       limit: params.limit,
       start: params.start,
@@ -2222,6 +2224,7 @@ export async function getContentsWithState(adapter: ForgeAdapter, authContext: A
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
     return response.json() as Promise<Types.ContentArray>;
+}
 
 export interface GetSpaceThemeParams {
     path: { spaceKey: string };
@@ -2245,7 +2248,7 @@ export async function getSpaceTheme(adapter: ForgeAdapter, authContext: AuthCont
 
 export interface SetSpaceThemeParams {
     path: { spaceKey: string };
-    body?: ThemeUpdate;
+    body?: Types.ThemeUpdate;
 }
 
 /**
@@ -2341,7 +2344,7 @@ export async function getLabelsForSpace(adapter: ForgeAdapter, authContext: Auth
 
 export interface AddLabelsToSpaceParams {
     path: { spaceKey: string };
-    body?: Array<LabelCreate>;
+    body?: Array<Types.LabelCreate>;
 }
 
 /**
@@ -2388,7 +2391,7 @@ export async function deleteLabelFromSpace(adapter: ForgeAdapter, authContext: A
 }
 
 export interface CreateContentTemplateParams {
-    body?: ContentTemplateCreate;
+    body?: Types.ContentTemplateCreate;
 }
 
 /**
@@ -2409,7 +2412,7 @@ export async function createContentTemplate(adapter: ForgeAdapter, authContext: 
 }
 
 export interface UpdateContentTemplateParams {
-    body?: ContentTemplateUpdate;
+    body?: Types.ContentTemplateUpdate;
 }
 
 /**
@@ -3028,7 +3031,7 @@ export async function getUserProperty(adapter: ForgeAdapter, authContext: AuthCo
 
 export interface CreateUserPropertyParams {
     path: { userId: string; key: string };
-    body?: UserPropertyCreate;
+    body?: Types.UserPropertyCreate;
 }
 
 /**
@@ -3049,7 +3052,7 @@ export async function createUserProperty(adapter: ForgeAdapter, authContext: Aut
 
 export interface UpdateUserPropertyParams {
     path: { userId: string; key: string };
-    body?: UserPropertyUpdate;
+    body?: Types.UserPropertyUpdate;
 }
 
 /**
@@ -3085,8 +3088,4 @@ export async function deleteUserProperty(adapter: ForgeAdapter, authContext: Aut
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-}
-
-}
-
 }

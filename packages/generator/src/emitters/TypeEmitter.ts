@@ -29,9 +29,11 @@ export class TypeEmitter {
       file.addInterface({
         name,
         isExported: true,
-        docs: description ? [{ description }] : [],
+        docs: description ? [{ description: description.replace(/\*\//g, '* /') }] : [],
         properties: type.properties.map(prop => ({
-          name: prop.name,
+          // Quote property names starting with digits (e.g. "16x16") — TypeScript requires
+          // numeric-starting identifiers to be quoted in interface property signatures
+          name: /^\d/.test(prop.name) ? `"${prop.name}"` : prop.name,
           type: this.irTypeToString(prop.type),
           hasQuestionToken: !prop.required,
           isReadonly: prop.readonly,
@@ -45,13 +47,14 @@ export class TypeEmitter {
       file.addTypeAlias({
         name,
         isExported: true,
-        docs: description ? [{ description }] : [],
+        docs: description ? [{ description: description.replace(/\*\//g, '* /') }] : [],
         type: this.irTypeToString(type),
       });
     }
   }
 
-  irTypeToString(type: IRType): string {
+  irTypeToString(type: IRType, namespace?: string): string {
+    const ns = namespace ? `${namespace}.` : '';
     switch (type.kind) {
       case 'string': return 'string';
       case 'number': return 'number';
@@ -60,15 +63,15 @@ export class TypeEmitter {
       case 'unknown': return 'unknown';
       case 'void': return 'void';
       case 'literal': return JSON.stringify(type.value);
-      case 'array': return `Array<${this.irTypeToString(type.items)}>`;
-      case 'record': return `Record<string, ${this.irTypeToString(type.values)}>`;
-      case 'ref': return type.name;
-      case 'union': return type.types.map(t => this.irTypeToString(t)).join(' | ');
-      case 'intersection': return type.types.map(t => this.irTypeToString(t)).join(' & ');
+      case 'array': return `Array<${this.irTypeToString(type.items, namespace)}>`;
+      case 'record': return `Record<string, ${this.irTypeToString(type.values, namespace)}>`;
+      case 'ref': return `${ns}${type.name}`;
+      case 'union': return type.types.map(t => this.irTypeToString(t, namespace)).join(' | ');
+      case 'intersection': return type.types.map(t => this.irTypeToString(t, namespace)).join(' & ');
       case 'object': {
         if (type.properties.length === 0) return 'Record<string, unknown>';
         const props = type.properties.map(p =>
-          `${p.readonly ? 'readonly ' : ''}${p.name}${p.required ? '' : '?'}: ${this.irTypeToString(p.type)}`
+          `${p.readonly ? 'readonly ' : ''}${/^\d/.test(p.name) ? `'${p.name}'` : p.name}${p.required ? '' : '?'}: ${this.irTypeToString(p.type)}`
         ).join('; ');
         return `{ ${props} }`;
       }

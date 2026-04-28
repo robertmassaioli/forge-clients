@@ -11,6 +11,18 @@ import type {
   IRSpec, IROperation, IRParameter, IRTypeRef, IRType, IRProperty, IRNamedType,
 } from './IRTypes.js';
 
+/**
+ * Sanitize an operationId for use as a TypeScript function name.
+ * Handles dot-notation (e.g. "AddonPropertiesResource.getAddonProperties_get")
+ * and underscore-suffix patterns common in Jira/Confluence specs.
+ */
+function sanitizeOperationId(operationId: string): string {
+  const dotIdx = operationId.lastIndexOf('.');
+  let name = dotIdx >= 0 ? operationId.slice(dotIdx + 1) : operationId;
+  name = name.replace(/[_-]([a-zA-Z0-9])/g, (_: string, c: string) => c.toUpperCase());
+  return name.charAt(0).toLowerCase() + name.slice(1);
+}
+
 export function specToIR(spec: OpenAPIV3.Document, title: string): IRSpec {
   const types = new Map<string, IRNamedType>();
 
@@ -98,7 +110,9 @@ function operationToIR(
   ];
 
   return {
-    operationId: op.operationId!,
+    // Sanitize operationId: dot-notation (e.g. "AddonPropertiesResource.getAddonProperties_get")
+    // is not a valid TypeScript identifier. Take only the last segment and convert to camelCase.
+    operationId: sanitizeOperationId(op.operationId!),
     method: method.toUpperCase() as IROperation['method'],
     path,
     ...(op.summary !== undefined ? { summary: op.summary } : {}),

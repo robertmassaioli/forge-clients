@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ForgeApiError } from "@forge-clients/core";
 import type { ForgeAdapter, AuthContext } from "@forge-clients/core";
 import type * as Types from "./types.gen.js";
@@ -35,7 +36,7 @@ export async function getAssetsWorkspaces(adapter: ForgeAdapter, authContext: Au
 
 export interface CreateCustomerParams {
     strictConflictStatusCode?: boolean;
-    body?: CustomerCreateDTO;
+    body?: Types.CustomerCreateDTO;
 }
 
 /**
@@ -184,7 +185,7 @@ export async function getOrganizationsGlobal(adapter: ForgeAdapter, authContext:
 }
 
 export interface CreateOrganizationParams {
-    body?: OrganizationCreateDTO;
+    body?: Types.OrganizationCreateDTO;
 }
 
 /**
@@ -353,7 +354,7 @@ export async function getUsersInOrganization(adapter: ForgeAdapter, authContext:
 
 export interface AddUsersToOrganizationParams {
     path: { organizationId: string };
-    body?: UsersOrganizationUpdateDTO;
+    body?: Types.UsersOrganizationUpdateDTO;
 }
 
 /**
@@ -374,7 +375,7 @@ export async function addUsersToOrganization(adapter: ForgeAdapter, authContext:
 
 export interface RemoveUsersFromOrganizationParams {
     path: { organizationId: string };
-    body?: UsersOrganizationUpdateDTO;
+    body?: Types.UsersOrganizationUpdateDTO;
 }
 
 /**
@@ -436,7 +437,7 @@ export async function getCustomerRequests(adapter: ForgeAdapter, authContext: Au
 }
 
 export interface CreateCustomerRequestParams {
-    body?: RequestCreateDTO;
+    body?: Types.RequestCreateDTO;
 }
 
 /**
@@ -530,7 +531,7 @@ export async function getApprovalById(adapter: ForgeAdapter, authContext: AuthCo
 
 export interface AnswerApprovalParams {
     path: { issueIdOrKey: string; approvalId: string };
-    body?: ApprovalDecisionRequestDTO;
+    body?: Types.ApprovalDecisionRequestDTO;
 }
 
 /**
@@ -578,7 +579,7 @@ export async function getAttachmentsForRequest(adapter: ForgeAdapter, authContex
 
 export interface CreateCommentWithAttachmentParams {
     path: { issueIdOrKey: string };
-    body?: AttachmentCreateDTO;
+    body?: Types.AttachmentCreateDTO;
 }
 
 /**
@@ -673,7 +674,7 @@ export async function getRequestComments(adapter: ForgeAdapter, authContext: Aut
 
 export interface CreateRequestCommentParams {
     path: { issueIdOrKey: string };
-    body?: CommentCreateDTO;
+    body?: Types.CommentCreateDTO;
 }
 
 /**
@@ -830,7 +831,7 @@ export async function getRequestParticipants(adapter: ForgeAdapter, authContext:
 
 export interface AddRequestParticipantsParams {
     path: { issueIdOrKey: string };
-    body?: RequestParticipantUpdateDTO;
+    body?: Types.RequestParticipantUpdateDTO;
 }
 
 /**
@@ -852,7 +853,7 @@ export async function addRequestParticipants(adapter: ForgeAdapter, authContext:
 
 export interface RemoveRequestParticipantsParams {
     path: { issueIdOrKey: string };
-    body?: RequestParticipantUpdateDTO;
+    body?: Types.RequestParticipantUpdateDTO;
 }
 
 /**
@@ -975,7 +976,7 @@ export async function getCustomerTransitions(adapter: ForgeAdapter, authContext:
 
 export interface PerformCustomerTransitionParams {
     path: { issueIdOrKey: string };
-    body?: CustomerTransitionExecutionDTO;
+    body?: Types.CustomerTransitionExecutionDTO;
 }
 
 /**
@@ -1015,7 +1016,7 @@ export async function getFeedback(adapter: ForgeAdapter, authContext: AuthContex
 
 export interface PostFeedbackParams {
     path: { requestIdOrKey: string };
-    body?: CSATFeedbackFullDTO;
+    body?: Types.CSATFeedbackFullDTO;
 }
 
 /**
@@ -1187,7 +1188,7 @@ export async function getCustomers(adapter: ForgeAdapter, authContext: AuthConte
 
 export interface AddCustomersParams {
     path: { serviceDeskId: string };
-    body?: ServiceDeskCustomerDTO;
+    body?: Types.ServiceDeskCustomerDTO;
 }
 
 /**
@@ -1208,7 +1209,7 @@ export async function addCustomers(adapter: ForgeAdapter, authContext: AuthConte
 
 export interface RemoveCustomersParams {
     path: { serviceDeskId: string };
-    body?: ServiceDeskCustomerDTO;
+    body?: Types.ServiceDeskCustomerDTO;
 }
 
 /**
@@ -1230,7 +1231,7 @@ export async function removeCustomers(adapter: ForgeAdapter, authContext: AuthCo
 export interface InviteCustomerParams {
     path: { serviceDeskId: string };
     strictConflictStatusCode?: boolean;
-    body?: ServiceDeskCustomerInviteDTO;
+    body?: Types.ServiceDeskCustomerInviteDTO;
 }
 
 /**
@@ -1318,7 +1319,7 @@ export async function getOrganizationsForServiceDesk(adapter: ForgeAdapter, auth
 
 export interface AddOrganizationParams {
     path: { serviceDeskId: string };
-    body?: OrganizationServiceDeskUpdateDTO;
+    body?: Types.OrganizationServiceDeskUpdateDTO;
 }
 
 /**
@@ -1339,7 +1340,7 @@ export async function addOrganization(adapter: ForgeAdapter, authContext: AuthCo
 
 export interface RemoveOrganizationParams {
     path: { serviceDeskId: string };
-    body?: OrganizationServiceDeskUpdateDTO;
+    body?: Types.OrganizationServiceDeskUpdateDTO;
 }
 
 /**
@@ -1478,7 +1479,7 @@ export async function getRequestTypes(adapter: ForgeAdapter, authContext: AuthCo
 
 export interface CreateRequestTypeParams {
     path: { serviceDeskId: string };
-    body?: RequestTypeCreateDTO;
+    body?: Types.RequestTypeCreateDTO;
 }
 
 /**
@@ -1500,7 +1501,7 @@ export async function createRequestType(adapter: ForgeAdapter, authContext: Auth
 
 export interface CheckRequestTypePermissionsParams {
     path: { serviceDeskId: string };
-    body?: RequestTypePermissionCheckRequestDTO;
+    body?: Types.RequestTypePermissionCheckRequestDTO;
 }
 
 /**

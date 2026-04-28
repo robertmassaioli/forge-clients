@@ -11870,9 +11870,9 @@
             }
           },
           {
-            "name": "state-id",
+            "name": "stateId",
             "in": "query",
-            "description": "The id of the content state to filter content by",
+            "description": "The id of the content state to filter content by\n(parameter was originally named `state-id` in the spec)",
             "required": true,
             "schema": {
               "type": "integer",
@@ -14419,7 +14419,7 @@
           {
             "name": "X-Atlassian-Token",
             "in": "header",
-            "description": "Note, you must add header when making a\nrequest, as this operation has XSRF protection.",
+            "description": "Note, you must add header when making a\nrequest, as this operation has XSRF protection.\n(parameter was originally named `X-Atlassian-Token` in the spec)",
             "required": true,
             "schema": {
               "type": "string",
@@ -14663,7 +14663,7 @@
           {
             "name": "X-Atlassian-Token",
             "in": "header",
-            "description": "Note, you must add header when making a\nrequest, as this operation has XSRF protection.",
+            "description": "Note, you must add header when making a\nrequest, as this operation has XSRF protection.\n(parameter was originally named `X-Atlassian-Token` in the spec)",
             "required": true,
             "schema": {
               "type": "string",
@@ -15026,7 +15026,7 @@
           {
             "name": "X-Atlassian-Token",
             "in": "header",
-            "description": "Note, you must add header when making a\nrequest, as this operation has XSRF protection.",
+            "description": "Note, you must add header when making a\nrequest, as this operation has XSRF protection.\n(parameter was originally named `X-Atlassian-Token` in the spec)",
             "required": true,
             "schema": {
               "type": "string",

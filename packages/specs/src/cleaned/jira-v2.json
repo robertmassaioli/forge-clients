@@ -5721,18 +5721,18 @@
         "additionalProperties": false,
         "description": "Details of a gadget position.",
         "properties": {
-          "The column position of the gadget.": {
+          "theColumnPositionOfTheGadget": {
             "format": "int32",
             "type": "integer"
           },
-          "The row position of the gadget.": {
+          "theRowPositionOfTheGadget": {
             "format": "int32",
             "type": "integer"
           }
         },
         "required": [
-          "The column position of the gadget.",
-          "The row position of the gadget."
+          "theColumnPositionOfTheGadget",
+          "theRowPositionOfTheGadget"
         ],
         "type": "object",
         "writeOnly": true
@@ -8053,7 +8053,7 @@
         "additionalProperties": false,
         "description": "A paginated list of subscriptions to a filter.",
         "properties": {
-          "end-index": {
+          "endIndex": {
             "description": "The index of the last item returned on the page.",
             "format": "int32",
             "readOnly": true,
@@ -8071,7 +8071,7 @@
             "readOnly": true,
             "type": "array"
           },
-          "max-results": {
+          "maxResults": {
             "description": "The maximum number of results that could be on the page.",
             "format": "int32",
             "readOnly": true,
@@ -8090,7 +8090,7 @@
               "attribute": true
             }
           },
-          "start-index": {
+          "startIndex": {
             "description": "The index of the first item returned on the page.",
             "format": "int32",
             "readOnly": true,
@@ -17147,7 +17147,7 @@
         "additionalProperties": false,
         "description": "A paged list. To access additional details append `[start-index:end-index]` to the expand request. For example, `?expand=sharedUsers[10:40]` returns a list starting at item 10 and finishing at item 40.",
         "properties": {
-          "end-index": {
+          "endIndex": {
             "description": "The index of the last item returned on the page.",
             "format": "int32",
             "readOnly": true,
@@ -17165,7 +17165,7 @@
             "readOnly": true,
             "type": "array"
           },
-          "max-results": {
+          "maxResults": {
             "description": "The maximum number of results that could be on the page.",
             "format": "int32",
             "readOnly": true,
@@ -17184,7 +17184,7 @@
               "attribute": true
             }
           },
-          "start-index": {
+          "startIndex": {
             "description": "The index of the first item returned on the page.",
             "format": "int32",
             "readOnly": true,
@@ -21691,7 +21691,7 @@
             },
             "type": "array"
           },
-          "max-results": {
+          "maxResults": {
             "format": "int32",
             "type": "integer",
             "xml": {
@@ -21727,7 +21727,7 @@
             },
             "type": "array"
           },
-          "max-results": {
+          "maxResults": {
             "format": "int32",
             "type": "integer",
             "xml": {
@@ -24656,7 +24656,7 @@
         "additionalProperties": false,
         "description": "A paginated list of users sharing the filter. This includes users that are members of the groups or can browse the projects that the filter is shared with.",
         "properties": {
-          "end-index": {
+          "endIndex": {
             "description": "The index of the last item returned on the page.",
             "format": "int32",
             "readOnly": true,
@@ -24674,7 +24674,7 @@
             "readOnly": true,
             "type": "array"
           },
-          "max-results": {
+          "maxResults": {
             "description": "The maximum number of results that could be on the page.",
             "format": "int32",
             "readOnly": true,
@@ -24693,7 +24693,7 @@
               "attribute": true
             }
           },
-          "start-index": {
+          "startIndex": {
             "description": "The index of the first item returned on the page.",
             "format": "int32",
             "readOnly": true,
@@ -106594,7 +106594,7 @@
         "operationId": "AppIssueFieldValueUpdateResource.updateIssueFields_put",
         "parameters": [
           {
-            "description": "The ID of the transfer.",
+            "description": "The ID of the transfer.\n(parameter was originally named `Atlassian-Transfer-Id` in the spec)",
             "in": "header",
             "name": "Atlassian-Transfer-Id",
             "required": true,
@@ -106721,7 +106721,7 @@
         "operationId": "MigrationResource.updateEntityPropertiesValue_put",
         "parameters": [
           {
-            "description": "The app migration transfer ID.",
+            "description": "The app migration transfer ID.\n(parameter was originally named `Atlassian-Transfer-Id` in the spec)",
             "in": "header",
             "name": "Atlassian-Transfer-Id",
             "required": true,
@@ -106838,7 +106838,7 @@
         "operationId": "MigrationResource.workflowRuleSearch_post",
         "parameters": [
           {
-            "description": "The app migration transfer ID.",
+            "description": "The app migration transfer ID.\n(parameter was originally named `Atlassian-Transfer-Id` in the spec)",
             "in": "header",
             "name": "Atlassian-Transfer-Id",
             "required": true,

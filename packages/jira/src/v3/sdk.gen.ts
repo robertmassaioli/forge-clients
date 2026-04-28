@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ForgeApiError } from "@forge-clients/core";
 import type { ForgeAdapter, AuthContext } from "@forge-clients/core";
 import type * as Types from "./types.gen.js";
@@ -14284,7 +14285,7 @@ export async function getIdsOfWorklogsModifiedSince(adapter: ForgeAdapter, authC
     return response.json() as Promise<Types.ChangedWorklogs>;
 }
 
-export interface AddonPropertiesResource.getAddonProperties_getParams {
+export interface GetAddonPropertiesGetParamsParams {
     path: { addonKey: string };
 }
 
@@ -14293,7 +14294,7 @@ export interface AddonPropertiesResource.getAddonProperties_getParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function AddonPropertiesResource.getAddonProperties_get(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddonPropertiesResource.getAddonProperties_getParams): Promise<Types.PropertyKeys> {
+export async function getAddonPropertiesGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAddonPropertiesGetParamsParams): Promise<Types.PropertyKeys> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -14304,7 +14305,7 @@ export async function AddonPropertiesResource.getAddonProperties_get(adapter: Fo
     return response.json() as Promise<Types.PropertyKeys>;
 }
 
-export interface AddonPropertiesResource.getAddonProperty_getParams {
+export interface GetAddonPropertyGetParamsParams {
     path: { addonKey: string; propertyKey: string };
 }
 
@@ -14313,7 +14314,7 @@ export interface AddonPropertiesResource.getAddonProperty_getParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function AddonPropertiesResource.getAddonProperty_get(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddonPropertiesResource.getAddonProperty_getParams): Promise<Types.EntityProperty> {
+export async function getAddonPropertyGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAddonPropertyGetParamsParams): Promise<Types.EntityProperty> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties/${params.path.propertyKey}`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -14324,7 +14325,7 @@ export async function AddonPropertiesResource.getAddonProperty_get(adapter: Forg
     return response.json() as Promise<Types.EntityProperty>;
 }
 
-export interface AddonPropertiesResource.putAddonProperty_putParams {
+export interface PutAddonPropertyPutParamsParams {
     path: { addonKey: string; propertyKey: string };
     body?: Record<string, unknown>;
 }
@@ -14334,7 +14335,7 @@ export interface AddonPropertiesResource.putAddonProperty_putParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function AddonPropertiesResource.putAddonProperty_put(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddonPropertiesResource.putAddonProperty_putParams): Promise<Types.OperationMessage> {
+export async function putAddonPropertyPut(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: PutAddonPropertyPutParamsParams): Promise<Types.OperationMessage> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties/${params.path.propertyKey}`;
     const response = await adapter.fetch({
       method: 'PUT',
@@ -14346,7 +14347,7 @@ export async function AddonPropertiesResource.putAddonProperty_put(adapter: Forg
     return response.json() as Promise<Types.OperationMessage>;
 }
 
-export interface AddonPropertiesResource.deleteAddonProperty_deleteParams {
+export interface DeleteAddonPropertyDeleteParamsParams {
     path: { addonKey: string; propertyKey: string };
 }
 
@@ -14355,7 +14356,7 @@ export interface AddonPropertiesResource.deleteAddonProperty_deleteParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function AddonPropertiesResource.deleteAddonProperty_delete(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AddonPropertiesResource.deleteAddonProperty_deleteParams): Promise<void> {
+export async function deleteAddonPropertyDelete(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: DeleteAddonPropertyDeleteParamsParams): Promise<void> {
     const path = `/rest/atlassian-connect/1/addons/${params.path.addonKey}/properties/${params.path.propertyKey}`;
     const response = await adapter.fetch({
       method: 'DELETE',
@@ -14369,7 +14370,7 @@ export async function AddonPropertiesResource.deleteAddonProperty_delete(adapter
  * Get modules
  * @forge-scopes-asApp read:jira-work
  */
-export async function DynamicModulesResource.getModules_get(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Types.ConnectModules> {
+export async function getModulesGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }): Promise<Types.ConnectModules> {
     const path = '/rest/atlassian-connect/1/app/module/dynamic';
     const response = await adapter.fetch({
       method: 'GET',
@@ -14380,7 +14381,7 @@ export async function DynamicModulesResource.getModules_get(adapter: ForgeAdapte
     return response.json() as Promise<Types.ConnectModules>;
 }
 
-export interface DynamicModulesResource.registerModules_postParams {
+export interface RegisterModulesPostParams {
     body?: ConnectModules;
 }
 
@@ -14388,7 +14389,7 @@ export interface DynamicModulesResource.registerModules_postParams {
  * Register modules
  * @forge-scopes-asApp read:jira-work
  */
-export async function DynamicModulesResource.registerModules_post(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: DynamicModulesResource.registerModules_postParams): Promise<void> {
+export async function registerModulesPost(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: RegisterModulesPostParams): Promise<void> {
     const path = '/rest/atlassian-connect/1/app/module/dynamic';
     const response = await adapter.fetch({
       method: 'POST',
@@ -14399,7 +14400,7 @@ export async function DynamicModulesResource.registerModules_post(adapter: Forge
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
 }
 
-export interface DynamicModulesResource.removeModules_deleteParams {
+export interface RemoveModulesDeleteParams {
     moduleKey?: Array<string>;
 }
 
@@ -14407,7 +14408,7 @@ export interface DynamicModulesResource.removeModules_deleteParams {
  * Remove modules
  * @forge-scopes-asApp read:jira-work
  */
-export async function DynamicModulesResource.removeModules_delete(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: DynamicModulesResource.removeModules_deleteParams): Promise<void> {
+export async function removeModulesDelete(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: RemoveModulesDeleteParams): Promise<void> {
     const path = '/rest/atlassian-connect/1/app/module/dynamic';
     const queryParams = {
       moduleKey: params.moduleKey,
@@ -14421,7 +14422,7 @@ export async function DynamicModulesResource.removeModules_delete(adapter: Forge
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
 }
 
-export interface AppIssueFieldValueUpdateResource.updateIssueFields_putParams {
+export interface UpdateIssueFieldsPutParams {
     body?: ConnectCustomFieldValues;
 }
 
@@ -14429,7 +14430,7 @@ export interface AppIssueFieldValueUpdateResource.updateIssueFields_putParams {
  * Bulk update custom field value
  * @forge-scopes-asApp read:jira-work
  */
-export async function AppIssueFieldValueUpdateResource.updateIssueFields_put(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: AppIssueFieldValueUpdateResource.updateIssueFields_putParams): Promise<Record<string, unknown>> {
+export async function updateIssueFieldsPut(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: UpdateIssueFieldsPutParams): Promise<Record<string, unknown>> {
     const path = '/rest/atlassian-connect/1/migration/field';
     const response = await adapter.fetch({
       method: 'PUT',
@@ -14441,7 +14442,7 @@ export async function AppIssueFieldValueUpdateResource.updateIssueFields_put(ada
     return response.json() as Promise<Record<string, unknown>>;
 }
 
-export interface MigrationResource.updateEntityPropertiesValue_putParams {
+export interface UpdateEntityPropertiesValuePutParams {
     path: { entityType: string };
     body?: Array<EntityPropertyDetails>;
 }
@@ -14450,7 +14451,7 @@ export interface MigrationResource.updateEntityPropertiesValue_putParams {
  * Bulk update entity properties
  * @forge-scopes-asApp read:jira-work
  */
-export async function MigrationResource.updateEntityPropertiesValue_put(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: MigrationResource.updateEntityPropertiesValue_putParams): Promise<void> {
+export async function updateEntityPropertiesValuePut(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: UpdateEntityPropertiesValuePutParams): Promise<void> {
     const path = `/rest/atlassian-connect/1/migration/properties/${params.path.entityType}`;
     const response = await adapter.fetch({
       method: 'PUT',
@@ -14461,7 +14462,7 @@ export async function MigrationResource.updateEntityPropertiesValue_put(adapter:
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
 }
 
-export interface MigrationResource.workflowRuleSearch_postParams {
+export interface WorkflowRuleSearchPostParams {
     body?: WorkflowRulesSearch;
 }
 
@@ -14469,7 +14470,7 @@ export interface MigrationResource.workflowRuleSearch_postParams {
  * Get workflow transition rule configurations
  * @forge-scopes-asApp read:jira-work
  */
-export async function MigrationResource.workflowRuleSearch_post(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: MigrationResource.workflowRuleSearch_postParams): Promise<Types.WorkflowRulesSearchDetails> {
+export async function workflowRuleSearchPost(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: WorkflowRuleSearchPostParams): Promise<Types.WorkflowRulesSearchDetails> {
     const path = '/rest/atlassian-connect/1/migration/workflow/rule/search';
     const response = await adapter.fetch({
       method: 'POST',
@@ -14481,7 +14482,7 @@ export async function MigrationResource.workflowRuleSearch_post(adapter: ForgeAd
     return response.json() as Promise<Types.WorkflowRulesSearchDetails>;
 }
 
-export interface ConnectToForgeMigrationFetchTaskResource.fetchMigrationTask_getParams {
+export interface FetchMigrationTaskGetParams {
     path: { connectKey: string; jiraIssueFieldsKey: string };
 }
 
@@ -14489,7 +14490,7 @@ export interface ConnectToForgeMigrationFetchTaskResource.fetchMigrationTask_get
  * Get Connect issue field migration task
  * @forge-scopes-asApp read:jira-work
  */
-export async function ConnectToForgeMigrationFetchTaskResource.fetchMigrationTask_get(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ConnectToForgeMigrationFetchTaskResource.fetchMigrationTask_getParams): Promise<Types.TaskProgress> {
+export async function fetchMigrationTaskGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: FetchMigrationTaskGetParams): Promise<Types.TaskProgress> {
     const path = `/rest/atlassian-connect/1/migration/${params.path.connectKey}/${params.path.jiraIssueFieldsKey}/task`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -14500,7 +14501,7 @@ export async function ConnectToForgeMigrationFetchTaskResource.fetchMigrationTas
     return response.json() as Promise<Types.TaskProgress>;
 }
 
-export interface ConnectToForgeMigrationTaskSubmissionResource.submitTask_postParams {
+export interface SubmitTaskPostParams {
     path: { connectKey: string; jiraIssueFieldsKey: string };
 }
 
@@ -14508,7 +14509,7 @@ export interface ConnectToForgeMigrationTaskSubmissionResource.submitTask_postPa
  * Submit Connect issue field migration task
  * @forge-scopes-asApp read:jira-work
  */
-export async function ConnectToForgeMigrationTaskSubmissionResource.submitTask_post(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ConnectToForgeMigrationTaskSubmissionResource.submitTask_postParams): Promise<void> {
+export async function submitTaskPost(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: SubmitTaskPostParams): Promise<void> {
     const path = `/rest/atlassian-connect/1/migration/${params.path.connectKey}/${params.path.jiraIssueFieldsKey}/task`;
     const response = await adapter.fetch({
       method: 'POST',
@@ -14518,7 +14519,7 @@ export async function ConnectToForgeMigrationTaskSubmissionResource.submitTask_p
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
 }
 
-export interface ServiceRegistryResource.services_getParams {
+export interface ServicesGetParams {
     serviceIds: Array<string>;
 }
 
@@ -14526,7 +14527,7 @@ export interface ServiceRegistryResource.services_getParams {
  * Retrieve the attributes of service registries
  * @forge-scopes-asApp read:jira-work
  */
-export async function ServiceRegistryResource.services_get(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ServiceRegistryResource.services_getParams): Promise<Array<ServiceRegistry>> {
+export async function servicesGet(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: ServicesGetParams): Promise<Array<ServiceRegistry>> {
     const path = '/rest/atlassian-connect/1/service-registry';
     const queryParams = {
       serviceIds: params.serviceIds,

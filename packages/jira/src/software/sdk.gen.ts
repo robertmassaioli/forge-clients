@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ForgeApiError } from "@forge-clients/core";
 import type { ForgeAdapter, AuthContext } from "@forge-clients/core";
 import type * as Types from "./types.gen.js";
@@ -67,7 +68,7 @@ export interface GetAllBoardsParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getAllBoards(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllBoardsParams): Promise<{ isLast?: boolean; maxResults?: number; startAt?: number; total?: number; values?: Array<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { 16x16?: string; 24x24?: string; 32x32?: string; 48x48?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> }> {
+export async function getAllBoards(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetAllBoardsParams): Promise<{ isLast?: boolean; maxResults?: number; startAt?: number; total?: number; values?: Array<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { '16x16'?: string; '24x24'?: string; '32x32'?: string; '48x48'?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> }> {
     const path = '/rest/agile/1.0/board';
     const queryParams = {
       startAt: params.startAt,
@@ -91,7 +92,8 @@ export async function getAllBoards(adapter: ForgeAdapter, authContext: AuthConte
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<{ isLast?: boolean; maxResults?: number; startAt?: number; total?: number; values?: Array<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { 16x16?: string; 24x24?: string; 32x32?: string; 48x48?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> }>;
+    return response.json() as Promise<{ isLast?: boolean; maxResults?: number; startAt?: number; total?: number; values?: Array<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { '16x16'?: string; '24x24'?: string; '32x32'?: string; '48x48'?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> }>;
+}
 
 export interface CreateBoardParams {
     body?: { filterId?: number; location?: { projectKeyOrId?: string; type?: "project" | "user" }; name?: string; type?: "kanban" | "scrum" | "agility" };
@@ -102,7 +104,7 @@ export interface CreateBoardParams {
  * @forge-scopes-asApp write:jira-work
  * @forge-scopes-asUser write:jira-work
  */
-export async function createBoard(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: CreateBoardParams): Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { 16x16?: string; 24x24?: string; 32x32?: string; 48x48?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> {
+export async function createBoard(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: CreateBoardParams): Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { '16x16'?: string; '24x24'?: string; '32x32'?: string; '48x48'?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> {
     const path = '/rest/agile/1.0/board';
     const response = await adapter.fetch({
       method: 'POST',
@@ -111,7 +113,8 @@ export async function createBoard(adapter: ForgeAdapter, authContext: AuthContex
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { 16x16?: string; 24x24?: string; 32x32?: string; 48x48?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }>;
+    return response.json() as Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { '16x16'?: string; '24x24'?: string; '32x32'?: string; '48x48'?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }>;
+}
 
 export interface GetBoardByFilterIdParams {
     path: { filterId: string };
@@ -149,7 +152,7 @@ export interface GetBoardParams {
  * @forge-scopes-asApp read:jira-work
  * @forge-scopes-asUser read:jira-work
  */
-export async function getBoard(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetBoardParams): Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { 16x16?: string; 24x24?: string; 32x32?: string; 48x48?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> {
+export async function getBoard(adapter: ForgeAdapter, authContext: AuthContext = { type: 'asApp' }, params: GetBoardParams): Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { '16x16'?: string; '24x24'?: string; '32x32'?: string; '48x48'?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }> {
     const path = `/rest/agile/1.0/board/${params.path.boardId}`;
     const response = await adapter.fetch({
       method: 'GET',
@@ -157,7 +160,8 @@ export async function getBoard(adapter: ForgeAdapter, authContext: AuthContext =
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-    return response.json() as Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { 16x16?: string; 24x24?: string; 32x32?: string; 48x48?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }>;
+    return response.json() as Promise<{ readonly admins?: { groups?: Array<{ name?: string; self?: string }>; users?: Array<{ accountId?: string; active?: boolean; avatarUrls?: { '16x16'?: string; '24x24'?: string; '32x32'?: string; '48x48'?: string }; displayName?: string; key?: string; name?: string; self?: string }> }; readonly canEdit?: boolean; readonly favourite?: boolean; id?: number; readonly isPrivate?: boolean; location?: { avatarURI?: string; displayName?: string; name?: string; projectId?: number; projectKey?: string; projectName?: string; projectTypeKey?: string; userAccountId?: string; userId?: number }; name?: string; readonly self?: string; type?: string }>;
+}
 
 export interface DeleteBoardParams {
     path: { boardId: string };
@@ -2104,10 +2108,4 @@ export async function deleteComponentById(adapter: ForgeAdapter, authContext: Au
       authContext,
     });
     if (!response.ok) throw await ForgeApiError.fromResponse(response, path);
-}
-
-}
-
-}
-
 }

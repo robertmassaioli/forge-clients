@@ -12,6 +12,7 @@ import { fixNullableFields } from './fixNullableFields.js';
 import { fixDeprecations } from './fixDeprecations.js';
 import { fixContentTypes } from './fixContentTypes.js';
 import { addForgeExtensions } from './addForgeExtensions.js';
+import { sanitizeParameterNames } from './sanitizeParameterNames.js';
 
 export type SpecTransform = (spec: OpenAPIV3.Document) => OpenAPIV3.Document;
 
@@ -22,6 +23,7 @@ export const TRANSFORMS: SpecTransform[] = [
   fixDeprecations,
   fixContentTypes,
   addForgeExtensions,
+  sanitizeParameterNames,
 ];
 
 export function applyTransforms(spec: OpenAPIV3.Document): OpenAPIV3.Document {

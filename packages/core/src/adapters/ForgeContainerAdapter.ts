@@ -68,7 +68,7 @@ function buildFetchInit(
 }
 
 function buildQueryString(
-  params?: Record<string, string | number | boolean | undefined>,
+  params?: Record<string, string | number | boolean | string[] | number[] | undefined>,
 ): string {
   if (!params) return '';
   const entries = Object.entries(params)
