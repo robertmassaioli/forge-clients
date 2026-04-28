@@ -3761,7 +3761,9 @@
           "leadAccountId": {
             "description": "The account ID of the project lead. Either `lead` or `leadAccountId` must be set when creating a project. Cannot be provided with `lead`.",
             "maxLength": 128,
-            "type": "string"
+            "type": "string",
+            "deprecated": true,
+            "x-forge-note": "Use `lead` field instead."
           },
           "name": {
             "description": "The name of the project.",

@@ -4451,7 +4451,7 @@
       "get": {
         "deprecated": false,
         "description": "Returns articles which match the given query string across all service desks.\n\n**[Permissions](#permissions) required**: Permission to access the [customer portal](https://confluence.atlassian.com/servicedeskcloud/configuring-the-customer-portal-732528918.html).",
-        "operationId": "getArticles",
+        "operationId": "getArticlesGlobal",
         "parameters": [
           {
             "description": "The string used to filter the articles (required).",
@@ -4625,7 +4625,7 @@
       "get": {
         "deprecated": false,
         "description": "This method returns a list of organizations in the Jira Service Management instance. Use this method when you want to present a list of organizations or want to locate an organization by name.\n\n**[Permissions](#permissions) required**: Any. However, to fetch organizations based on `accountId` the user must have a Service Desk agent license.\n\n**Response limitations**: If the user is a customer, only those organizations of which the customer is a member are listed.",
-        "operationId": "getOrganizations",
+        "operationId": "getOrganizationsGlobal",
         "parameters": [
           {
             "description": "The starting index of the returned objects. Base index: 0. See the [Pagination](#pagination) section for more details.",
@@ -5162,7 +5162,7 @@
       "get": {
         "deprecated": false,
         "description": "Returns the keys of all organization properties. Organization properties are a type of entity property which are available to the API only, and not shown in Jira Service Management. [Learn more](https://developer.atlassian.com/cloud/jira/platform/jira-entity-properties/).\n\nTo get organization detail field values which are visible in Jira Service Management, see the [Customer Service Management REST API](https://developer.atlassian.com/cloud/customer-service-management/rest/v1/api-group-organization/#api-group-organization).\n\n**[Permissions](#permissions) required**: Any\n\n**Response limitations**: Customers can only access properties of organizations of which they are members.",
-        "operationId": "getPropertiesKeys",
+        "operationId": "getPropertiesKeysForOrg",
         "parameters": [
           {
             "description": "The ID of the organization from which keys will be returned.",
@@ -5301,7 +5301,7 @@
       "delete": {
         "deprecated": false,
         "description": "Removes an organization property. Organization properties are a type of entity property which are available to the API only, and not shown in Jira Service Management. [Learn more](https://developer.atlassian.com/cloud/jira/platform/jira-entity-properties/).\n\nFor operations relating to organization detail field values which are visible in Jira Service Management, see the [Customer Service Management REST API](https://developer.atlassian.com/cloud/customer-service-management/rest/v1/api-group-organization/#api-group-organization).\n\n**[Permissions](#permissions) required**: Service Desk Administrator or Agent.\n\nNote: Permission to manage organizations can be switched to users with the Jira administrator permission, using the **[Organization management](https://confluence.atlassian.com/servicedeskcloud/setting-up-service-desk-users-732528877.html#Settingupservicedeskusers-manageorgsManageorganizations)** feature.",
-        "operationId": "deleteProperty",
+        "operationId": "deletePropertyForOrg",
         "parameters": [
           {
             "description": "The ID of the organization from which the property will be removed.",
@@ -5440,7 +5440,7 @@
       "get": {
         "deprecated": false,
         "description": "Returns the value of an organization property. Use this method to obtain the JSON content for an organization's property. Organization properties are a type of entity property which are available to the API only, and not shown in Jira Service Management. [Learn more](https://developer.atlassian.com/cloud/jira/platform/jira-entity-properties/).\n\nTo get organization detail field values which are visible in Jira Service Management, see the [Customer Service Management REST API](https://developer.atlassian.com/cloud/customer-service-management/rest/v1/api-group-organization/#api-group-organization).\n\n**[Permissions](#permissions) required**: Any\n\n**Response limitations**: Customers can only access properties of organizations of which they are members.",
-        "operationId": "getProperty",
+        "operationId": "getPropertyForOrg",
         "parameters": [
           {
             "description": "The ID of the organization from which the property will be returned.",
@@ -5586,7 +5586,7 @@
       "put": {
         "deprecated": false,
         "description": "Sets the value of an organization property. Use this resource to store custom data against an organization. Organization properties are a type of entity property which are available to the API only, and not shown in Jira Service Management. [Learn more](https://developer.atlassian.com/cloud/jira/platform/jira-entity-properties/).\n\nTo store organization detail field values which are visible in Jira Service Management, see the [Customer Service Management REST API](https://developer.atlassian.com/cloud/customer-service-management/rest/v1/api-group-organization/#api-group-organization).\n\n**[Permissions](#permissions) required**: Service Desk Administrator or Agent.\n\nNote: Permission to manage organizations can be switched to users with the Jira administrator permission, using the **[Organization management](https://confluence.atlassian.com/servicedeskcloud/setting-up-service-desk-users-732528877.html#Settingupservicedeskusers-manageorgsManageorganizations)** feature.",
-        "operationId": "setProperty",
+        "operationId": "setPropertyForOrg",
         "parameters": [
           {
             "description": "The ID of the organization on which the property will be set.",
@@ -11607,7 +11607,7 @@
       "get": {
         "deprecated": false,
         "description": "Returns articles which match the given query and belong to the knowledge base linked to the service desk.\n\n**[Permissions](#permissions) required**: Permission to access the service desk.",
-        "operationId": "getArticles",
+        "operationId": "getArticlesForServiceDesk",
         "parameters": [
           {
             "in": "path",
@@ -11925,7 +11925,7 @@
       "get": {
         "deprecated": false,
         "description": "This method returns a list of all organizations associated with a service desk.\n\n**[Permissions](#permissions) required**: Service desk's agent.",
-        "operationId": "getOrganizations",
+        "operationId": "getOrganizationsForServiceDesk",
         "parameters": [
           {
             "description": "The ID of the service desk from which the organization list will be returned. This can alternatively be a [project identifier.](#project-identifiers)",
@@ -13594,7 +13594,7 @@
       "get": {
         "deprecated": false,
         "description": "Returns the keys of all properties for a request type.\n\nProperties for a Request Type in next-gen are stored as Issue Type properties and therefore the keys of all properties for a request type are also available by calling the Jira Cloud Platform [Get issue type property keys](https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-issuetype-issueTypeId-properties-get) endpoint.\n\n**[Permissions](#permissions) required**: The user must have permission to view the request type.",
-        "operationId": "getPropertiesKeys",
+        "operationId": "getPropertiesKeysForRequestType",
         "parameters": [
           {
             "description": "The ID of the request type for which keys will be retrieved.",
@@ -13734,7 +13734,7 @@
       "delete": {
         "deprecated": false,
         "description": "Removes a property from a request type.\n\nProperties for a Request Type in next-gen are stored as Issue Type properties and therefore can also be deleted by calling the Jira Cloud Platform [Delete issue type property](https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-issuetype-issueTypeId-properties-propertyKey-delete) endpoint.\n\n**[Permissions](#permissions) required**: Jira project administrator with a Jira Service Management agent license.",
-        "operationId": "deleteProperty",
+        "operationId": "deletePropertyForRequestType",
         "parameters": [
           {
             "description": "The ID of the service desk which contains the request type. This can alternatively be a [project identifier.](#project-identifiers)",
@@ -13884,7 +13884,7 @@
       "get": {
         "deprecated": false,
         "description": "Returns the value of the property from a request type.\n\nProperties for a Request Type in next-gen are stored as Issue Type properties and therefore also available by calling the Jira Cloud Platform [Get issue type property](https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-issuetype-issueTypeId-properties-propertyKey-get) endpoint.\n\n**[Permissions](#permissions) required**: User must have permission to view the request type.",
-        "operationId": "getProperty",
+        "operationId": "getPropertyForRequestType",
         "parameters": [
           {
             "description": "The ID of the service desk which contains the request type. This can alternatively be a [project identifier.](#project-identifiers)",
@@ -14031,7 +14031,7 @@
       "put": {
         "deprecated": false,
         "description": "Sets the value of a request type property. Use this resource to store custom data against a request type.\n\nProperties for a Request Type in next-gen are stored as Issue Type properties and therefore can also be set by calling the Jira Cloud Platform [Set issue type property](https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-issuetype-issueTypeId-properties-propertyKey-put) endpoint.\n\n**[Permissions](#permissions) required**: Jira project administrator with a Jira Service Management agent license.",
-        "operationId": "setProperty",
+        "operationId": "setPropertyForRequestType",
         "parameters": [
           {
             "description": "The ID of the service desk which contains the request type. This can alternatively be a [project identifier.](#project-identifiers)",

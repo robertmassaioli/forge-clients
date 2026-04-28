@@ -4,7 +4,10 @@
     "title": "The Confluence Cloud REST API",
     "description": "This document describes the REST API and resources provided by Confluence. The REST APIs are for developers who want to integrate Confluence into their application and for administrators who want to script interactions with the Confluence server.Confluence's REST APIs provide access to resources (data entities) via URI paths. To use a REST API, your application will make an HTTP request and parse the response. The response format is JSON. Your methods will be the standard HTTP methods like GET, PUT, POST and DELETE. Because the REST API is based on open standards, you can use any web development language to access the API.",
     "termsOfService": "https://atlassian.com/terms/",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "x-forge-deprecated": true,
+    "x-forge-successor": "confluence-v2",
+    "x-forge-note": "Confluence REST API v1 is deprecated. Migrate to v2 for better performance and more accurate schemas."
   },
   "externalDocs": {
     "description": "The online and complete version of the Confluence Cloud REST API docs.",

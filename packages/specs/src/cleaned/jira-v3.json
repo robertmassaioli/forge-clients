@@ -3924,7 +3924,9 @@
           "leadAccountId": {
             "description": "The account ID of the project lead. Either `lead` or `leadAccountId` must be set when creating a project. Cannot be provided with `lead`.",
             "maxLength": 128,
-            "type": "string"
+            "type": "string",
+            "deprecated": true,
+            "x-forge-note": "leadAccountId is documented but silently ignored. Use `lead` field instead."
           },
           "name": {
             "description": "The name of the project.",
@@ -9541,7 +9543,8 @@
             "description": "The URL of the issue details.",
             "format": "uri",
             "readOnly": true,
-            "type": "string"
+            "type": "string",
+            "x-forge-note": "The self URL format differs when accessed via the api.atlassian.com proxy vs direct site URL. Do not use self links for constructing API calls within Forge apps."
           },
           "transitions": {
             "description": "The transitions that can be performed on the issue.",
@@ -54103,7 +54106,8 @@
           "forge-bridge"
         ],
         "x-forge-rate-limit-cost": "standard"
-      }
+      },
+      "x-forge-note": "This endpoint was removed in Jira 9.0 due to OOM issues with large projects. Use getIssueType and getFields separately."
     },
     "/rest/api/3/issue/createmeta/{projectIdOrKey}/issuetypes": {
       "get": {
@@ -90553,7 +90557,8 @@
           "forge-bridge"
         ],
         "x-forge-rate-limit-cost": "high"
-      }
+      },
+      "x-forge-deprecation-note": "Prefer POST /rest/api/3/search/jql for large JQL queries to avoid URL length limits."
     },
     "/rest/api/3/search/approximate-count": {
       "post": {

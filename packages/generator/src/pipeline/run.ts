@@ -18,6 +18,7 @@ import { SPEC_TARGETS } from './specs.js';
 import type { SpecTarget } from './specs.js';
 import { downloadSpec, repoRoot } from './download.js';
 import { applyTransforms } from './transforms/index.js';
+import { deduplicateJiraSmOperationIds } from './transforms/deduplicateJiraSmIds.js';
 import { applyPatches, PATCHES_BY_SPEC } from './patches/index.js';
 import { generateDiff, writeDiff } from './diff.js';
 
@@ -81,8 +82,13 @@ async function processSpec(target: SpecTarget, opts: PipelineOptions): Promise<v
   console.log('  Applying transforms...');
   spec = applyTransforms(spec);
 
+  // Step 3b: Apply spec-specific transforms (conditional on spec id)
+  if (target.id === 'jira-sm') {
+    spec = deduplicateJiraSmOperationIds(spec);
+  }
+
   // Step 4: Apply targeted patches
-  const patches = PATCHES_BY_SPEC[target.patchFile] ?? [];
+  const patches = PATCHES_BY_SPEC[target.id] ?? [];
   if (patches.length > 0) {
     console.log(`  Applying ${patches.length} patch(es)...`);
     applyPatches(spec as unknown as Record<string, unknown>, patches);
