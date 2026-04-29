@@ -1,11 +1,13 @@
 export { applyPatches } from './types.js';
 export type { SpecPatch } from './types.js';
 export { jiraV3Patches } from './jira-v3.js';
+export { jiraSmPatches } from './jira-sm-patches.js';
 export { jiraV2Patches } from './jira-v2.js';
 export { confluenceV2Patches } from './confluence-v2.js';
 export { confluenceV1Patches } from './confluence-v1.js';
 
 import { jiraV3Patches } from './jira-v3.js';
+import { jiraSmPatches } from './jira-sm-patches.js';
 import { jiraV2Patches } from './jira-v2.js';
 import { confluenceV2Patches } from './confluence-v2.js';
 import { confluenceV1Patches } from './confluence-v1.js';
@@ -17,5 +19,5 @@ export const PATCHES_BY_SPEC: Record<string, SpecPatch[]> = {
   'confluence-v2': confluenceV2Patches,
   'confluence-v1': confluenceV1Patches,
   'jira-software': [],
-  'jira-sm': [],
+  'jira-sm': jiraSmPatches,
 };

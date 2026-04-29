@@ -1,9 +1,16 @@
 /**
- * Confluence Cloud REST API v2 client
+ * Confluence Cloud REST API v2 — Not yet available
  *
- * This file and all *.gen.ts files in this directory are generated.
- * Run `pnpm generate` to regenerate from the latest cleaned spec.
+ * The Confluence v2 OpenAPI spec is not available as a direct JSON download URL.
+ * It can only be downloaded via the "meatball menu" on:
+ * https://developer.atlassian.com/cloud/confluence/rest/v2/intro/
+ *
+ * Once a reliable URL or community-maintained copy is identified, this will
+ * be populated with generated types and SDK functions matching the v2 API.
+ *
+ * In the meantime, use v1 which covers the same resources:
+ *   import { ... } from '@forge-clients/confluence/v1';
  */
 
-// Placeholder export so the package compiles before generation
-export const CONFLUENCE_V2_PLACEHOLDER = 'Confluence v2 client — run pnpm generate to populate';
+export const CONFLUENCE_V2_NOT_YET_AVAILABLE = 
+  'Confluence REST API v2 spec not yet available for download. Use v1 instead.';

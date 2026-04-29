@@ -1,18 +1,14 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: {
-    index: 'src/index.ts',
-    'adapters/index': 'src/adapters/index.ts',
-    'errors/index': 'src/errors/index.ts',
-    'pagination/index': 'src/pagination/index.ts',
-    'retry/index': 'src/retry/index.ts',
-    'auth/index': 'src/auth/index.ts',
-  },
+  entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
-  dts: true,
+  // DTS disabled: @forge/api is a Forge runtime package not available at build time.
+  // Type declarations are generated separately via `tsc --declaration --emitDeclarationOnly`
+  // using the tsconfig.build.json which excludes @forge/api from type checking.
+  dts: false,
   sourcemap: true,
   clean: true,
   splitting: false,
-  treeshake: true,
+  external: ['@forge/api', '@forge/bridge'],
 });

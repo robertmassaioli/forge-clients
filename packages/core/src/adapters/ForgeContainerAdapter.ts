@@ -1,26 +1,16 @@
 /**
  * Adapter for Forge Containers and Forge Remote backends.
- *
- * Uses the FORGE_EGRESS_PROXY_URL environment variable and manually
- * constructs forge-proxy-authorization headers. This is the ONLY
- * way to make API calls from Forge Containers (@forge/api is not available there).
- *
- * Supports: asApp, offline user impersonation (with pre-fetched token).
+ * Uses FORGE_EGRESS_PROXY_URL + forge-proxy-authorization headers.
+ * This is the ONLY way to make API calls from Forge Containers.
  */
 
 import type { ForgeAdapter, ForgeRequestOptions } from './ForgeAdapter.js';
 
 export interface ForgeContainerAdapterOptions {
   product: 'jira' | 'confluence';
-  /**
-   * The Forge egress proxy URL.
-   * Typically: process.env.FORGE_EGRESS_PROXY_URL
-   */
+  /** process.env.FORGE_EGRESS_PROXY_URL */
   proxyUrl: string;
-  /**
-   * The installation ID for this app installation.
-   * Obtained from GET <proxyUrl>/v0/installations
-   */
+  /** Obtained from GET <proxyUrl>/v0/installations */
   installationId: string;
 }
 
@@ -31,15 +21,59 @@ export class ForgeContainerAdapter implements ForgeAdapter {
 
   constructor(options: ForgeContainerAdapterOptions) {
     this.product = options.product;
-    this.proxyUrl = options.proxyUrl;
+    this.proxyUrl = options.proxyUrl.replace(/\/$/, '');
     this.installationId = options.installationId;
   }
 
-  async fetch(_options: ForgeRequestOptions): Promise<Response> {
-    // Implementation will be completed in a later step.
-    throw new Error(
-      'ForgeContainerAdapter.fetch() — implementation pending. ' +
-      'See the generator implementation phase.'
-    );
+  async fetch(options: ForgeRequestOptions): Promise<Response> {
+    const { method, path, queryParams, body, headers, authContext } = options;
+
+    const productPrefix = this.product === 'jira' ? '/jira' : '/confluence';
+    const url = `${this.proxyUrl}${productPrefix}${path}${buildQueryString(queryParams)}`;
+
+    const extraHeaders: Record<string, string> = {};
+    let proxyAuth: string;
+
+    switch (authContext.type) {
+      case 'asApp':
+        proxyAuth = `Forge as=app,installationId=${this.installationId}`;
+        break;
+      case 'asUser':
+        proxyAuth = `Forge as=user,accountId=${authContext.userId ?? ''},installationId=${this.installationId}`;
+        break;
+      case 'offlineUser':
+        proxyAuth = `Forge as=user,accountId=${authContext.accountId},installationId=${this.installationId}`;
+        extraHeaders['Authorization'] = `Bearer ${authContext.accessToken}`;
+        break;
+    }
+
+    extraHeaders['forge-proxy-authorization'] = proxyAuth;
+
+    return fetch(url, buildFetchInit(method, { ...headers, ...extraHeaders }, body));
   }
+}
+
+function buildFetchInit(
+  method: string,
+  headers: Record<string, string>,
+  body: unknown,
+  extraHeaders?: Record<string, string>,
+): RequestInit {
+  const allHeaders = { 'Content-Type': 'application/json', 'Accept': 'application/json', ...headers, ...extraHeaders };
+  const base: RequestInit = { method, headers: allHeaders };
+  if (body !== undefined) {
+    return { ...base, body: JSON.stringify(body) };
+  }
+  return base;
+}
+
+function buildQueryString(
+  params?: Record<string, string | number | boolean | string[] | number[] | undefined>,
+): string {
+  if (!params) return '';
+  const entries = Object.entries(params)
+    .filter((e): e is [string, string | number | boolean] => e[1] !== undefined)
+    .map(([k, v]) => [k, String(v)]);
+  if (entries.length === 0) return '';
+  return '?' + new URLSearchParams(entries).toString();
 }
