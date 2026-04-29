@@ -1,0 +1,66 @@
+---
+title: "@forge-clients"
+description: Type-safe Jira and Confluence REST API clients for Atlassian Forge apps.
+template: splash
+hero:
+  tagline: Stop writing URLs. Start writing features.
+  actions:
+    - text: Quick Start
+      link: /forge-clients/getting-started/quick-start/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/rmassaioli/forge-clients
+      icon: github
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## What is @forge-clients?
+
+`@forge-clients` is a set of **generated, type-safe REST API clients** for Atlassian Forge apps.
+Instead of hand-writing `requestJira('/rest/api/3/issue/PROJ-123')`, you call:
+
+```typescript
+import { getIssue } from '@forge-clients/jira/v3';
+import { ForgeFunctionAdapter } from '@forge-clients/core';
+
+const adapter = new ForgeFunctionAdapter({ product: 'jira' });
+const issue = await getIssue(adapter, { type: 'asApp' }, { issueIdOrKey: 'PROJ-123' });
+//    ^^ fully typed as Types.IssueBean
+```
+
+Every function is named, typed, and tree-shakeable. Your IDE autocompletes parameters.
+TypeScript catches mistakes before they reach production.
+
+<CardGrid>
+  <Card title="Type-safe functions" icon="approve-check">
+    Every Jira and Confluence endpoint becomes a named TypeScript function with typed parameters and return values.
+  </Card>
+  <Card title="All Forge contexts" icon="puzzle">
+    Works in Forge Functions, Custom UI, Forge Containers, and Forge Remotes via swappable adapter pattern.
+  </Card>
+  <Card title="asApp & asUser" icon="user">
+    First-class support for both app-level and user-impersonation auth contexts on every request.
+  </Card>
+  <Card title="Tree-shakeable" icon="rocket">
+    Individual named function exports — bundlers eliminate unused API functions automatically.
+  </Card>
+  <Card title="Generated from live specs" icon="setting">
+    Clients are generated from Atlassian's official OpenAPI specs with post-processing to fix known defects.
+  </Card>
+  <Card title="Full coverage" icon="list-format">
+    1,529 operations across Jira v3, Jira v2, Jira Software, Jira Service Management, and Confluence v1.
+  </Card>
+</CardGrid>
+
+## Packages
+
+| Package | Description |
+|---|---|
+| `@forge-clients/jira` | Jira Cloud REST API clients (v3, v2, Software, Service Management) |
+| `@forge-clients/confluence` | Confluence Cloud REST API client (v1) |
+| `@forge-clients/core` | Adapters, auth helpers, error types, retry, pagination |
+| `@forge-clients/generator` | The generator CLI — update specs and regenerate clients |
+| `@forge-clients/specs` | Cleaned OpenAPI specs (post-processed from Atlassian's originals) |
