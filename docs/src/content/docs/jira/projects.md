@@ -47,9 +47,11 @@ import { searchProjects } from '@forge-clients/jira/v3';
 
 const appClient = asApp(adapter);
 
+// collectAllPages(fetchPage, pageSize?)
+// fetchPage receives (startAt, maxResults) — pass both to the API call
 const allProjects = await collectAllPages(
-  (startAt) => searchProjects(appClient, { startAt, maxResults: 50 }),
-  (page) => ({ items: page.values ?? [], isLast: page.isLast ?? true }),
+  (startAt, maxResults) => searchProjects(appClient, { startAt, maxResults }),
+  50, // pageSize — default is 50 if omitted
 );
 
 console.log(`Total projects: ${allProjects.length}`);

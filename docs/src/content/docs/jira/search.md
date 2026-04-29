@@ -34,11 +34,13 @@ import { searchForIssuesUsingJqlPost } from '@forge-clients/jira/v3';
 const appClient = asApp(adapter);
 let count = 0;
 
+// iteratePages(fetchPage, pageSize?) — yields individual IssueBean items
+// fetchPage receives (startAt, maxResults) — pass both to the API call
 for await (const issue of iteratePages(
-  (startAt) => searchForIssuesUsingJqlPost(appClient, {
-    body: { jql: 'project = PROJ', startAt, maxResults: 100 },
+  (startAt, maxResults) => searchForIssuesUsingJqlPost(appClient, {
+    body: { jql: 'project = PROJ', startAt, maxResults },
   }),
-  (r) => ({ items: r.issues ?? [], isLast: (r.startAt ?? 0) + (r.issues?.length ?? 0) >= (r.total ?? 0) }),
+  100, // pageSize
 )) {
   count++;
   await processIssue(issue);
