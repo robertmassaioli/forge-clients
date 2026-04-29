@@ -107,7 +107,9 @@ program
         ` */`,
         ``,
         `// All TypeScript types — zero runtime cost, erased at build time`,
-        `export type * from './types.gen.js';`,
+        // Note: 'export type *' (TS 5.0+) is not supported by Forge's webpack/ts-loader bundler.
+        // Since types.gen.ts contains only interfaces (erased at runtime), plain 'export *' is safe.
+        `export * from './types.gen.js';`,
         ``,
         `// All named SDK functions — individually tree-shakeable`,
         `export * from './sdk.gen.js';`,
