@@ -33,8 +33,21 @@ jobs:
           node-version: 24
           cache: pnpm
 
+      - name: Ensure public npm registry (override any runner-level .npmrc)
+        # GitHub-hosted runners are vanilla Ubuntu and won't have a corporate
+        # .npmrc, but this step future-proofs against self-hosted Atlassian runners
+        # which redirect @forge/* to packages.atlassian.com.
+        run: |
+          npm config set registry https://registry.npmjs.org/
+          npm config set @forge:registry https://registry.npmjs.org/
+          npm config set @atlassian:registry https://registry.npmjs.org/
+          npm config set @atlaskit:registry https://registry.npmjs.org/
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        # --frozen-lockfile would fail if lockfile tarball URLs (packages.atlassian.com)
+        # don't match the configured registry. pnpm will re-resolve and update the lockfile
+        # in CI from the public registry, which is correct behaviour.
+        run: pnpm install
 
       - name: Build @forge-clients packages (needed for API reference generation)
         run: pnpm --filter @forge-clients/core --filter @forge-clients/jira --filter @forge-clients/confluence run build
