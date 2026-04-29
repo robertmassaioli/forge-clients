@@ -28,10 +28,34 @@ export interface OfflineTokenManagerOptions {
   refreshBufferSeconds?: number;
 }
 
+/**
+ * Manages offline user impersonation tokens for Forge Containers.
+ *
+ * Fetches short-lived user access tokens through the Forge egress proxy
+ * and caches them until they are close to expiry. This allows a Forge Container
+ * to make API calls on behalf of specific users without a live user session.
+ *
+ * @example
+ * ```typescript
+ * import { ForgeContainerAdapter, OfflineTokenManager, asOfflineUser } from '@forge-clients/core';
+ * import { getIssue } from '@forge-clients/jira/v3';
+ *
+ * const adapter = new ForgeContainerAdapter({ product: 'jira', proxyUrl, installationId });
+ * const tokenManager = new OfflineTokenManager({ proxyUrl, installationId });
+ *
+ * const token = await tokenManager.getToken('atlassian-account-id');
+ * const client = asOfflineUser(adapter, token.accountId, token.accessToken);
+ * const issue = await getIssue(client, { path: { issueIdOrKey: 'PROJ-1' } });
+ * ```
+ */
 export class OfflineTokenManager {
   private readonly cache = new Map<string, OfflineUserToken>();
   private readonly refreshBufferSeconds: number;
 
+  /**
+   * Create a new OfflineTokenManager.
+   * @param opts - Configuration including the proxy URL and installation ID
+   */
   constructor(private readonly opts: OfflineTokenManagerOptions) {
     this.refreshBufferSeconds = opts.refreshBufferSeconds ?? 60;
   }

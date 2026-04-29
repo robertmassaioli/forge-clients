@@ -35,10 +35,40 @@ export interface ForgeRemoteTokenManagerOptions {
   refreshBufferSeconds?: number;
 }
 
+/**
+ * Manages offline user impersonation tokens for Forge Remote backends.
+ *
+ * Similar to {@link OfflineTokenManager} but authenticates using an `appSystemToken`
+ * from the inbound invocation payload instead of relying on Container identity.
+ *
+ * Because Forge Remotes are stateless per-invocation handlers, this manager is
+ * typically instantiated fresh per request. Token caching is still valuable within
+ * a single invocation that makes multiple API calls for the same user, and across
+ * warm Lambda / Cloud Run invocations where the handler module stays alive.
+ *
+ * @example
+ * ```typescript
+ * import { ForgeRemoteAdapter, ForgeRemoteTokenManager, asOfflineUser } from '@forge-clients/core';
+ * import { getIssue } from '@forge-clients/jira/v3';
+ *
+ * export async function handler(payload: ForgeInvocationPayload) {
+ *   const adapter = new ForgeRemoteAdapter({ product: 'jira', proxyUrl, installationId: payload.installationId, appSystemToken: payload.appSystemToken });
+ *   const tokenManager = new ForgeRemoteTokenManager({ proxyUrl, installationId: payload.installationId, appSystemToken: payload.appSystemToken });
+ *
+ *   const token = await tokenManager.getToken(payload.context.accountId!);
+ *   const client = asOfflineUser(adapter, token.accountId, token.accessToken);
+ *   return getIssue(client, { path: { issueIdOrKey: 'PROJ-1' } });
+ * }
+ * ```
+ */
 export class ForgeRemoteTokenManager {
   private readonly cache = new Map<string, ForgeRemoteUserToken>();
   private readonly refreshBufferSeconds: number;
 
+  /**
+   * Create a new ForgeRemoteTokenManager.
+   * @param opts - Configuration including the proxy URL, installation ID, and app system token
+   */
   constructor(private readonly opts: ForgeRemoteTokenManagerOptions) {
     this.refreshBufferSeconds = opts.refreshBufferSeconds ?? 60;
   }

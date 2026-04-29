@@ -76,12 +76,28 @@ export interface ForgeRemoteAdapterOptions {
 
 }
 
+/**
+ * Adapter for Forge Remote backends.
+ *
+ * A Forge Remote is a stateless, externally-hosted service (your own server,
+ * AWS Lambda, Cloud Run, etc.) that Forge calls via a declared `remote` module
+ * in `manifest.yml`. Unlike {@link ForgeContainerAdapter}, the `installationId`
+ * and `appSystemToken` are provided fresh in every inbound invocation payload —
+ * you do not need to fetch them at startup.
+ *
+ * For the simplest setup, use {@link adapterFromForgePayload} to create an adapter
+ * directly from the invocation payload.
+ */
 export class ForgeRemoteAdapter implements ForgeAdapter {
   readonly product: 'jira' | 'confluence';
   private readonly proxyUrl: string;
   private readonly installationId: string;
   private readonly appSystemToken: string;
 
+  /**
+   * Create a new ForgeRemoteAdapter.
+   * @param options - Configuration including product, proxy URL, installation ID, and app system token
+   */
   constructor(options: ForgeRemoteAdapterOptions) {
     this.product = options.product;
     this.proxyUrl = options.proxyUrl.replace(/\/$/, '');
@@ -89,6 +105,10 @@ export class ForgeRemoteAdapter implements ForgeAdapter {
     this.appSystemToken = options.appSystemToken;
   }
 
+  /**
+   * Execute a request through the Forge egress proxy.
+   * Injects `forge-proxy-authorization` header with the app system token and installation ID.
+   */
   async fetch(options: ForgeRequestOptions): Promise<Response> {
     const { method, path, queryParams, body, headers, authContext } = options;
 
