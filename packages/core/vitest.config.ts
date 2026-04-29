@@ -4,6 +4,8 @@ export default defineConfig({
   test: {
     // Tests live in tests/ not co-located with source
     include: ['tests/**/*.test.ts'],
+    // Use tsconfig.test.json which includes both src/ and tests/
+    typecheck: { tsconfig: './tsconfig.test.json' },
     exclude: ['**/node_modules/**', '**/dist/**'],
     globals: false,
     environment: 'node',

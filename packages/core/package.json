@@ -49,7 +49,7 @@
   "scripts": {
     "build": "tsup && pnpm exec tsc -p tsconfig.build.json --skipLibCheck",
     "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
     "lint": "eslint src --ext .ts",
     "test": "vitest run",
     "test:watch": "vitest",

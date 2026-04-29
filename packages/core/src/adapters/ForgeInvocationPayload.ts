@@ -91,7 +91,7 @@ export interface ForgeInvocationPayload {
  * Options for the adapterFromForgePayload() factory function.
  */
 export interface AdapterFromPayloadOptions
-  extends Omit<ForgeRemoteAdapterOptions, 'installationId' | 'appSystemToken' | 'proxyUrl'> {
+  extends Omit<ForgeRemoteAdapterOptions, 'installationId' | 'appSystemToken' | 'proxyUrl' | 'product'> {
   /**
    * Override the egress proxy URL. Defaults to process.env.FORGE_EGRESS_PROXY_URL.
    * Useful for testing with a mock proxy.

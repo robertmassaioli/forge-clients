@@ -9,7 +9,16 @@
 export type AuthContext =
   | { type: 'asApp' }
   | { type: 'asUser'; userId?: string }
-  | { type: 'offlineUser'; accountId: string; accessToken: string };
+  | {
+      type: 'offlineUser';
+      accountId: string;
+      /**
+       * Optional pre-fetched access token. If provided, it is used directly.
+       * If omitted, the adapter fetches one via its internal token manager
+       * (ForgeContainerAdapter / ForgeRemoteAdapter).
+       */
+      accessToken?: string;
+    };
 
 export interface ForgeRequestOptions {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';

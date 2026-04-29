@@ -6,12 +6,12 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { ForgeRemoteAdapter } from './ForgeRemoteAdapter.js';
+import { ForgeRemoteAdapter } from '../../src/adapters/ForgeRemoteAdapter.js';
 import {
   adapterFromForgePayload,
   getInvokingUserId,
   type ForgeInvocationPayload,
-} from './ForgeInvocationPayload.js';
+} from '../../src/adapters/ForgeInvocationPayload.js';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
