@@ -47,10 +47,12 @@ Function names match the `operationId` from the OpenAPI spec, converted to camel
 All types are available via the `Types` namespace re-exported from each module:
 
 ```typescript
+import { ForgeFunctionAdapter, asApp } from '@forge-clients/core';
 import { getIssue } from '@forge-clients/jira/v3';
-import type { Types } from '@forge-clients/jira/v3';
+import type { IssueBean } from '@forge-clients/jira/v3';
 
-const issue: Types.IssueBean = await getIssue(adapter, { type: 'asApp' }, {
-  issueIdOrKey: 'PROJ-123',
+const adapter = new ForgeFunctionAdapter({ product: 'jira' });
+const issue: IssueBean = await getIssue(asApp(adapter), {
+  path: { issueIdOrKey: 'PROJ-123' },
 });
 ```

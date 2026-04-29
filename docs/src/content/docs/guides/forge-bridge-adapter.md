@@ -31,8 +31,10 @@ perspective — the same named functions, same auth contexts:
 import { getIssue } from '@forge-clients/jira/v3';
 
 // In Custom UI, asUser is implicit — the bridge uses the current user's context
-const issue = await getIssue(adapter, { type: 'asUser' }, {
-  issueIdOrKey: 'PROJ-123',
+import { asUser } from '@forge-clients/core';
+
+const issue = await getIssue(asUser(adapter), {
+  path: { issueIdOrKey: 'PROJ-123' },
 });
 ```
 

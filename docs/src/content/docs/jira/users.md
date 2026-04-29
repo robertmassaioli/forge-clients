@@ -3,21 +3,27 @@ title: Jira — Users & Myself
 description: Working with Jira user data in @forge-clients.
 ---
 
-## Get the current user (asApp)
+```typescript
+import { ForgeFunctionAdapter, asApp, asUser } from '@forge-clients/core';
+
+const adapter = new ForgeFunctionAdapter({ product: 'jira' });
+```
+
+## Get the current user (as the app)
 
 ```typescript
 import { getCurrentUser } from '@forge-clients/jira/v3';
 
-const user = await getCurrentUser(adapter, { type: 'asApp' }, {});
+const user = await getCurrentUser(asApp(adapter), {});
 console.log(user.accountId);
 console.log(user.displayName);
 console.log(user.emailAddress);
 ```
 
-## Get the current user (asUser — context user)
+## Get the current user (as the invoking user)
 
 ```typescript
-const contextUser = await getCurrentUser(adapter, { type: 'asUser' }, {});
+const contextUser = await getCurrentUser(asUser(adapter), {});
 console.log(`Logged in as: ${contextUser.displayName}`);
 ```
 
@@ -26,7 +32,7 @@ console.log(`Logged in as: ${contextUser.displayName}`);
 ```typescript
 import { getUser } from '@forge-clients/jira/v3';
 
-const user = await getUser(adapter, { type: 'asApp' }, {
+const user = await getUser(asApp(adapter), {
   accountId: 'account:abc123',
   expand: 'groups,applicationRoles',
 });
@@ -37,7 +43,7 @@ const user = await getUser(adapter, { type: 'asApp' }, {
 ```typescript
 import { findUsers } from '@forge-clients/jira/v3';
 
-const users = await findUsers(adapter, { type: 'asApp' }, {
+const users = await findUsers(asApp(adapter), {
   query: 'jane',
   maxResults: 10,
 });

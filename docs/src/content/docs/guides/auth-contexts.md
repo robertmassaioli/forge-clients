@@ -3,16 +3,16 @@ title: Auth Contexts
 description: Understanding asApp, asUser, and offline user impersonation in @forge-clients.
 ---
 
-Every generated function takes an `AuthContext` as its second argument. This tells the
-adapter which Forge authentication context to use for that specific request.
-
-## The AuthContext type
+Auth context is set once when creating a **BoundClient** using `asApp()`, `asUser()`,
+or `asOfflineUser()`. All generated functions take a BoundClient as their first argument —
+there is no middle auth context argument.
 
 ```typescript
-type AuthContext =
-  | { type: 'asApp' }
-  | { type: 'asUser'; userId?: string }
-  | { type: 'offlineUser'; accountId: string; accessToken: string };
+import { asApp, asUser, asOfflineUser, withAuth } from '@forge-clients/core';
+
+const appClient  = asApp(adapter);               // asApp
+const userClient = asUser(adapter);              // asUser (invoking user)
+const userClient2 = asUser(adapter, 'acct:123'); // asUser (specific user)
 ```
 
 ## asApp
@@ -21,7 +21,10 @@ The request is made using the **app's own credentials**. This is the default for
 background operations, scheduled tasks, and system-level actions.
 
 ```typescript
-const projects = await getProjects(adapter, { type: 'asApp' }, {});
+import { asApp } from '@forge-clients/core';
+import { searchProjects } from '@forge-clients/jira/v3';
+
+const projects = await searchProjects(asApp(adapter), {});
 ```
 
 - Available in: Forge Functions, Forge Containers, Forge Remotes
@@ -35,7 +38,10 @@ The request is made on behalf of the **current user** — the person who trigger
 Forge Function invocation. No `userId` is needed; Forge injects the context user automatically.
 
 ```typescript
-const myself = await getCurrentUser(adapter, { type: 'asUser' }, {});
+import { asUser } from '@forge-clients/core';
+import { getCurrentUser } from '@forge-clients/jira/v3';
+
+const myself = await getCurrentUser(asUser(adapter), {});
 ```
 
 - Available in: Forge Functions (when invoked by a user action in UI)
@@ -58,8 +64,11 @@ Impersonate a **specific user** by their Atlassian account ID. Useful for workfl
 where you know which user's context you need.
 
 ```typescript
+import { asUser } from '@forge-clients/core';
+import { createIssue } from '@forge-clients/jira/v3';
+
 const userId = 'account:abc123def456';
-const issue = await createIssue(adapter, { type: 'asUser', userId }, {
+const issue = await createIssue(asUser(adapter, userId), {
   body: { fields: { project: { key: 'PROJ' }, summary: 'Created on behalf of user', issuetype: { name: 'Task' } } }
 });
 ```
@@ -91,16 +100,20 @@ const tokenManager = new OfflineTokenManager({
 });
 
 const accountId = 'account:abc123';
-const accessToken = await tokenManager.getToken(accountId);
 
-const user = await getCurrentUser(adapter, {
-  type: 'offlineUser',
-  accountId,
-  accessToken,
-}, {});
+// Option 1: fetch token manually, then bind
+const token = await tokenManager.getToken(accountId);
+const offlineClient = asOfflineUser(adapter, token.accountId, token.accessToken);
+
+// Option 2: convenience method (fetches + caches token, returns BoundClient)
+const offlineClient2 = await tokenManager.boundClient(adapter, accountId);
+
+const user = await getCurrentUser(offlineClient, {});
 ```
 
 The `OfflineTokenManager` handles token caching and proactive refresh automatically.
+The `accessToken` field is **required** — token fetching is always the caller's
+responsibility via the token manager, never done automatically inside the adapter.
 
 ## Choosing the right auth context
 

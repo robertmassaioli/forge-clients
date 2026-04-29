@@ -24,7 +24,7 @@ const adapter = new ForgeContainerAdapter({
 Containers can impersonate users using short-lived offline tokens:
 
 ```typescript
-import { ForgeContainerAdapter, OfflineTokenManager } from '@forge-clients/core';
+import { ForgeContainerAdapter, OfflineTokenManager, asOfflineUser } from '@forge-clients/core';
 import { createContent } from '@forge-clients/confluence/v1';
 
 const tokenManager = new OfflineTokenManager({
@@ -33,19 +33,20 @@ const tokenManager = new OfflineTokenManager({
 });
 
 async function createPageAsUser(accountId: string, spaceKey: string, title: string) {
-  const accessToken = await tokenManager.getToken(accountId);
-
   const confluenceAdapter = new ForgeContainerAdapter({
     product: 'confluence',
     installationId: process.env.FORGE_INSTALLATION_ID!,
     egressProxyUrl: process.env.FORGE_EGRESS_PROXY_URL!,
   });
 
-  return createContent(confluenceAdapter, {
-    type: 'offlineUser',
-    accountId,
-    accessToken,
-  }, {
+  // Option 1: fetch token manually, create BoundClient with asOfflineUser()
+  const token = await tokenManager.getToken(accountId);
+  const client = asOfflineUser(confluenceAdapter, token.accountId, token.accessToken);
+
+  // Option 2: convenience method (recommended)
+  // const client = await tokenManager.boundClient(confluenceAdapter, accountId);
+
+  return createContent(client, {
     body: {
       type: 'page',
       title,

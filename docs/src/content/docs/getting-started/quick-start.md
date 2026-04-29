@@ -19,23 +19,29 @@ In your Forge app directory:
 npm install @forge-clients/jira @forge-clients/core
 ```
 
-## 2. Create an adapter
+## 2. Create an adapter and bind an auth context
 
-The adapter tells the client how to make authenticated requests. In a Forge Function,
-use `ForgeFunctionAdapter`:
+The adapter tells the client how to make authenticated requests. Wrap it with
+`asApp()` or `asUser()` to create a **BoundClient** — a lightweight object that
+carries both the adapter and the auth context:
 
 ```typescript
 // src/index.ts
-import { ForgeFunctionAdapter } from '@forge-clients/core';
+import { ForgeFunctionAdapter, asApp, asUser } from '@forge-clients/core';
 
 const adapter = new ForgeFunctionAdapter({ product: 'jira' });
+
+const app  = asApp(adapter);   // calls run as the Forge app
+const user = asUser(adapter);  // calls run as the invoking user
 ```
 
 ## 3. Call an API function
 
+Pass the BoundClient as the first argument to any generated function:
+
 ```typescript
 import Resolver from '@forge/resolver';
-import { ForgeFunctionAdapter } from '@forge-clients/core';
+import { ForgeFunctionAdapter, asApp, asUser } from '@forge-clients/core';
 import { getIssue, getCurrentUser } from '@forge-clients/jira/v3';
 
 const resolver = new Resolver();
@@ -44,17 +50,16 @@ const adapter = new ForgeFunctionAdapter({ product: 'jira' });
 resolver.define('getIssueDetails', async (req) => {
   const { issueKey } = req.payload;
 
-  // Get the current user (asUser — uses the context user automatically)
-  const user = await getCurrentUser(adapter, { type: 'asUser' }, {});
+  // Get the current user (asUser — uses the invoking user's credentials)
+  const me = await getCurrentUser(asUser(adapter), {});
 
   // Get the issue (asApp — uses the app's credentials)
-  const issue = await getIssue(adapter, { type: 'asApp' }, {
-    issueIdOrKey: issueKey,
-    fields: ['summary', 'status', 'assignee'],
+  const issue = await getIssue(asApp(adapter), {
+    path: { issueIdOrKey: issueKey },
   });
 
   return {
-    user: user.displayName,
+    user: me.displayName,
     issue: {
       key: issue.key,
       summary: issue.fields?.summary,

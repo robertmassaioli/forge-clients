@@ -23,12 +23,17 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 Instead of hand-writing `requestJira('/rest/api/3/issue/PROJ-123')`, you call:
 
 ```typescript
-import { getIssue } from '@forge-clients/jira/v3';
-import { ForgeFunctionAdapter } from '@forge-clients/core';
+import { ForgeFunctionAdapter, asApp, asUser } from '@forge-clients/core';
+import { getIssue, getCurrentUser } from '@forge-clients/jira/v3';
 
 const adapter = new ForgeFunctionAdapter({ product: 'jira' });
-const issue = await getIssue(adapter, { type: 'asApp' }, { issueIdOrKey: 'PROJ-123' });
+
+const app  = asApp(adapter);   // make calls as the Forge app
+const user = asUser(adapter);  // make calls as the invoking user
+
+const issue = await getIssue(app, { path: { issueIdOrKey: 'PROJ-123' } });
 //    ^^ fully typed as Types.IssueBean
+const me = await getCurrentUser(user, {});
 ```
 
 Every function is named, typed, and tree-shakeable. Your IDE autocompletes parameters.

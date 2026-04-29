@@ -25,9 +25,13 @@ generated from Atlassian's official OpenAPI specification.
 ## Types
 
 ```typescript
-import type { Types } from '@forge-clients/confluence/v1';
+import { ForgeFunctionAdapter, asApp } from '@forge-clients/core';
+import { getContentById } from '@forge-clients/confluence/v1';
+import type { Content } from '@forge-clients/confluence/v1';
 
-const page: Types.Content = await getContentById(adapter, { type: 'asApp' }, {
-  id: '123456',
+const adapter = new ForgeFunctionAdapter({ product: 'confluence' });
+
+const page: Content = await getContentById(asApp(adapter), {
+  path: { id: '123456' },
 });
 ```

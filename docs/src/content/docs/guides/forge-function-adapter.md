@@ -22,7 +22,7 @@ const confluenceAdapter = new ForgeFunctionAdapter({ product: 'confluence' });
 ```typescript
 // src/index.ts
 import Resolver from '@forge/resolver';
-import { ForgeFunctionAdapter } from '@forge-clients/core';
+import { ForgeFunctionAdapter, asApp, asUser } from '@forge-clients/core';
 import { getIssue, addComment } from '@forge-clients/jira/v3';
 
 const resolver = new Resolver();
@@ -32,13 +32,12 @@ resolver.define('commentOnIssue', async (req) => {
   const { issueKey, comment } = req.payload;
 
   // Read as app, write as the user who triggered the action
-  const issue = await getIssue(adapter, { type: 'asApp' }, {
-    issueIdOrKey: issueKey,
-    fields: ['summary'],
+  const issue = await getIssue(asApp(adapter), {
+    path: { issueIdOrKey: issueKey },
   });
 
-  await addComment(adapter, { type: 'asUser' }, {
-    issueIdOrKey: issueKey,
+  await addComment(asUser(adapter), {
+    path: { issueIdOrKey: issueKey },
     body: {
       body: {
         type: 'doc', version: 1,

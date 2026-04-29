@@ -3,12 +3,18 @@ title: Jira — Projects
 description: Listing and managing Jira projects with @forge-clients.
 ---
 
+```typescript
+import { ForgeFunctionAdapter, asApp } from '@forge-clients/core';
+
+const adapter = new ForgeFunctionAdapter({ product: 'jira' });
+```
+
 ## List all projects
 
 ```typescript
 import { searchProjects } from '@forge-clients/jira/v3';
 
-const result = await searchProjects(adapter, { type: 'asApp' }, {
+const result = await searchProjects(asApp(adapter), {
   maxResults: 50,
   orderBy: 'name',
   expand: 'description,lead',
@@ -24,8 +30,8 @@ for (const project of result.values ?? []) {
 ```typescript
 import { getProject } from '@forge-clients/jira/v3';
 
-const project = await getProject(adapter, { type: 'asApp' }, {
-  projectIdOrKey: 'PROJ',
+const project = await getProject(asApp(adapter), {
+  path: { projectIdOrKey: 'PROJ' },
   expand: 'description,lead,issueTypes',
 });
 
@@ -39,10 +45,11 @@ console.log(project.lead?.displayName);
 import { collectAllPages } from '@forge-clients/core';
 import { searchProjects } from '@forge-clients/jira/v3';
 
+const appClient = asApp(adapter);
+
 const allProjects = await collectAllPages(
-  (startAt) => searchProjects(adapter, { type: 'asApp' }, { startAt, maxResults: 50 }),
-  (page) => page.values ?? [],
-  (page) => page.total ?? 0,
+  (startAt) => searchProjects(appClient, { startAt, maxResults: 50 }),
+  (page) => ({ items: page.values ?? [], isLast: page.isLast ?? true }),
 );
 
 console.log(`Total projects: ${allProjects.length}`);

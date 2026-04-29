@@ -9,15 +9,21 @@ description: Understanding the adapter pattern, auth contexts, and how @forge-cl
 the call** (the adapter). This is the core design principle.
 
 ```
-Your code         Generated function       Adapter           Forge runtime
-────────          ─────────────────        ───────           ─────────────
-getIssue(...)  →  builds request  →  ForgeFunctionAdapter  →  @forge/api
-                                    ForgeBridgeAdapter     →  @forge/bridge
-                                    ForgeContainerAdapter  →  FORGE_EGRESS_PROXY_URL
+Your code               BoundClient              Adapter                Forge runtime
+─────────               ───────────              ───────                ─────────────
+asApp(adapter)      →   { adapter, authContext }
+asUser(adapter)     →   { adapter, authContext }
+                                 ↓
+getIssue(client, params)  →  builds request  →  ForgeFunctionAdapter  →  @forge/api
+                                                ForgeBridgeAdapter     →  @forge/bridge
+                                                ForgeContainerAdapter  →  FORGE_EGRESS_PROXY_URL
+                                                ForgeRemoteAdapter     →  FORGE_EGRESS_PROXY_URL
 ```
 
-Every generated function takes an `adapter` as its first argument. Swap the adapter to
-change *how* the request is made without changing your business logic.
+Every generated function takes a **BoundClient** as its first argument — a plain object
+created by `asApp()`, `asUser()`, or `asOfflineUser()` that carries the adapter and auth
+context together. Swap the adapter to change *how* the request is made without changing
+your business logic.
 
 ## Adapters
 
@@ -55,23 +61,47 @@ const adapter = new ForgeContainerAdapter({
 });
 ```
 
-## Auth Contexts
+### ForgeRemoteAdapter
 
-Every generated function takes an `AuthContext` as its second argument, telling the
-adapter which credentials to use for this specific call.
+Use this in **Forge Remotes** (externally hosted backends). The `installationId` and
+`appSystemToken` come from the Forge Remote invocation payload — use the
+`adapterFromForgePayload()` convenience factory:
 
 ```typescript
-// Use the app's own credentials
-{ type: 'asApp' }
+import { adapterFromForgePayload, type ForgeInvocationPayload } from '@forge-clients/core';
 
-// Use the current context user's credentials (Forge Functions only)
-{ type: 'asUser' }
+export async function handler(payload: ForgeInvocationPayload) {
+  const adapter = adapterFromForgePayload(payload, 'jira');
+  // ...
+}
+```
+
+## Auth Contexts and BoundClient
+
+Auth context is set once using `asApp()`, `asUser()`, or `asOfflineUser()` — each
+returns a **BoundClient** (a plain object holding the adapter + auth context). All
+generated functions accept a BoundClient as their first argument.
+
+```typescript
+import { asApp, asUser, asOfflineUser, withAuth } from '@forge-clients/core';
+
+// Use the app's own credentials
+const appClient = asApp(adapter);
+
+// Use the invoking user's credentials (Forge Functions / Custom UI)
+const userClient = asUser(adapter);
 
 // Impersonate a specific user by account ID
-{ type: 'asUser', userId: 'account:abc123' }
+const specificUser = asUser(adapter, 'account:abc123');
 
-// Use an offline user token (Containers / Remotes)
-{ type: 'offlineUser', accountId: 'account:abc123', accessToken: 'eyJ...' }
+// Offline user impersonation (Containers / Remotes) — fetch token first
+const token = await tokenManager.getToken(accountId);
+const offlineClient = asOfflineUser(adapter, token.accountId, token.accessToken);
+// Or use the convenience method:
+const offlineClient2 = await tokenManager.boundClient(adapter, accountId);
+
+// Switch auth context on an existing BoundClient
+const asAppAgain = withAuth(userClient, { type: 'asApp' });
 ```
 
 See the [Auth Contexts guide](/forge-clients/guides/auth-contexts/) for full details.
@@ -101,7 +131,7 @@ All errors from generated functions are instances of `ForgeApiError` subclasses:
 import { ForgeApiError, NotFoundError, RateLimitError } from '@forge-clients/core';
 
 try {
-  const issue = await getIssue(adapter, { type: 'asApp' }, { issueIdOrKey: 'PROJ-999' });
+  const issue = await getIssue(asApp(adapter), { path: { issueIdOrKey: 'PROJ-999' } });
 } catch (err) {
   if (err instanceof NotFoundError) {
     console.log('Issue not found');
