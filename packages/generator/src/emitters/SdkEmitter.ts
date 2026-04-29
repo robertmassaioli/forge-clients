@@ -20,7 +20,9 @@ export class SdkEmitter {
     file.addImportDeclaration({ moduleSpecifier: '@forge-clients/core', namedImports: ['ForgeApiError'] });
     file.addImportDeclaration({ moduleSpecifier: '@forge-clients/core', isTypeOnly: true, namedImports: ['ForgeAdapter', 'AuthContext'] });
     file.addImportDeclaration({ moduleSpecifier: './types.gen.js', isTypeOnly: true, namespaceImport: 'Types' });
-    file.addStatements("export type * from './types.gen.js';");
+    // Note: 'export type *' is TS 5.0+ and not supported by Forge's webpack bundler (ts-loader).
+    // Use 'export *' which works for both types and values in the Forge build context.
+    file.addStatements("export * from './types.gen.js';");
 
     for (const op of spec.operations) {
       this.emitParamsInterface(file, op);
