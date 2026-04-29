@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightTypeDoc, { typeDocSidebarGroup } from 'starlight-typedoc';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +26,35 @@ export default defineConfig({
 				baseUrl: 'https://github.com/rmassaioli/forge-clients/edit/main/docs/',
 			},
 			lastUpdated: true,
+			plugins: [
+				starlightTypeDoc({
+					// Generate API reference from @forge-clients/core only.
+					// jira/confluence have 1500+ generated functions — too large for reference docs.
+					// Generator package is internal tooling — not relevant to consumers.
+					entryPoints: [
+						'../packages/core/src/index.ts',
+					],
+					tsconfig: '../packages/core/tsconfig.json',
+					typedoc: {
+						entryPointStrategy: 'expand',
+						excludePrivate: true,
+						excludeInternal: true,
+						excludeExternals: true,
+						plugin: ['typedoc-plugin-markdown'],
+						readme: 'none',
+						sort: ['source-order'],
+						groupOrder: ['Functions', 'Classes', 'Interfaces', 'Type Aliases', 'Variables'],
+						parametersFormat: 'table',
+						propertiesFormat: 'table',
+						enumMembersFormat: 'table',
+					},
+					sidebar: {
+						label: 'API Reference (@forge-clients/core)',
+						collapsed: false,
+					},
+					output: 'reference',
+				}),
+			],
 			sidebar: [
 				{
 					label: 'Getting Started',
@@ -72,10 +102,7 @@ export default defineConfig({
 						{ label: 'Post-Processing Pipeline', slug: 'generator/post-processing' },
 					],
 				},
-				{
-					label: 'API Reference',
-					autogenerate: { directory: 'reference' },
-				},
+				typeDocSidebarGroup,
 			],
 			customCss: ['./src/styles/custom.css'],
 		}),

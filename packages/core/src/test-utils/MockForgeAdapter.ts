@@ -28,6 +28,32 @@ export interface RecordedCall {
   headers?: Record<string, string>;
 }
 
+/**
+ * A test double for {@link ForgeAdapter} that records all calls and returns
+ * configurable responses from a FIFO queue.
+ *
+ * This is the primary tool for unit testing generated client functions
+ * without a real Forge runtime or network connection.
+ *
+ * Responses are dequeued in the order they were queued. If the queue is empty,
+ * a default `200 OK` with `{}` body is returned. Errors queued via
+ * `queueThrow()` are thrown before checking the response queue.
+ *
+ * @example
+ * ```typescript
+ * import { MockForgeAdapter, asApp } from '@forge-clients/core';
+ * import { getIssue } from '@forge-clients/jira/v3';
+ *
+ * const mock = new MockForgeAdapter('jira');
+ * mock.queueResponse({ id: '123', key: 'PROJ-1', fields: {} });
+ *
+ * const client = asApp(mock);
+ * const issue = await getIssue(client, { path: { issueIdOrKey: 'PROJ-1' } });
+ *
+ * expect(mock.callCount).toBe(1);
+ * expect(mock.getLastCall()?.path).toBe('/rest/api/3/issue/PROJ-1');
+ * ```
+ */
 export class MockForgeAdapter implements ForgeAdapter {
   readonly product: 'jira' | 'confluence';
 
@@ -35,6 +61,10 @@ export class MockForgeAdapter implements ForgeAdapter {
   private responseQueue: Response[] = [];
   private errorQueue: Error[] = [];
 
+  /**
+   * Create a new MockForgeAdapter.
+   * @param product - The Atlassian product to simulate (default: `'jira'`)
+   */
   constructor(product: 'jira' | 'confluence' = 'jira') {
     this.product = product;
   }
@@ -67,9 +97,13 @@ export class MockForgeAdapter implements ForgeAdapter {
 
   // ── Query helpers ─────────────────────────────────────────────────────────
 
+  /** Returns a copy of all recorded calls in the order they were made */
   getCalls(): RecordedCall[] { return [...this.calls]; }
+  /** Returns the most recent recorded call, or `undefined` if no calls have been made */
   getLastCall(): RecordedCall | undefined { return this.calls.at(-1); }
+  /** Returns the recorded call at the given zero-based index, or `undefined` if out of range */
   getCall(index: number): RecordedCall | undefined { return this.calls[index]; }
+  /** The total number of calls made to `fetch()` since the last `reset()` */
   get callCount(): number { return this.calls.length; }
 
   /** Reset all recorded calls and queued responses */

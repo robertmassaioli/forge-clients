@@ -1,5 +1,5 @@
 /**
- * Retry handler with exponential backoff for @forge-clients.
+ * Retry handler with exponential backoff for `@forge-clients` packages.
  *
  * Automatically handles rate limit (429) and transient server (503) errors
  * with configurable retry logic. Honours the Retry-After header from 429 responses.
