@@ -73,6 +73,7 @@ export default defineConfig({
 						{ label: 'ForgeFunctionAdapter', slug: 'guides/forge-function-adapter' },
 						{ label: 'ForgeBridgeAdapter', slug: 'guides/forge-bridge-adapter' },
 						{ label: 'ForgeContainerAdapter', slug: 'guides/forge-container-adapter' },
+						{ label: 'ForgeRemoteAdapter', slug: 'guides/forge-remote-adapter' },
 					],
 				},
 				{

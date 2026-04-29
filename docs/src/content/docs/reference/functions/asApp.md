@@ -7,7 +7,7 @@ title: "asApp"
 
 > **asApp**(`adapter`): [`BoundClient`](/forge-clients/reference/interfaces/boundclient/)
 
-Defined in: [packages/core/src/client/BoundClient.ts:49](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/client/BoundClient.ts#L49)
+Defined in: [packages/core/src/client/BoundClient.ts:49](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/client/BoundClient.ts#L49)
 
 Make API calls as the Forge app itself.
 This is the default and most common auth context for backend operations.

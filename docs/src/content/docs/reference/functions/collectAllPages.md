@@ -7,7 +7,7 @@ title: "collectAllPages"
 
 > **collectAllPages**\<`T`\>(`fetchPage`, `pageSize?`): `Promise`\<`T`[]\>
 
-Defined in: [packages/core/src/pagination/PaginationHelper.ts:69](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/pagination/PaginationHelper.ts#L69)
+Defined in: [packages/core/src/pagination/PaginationHelper.ts:69](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/pagination/PaginationHelper.ts#L69)
 
 Collect **all** pages of an offset-paginated endpoint into a single array.
 

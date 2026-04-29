@@ -5,20 +5,21 @@ description: Understanding asApp, asUser, and offline user impersonation in @for
 
 Auth context is set once when creating a **BoundClient** using `asApp()`, `asUser()`,
 or `asOfflineUser()`. All generated functions take a BoundClient as their first argument —
-there is no middle auth context argument.
+there is no per-call auth context argument.
 
 ```typescript
-import { asApp, asUser, asOfflineUser, withAuth } from '@forge-clients/core';
+import { asApp, asUser, asOfflineUser } from '@forge-clients/core';
 
-const appClient  = asApp(adapter);               // asApp
-const userClient = asUser(adapter);              // asUser (invoking user)
-const userClient2 = asUser(adapter, 'acct:123'); // asUser (specific user)
+const appClient  = asApp(adapter);               // app credentials
+const userClient = asUser(adapter);              // invoking user (Forge Functions only)
+const userClient2 = asUser(adapter, 'acct:123'); // specific user by account ID
 ```
 
 ## asApp
 
-The request is made using the **app's own credentials**. This is the default for most
-background operations, scheduled tasks, and system-level actions.
+The request is made using the **app's own credentials**. This is the right choice for
+background operations, scheduled tasks, and system-level actions where no user context
+is available or needed.
 
 ```typescript
 import { asApp } from '@forge-clients/core';
@@ -27,15 +28,15 @@ import { searchProjects } from '@forge-clients/jira/v3';
 const projects = await searchProjects(asApp(adapter), {});
 ```
 
-- Available in: Forge Functions, Forge Containers, Forge Remotes
-- Rate limits: App-level rate limit bucket
-- Audit logs: Attributed to the app, not a user
-- Requires: `read:jira-work` or equivalent scope in `manifest.yml`
+- **Available in:** Forge Functions, Forge Containers, Forge Remotes
+- **Rate limits:** App-level rate limit bucket
+- **Audit logs:** Attributed to the app, not a user
+- **Requires:** `read:jira-work` or equivalent scope in `manifest.yml`
 
 ## asUser (context user)
 
-The request is made on behalf of the **current user** — the person who triggered the
-Forge Function invocation. No `userId` is needed; Forge injects the context user automatically.
+The request is made on behalf of the **current invoking user**. No `userId` argument is
+needed — Forge injects the invoking user's identity automatically from the request context.
 
 ```typescript
 import { asUser } from '@forge-clients/core';
@@ -44,24 +45,24 @@ import { getCurrentUser } from '@forge-clients/jira/v3';
 const myself = await getCurrentUser(asUser(adapter), {});
 ```
 
-- Available in: Forge Functions (when invoked by a user action in UI)
-- Rate limits: App + User rate limit bucket
-- Audit logs: Attributed to the user
-- Requires: Scopes marked with `impersonation: true` in `manifest.yml`
+- **Available in:** Forge Functions (when triggered by a user action)
+- **Rate limits:** App + User combined rate limit bucket
+- **Audit logs:** Attributed to the user
+- **Requires:** Scopes with `impersonation: true` in `manifest.yml`
 
 ```yaml
-# manifest.yml — declare impersonation scopes
+# manifest.yml — declare user impersonation scopes
 permissions:
   scopes:
     - read:jira-work
     - write:jira-work
-  # To use asUser, add impersonation: true to each scope
+  # Each scope used with asUser must also have impersonation: true
 ```
 
 ## asUser with explicit userId
 
-Impersonate a **specific user** by their Atlassian account ID. Useful for workflows
-where you know which user's context you need.
+Impersonate a **specific user** by their Atlassian account ID. Useful in Forge Functions
+when you know which user's context you need (e.g. from a stored account ID).
 
 ```typescript
 import { asUser } from '@forge-clients/core';
@@ -69,58 +70,67 @@ import { createIssue } from '@forge-clients/jira/v3';
 
 const userId = 'account:abc123def456';
 const issue = await createIssue(asUser(adapter, userId), {
-  body: { fields: { project: { key: 'PROJ' }, summary: 'Created on behalf of user', issuetype: { name: 'Task' } } }
+  body: {
+    fields: {
+      project: { key: 'PROJ' },
+      summary: 'Created on behalf of user',
+      issuetype: { name: 'Task' },
+    },
+  },
 });
 ```
 
 :::caution[Principle of least privilege]
 Forge's `asUser` tokens only include scopes explicitly marked with `impersonation: true`.
-Unlike Atlassian Connect's `ACT_AS_USER`, users cannot access more than the declared
-impersonation scopes — even if the user themselves has broader permissions.
+Unlike Atlassian Connect's `ACT_AS_USER`, a user cannot access more than the declared
+impersonation scopes — even if the user themselves has broader product permissions.
 :::
 
-## offlineUser (Containers / Remotes)
+## asOfflineUser (Containers and Remotes)
 
-For **Forge Containers** and **Forge Remotes**, you must first obtain a short-lived user
-access token via the `OfflineTokenManager`, then pass it with the request:
+For **Forge Containers** and **Forge Remotes**, there is no live user session — you must
+obtain a short-lived user access token out-of-band and pass it with the request.
+
+Use `OfflineTokenManager` (for Containers) or `ForgeRemoteTokenManager` (for Remotes)
+to fetch and cache these tokens, then bind them with `asOfflineUser`:
 
 ```typescript
-import { ForgeContainerAdapter, OfflineTokenManager } from '@forge-clients/core';
+import { ForgeContainerAdapter, OfflineTokenManager, asOfflineUser } from '@forge-clients/core';
 import { getCurrentUser } from '@forge-clients/jira/v3';
 
-const adapter = new ForgeContainerAdapter({
-  product: 'jira',
-  installationId: process.env.FORGE_INSTALLATION_ID!,
-  egressProxyUrl: process.env.FORGE_EGRESS_PROXY_URL!,
-});
+const proxyUrl = process.env.FORGE_EGRESS_PROXY_URL!;
 
-const tokenManager = new OfflineTokenManager({
-  egressProxyUrl: process.env.FORGE_EGRESS_PROXY_URL!,
-  installationId: process.env.FORGE_INSTALLATION_ID!,
-});
+// Fetch installation ID at startup (Container only)
+const { installationId } = await fetch(`${proxyUrl}/v0/installations`).then(r => r.json());
+
+const adapter = new ForgeContainerAdapter({ product: 'jira', proxyUrl, installationId });
+const tokenManager = new OfflineTokenManager({ proxyUrl, installationId });
 
 const accountId = 'account:abc123';
 
-// Option 1: fetch token manually, then bind
+// Fetch (and cache) a token, then bind it to a client
 const token = await tokenManager.getToken(accountId);
 const offlineClient = asOfflineUser(adapter, token.accountId, token.accessToken);
-
-// Option 2: convenience method (fetches + caches token, returns BoundClient)
-const offlineClient2 = await tokenManager.boundClient(adapter, accountId);
 
 const user = await getCurrentUser(offlineClient, {});
 ```
 
-The `OfflineTokenManager` handles token caching and proactive refresh automatically.
-The `accessToken` field is **required** — token fetching is always the caller's
-responsibility via the token manager, never done automatically inside the adapter.
+The `OfflineTokenManager` and `ForgeRemoteTokenManager` both handle token caching and
+proactive refresh automatically — call `getToken()` on every request without worrying
+about unnecessary round-trips.
+
+The `accessToken` is **always the caller's responsibility to fetch** — it is never
+obtained automatically inside the adapter.
 
 ## Choosing the right auth context
 
-| Scenario | Auth context |
-|---|---|
-| Background job, no user context | `asApp` |
-| Responding to a user action in a Forge Function | `asUser` (no userId) |
-| Creating content on behalf of a known user | `asUser` with userId |
-| Scheduled task in a Forge Container | `offlineUser` |
-| Forge Remote webhook handler | `offlineUser` |
+| Scenario | Adapter | Auth context |
+|---|---|---|
+| Background job, no user context | Any | `asApp` |
+| Responding to a user action in a Forge Function | `ForgeFunctionAdapter` | `asUser()` |
+| Creating content on behalf of a specific known user (Forge Function) | `ForgeFunctionAdapter` | `asUser(adapter, userId)` |
+| Scheduled task in a Forge Container | `ForgeContainerAdapter` | `asOfflineUser` via `OfflineTokenManager` |
+| Forge Remote handler — as app | `ForgeRemoteAdapter` | `asApp` |
+| Forge Remote handler — on behalf of invoking user | `ForgeRemoteAdapter` | `asUser(adapter, payload.context.accountId)` |
+| Forge Remote handler — offline user token | `ForgeRemoteAdapter` | `asOfflineUser` via `ForgeRemoteTokenManager` |
+| Custom UI / UI Kit 2 frontend | `ForgeBridgeAdapter` | `asUser()` (implicit — Bridge only supports user context) |

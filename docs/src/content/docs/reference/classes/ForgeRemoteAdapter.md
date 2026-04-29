@@ -5,7 +5,7 @@ prev: false
 title: "ForgeRemoteAdapter"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:91](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeRemoteAdapter.ts#L91)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:91](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L91)
 
 Adapter for Forge Remote backends.
 
@@ -28,7 +28,7 @@ directly from the invocation payload.
 
 > **new ForgeRemoteAdapter**(`options`): `ForgeRemoteAdapter`
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:101](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeRemoteAdapter.ts#L101)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:101](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L101)
 
 Create a new ForgeRemoteAdapter.
 
@@ -50,7 +50,7 @@ Configuration including product, proxy URL, installation ID, and app system toke
 
 > `readonly` **product**: `"jira"` \| `"confluence"`
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:92](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeRemoteAdapter.ts#L92)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:92](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L92)
 
 The Atlassian product this adapter is configured to make requests to
 
@@ -64,7 +64,7 @@ The Atlassian product this adapter is configured to make requests to
 
 > **fetch**(`options`): `Promise`\<`Response`\>
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:112](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeRemoteAdapter.ts#L112)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:112](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L112)
 
 Execute a request through the Forge egress proxy.
 Injects `forge-proxy-authorization` header with the app system token and installation ID.

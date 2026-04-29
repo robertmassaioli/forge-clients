@@ -5,7 +5,7 @@ prev: false
 title: "CursorPage"
 ---
 
-Defined in: [packages/core/src/pagination/PaginationHelper.ts:38](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/pagination/PaginationHelper.ts#L38)
+Defined in: [packages/core/src/pagination/PaginationHelper.ts:38](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/pagination/PaginationHelper.ts#L38)
 
 Represents one page of results from a cursor-paginated Atlassian API endpoint.
 Used by some Confluence v2 endpoints.
@@ -22,7 +22,7 @@ Used by some Confluence v2 endpoints.
 
 > `optional` **\_links?**: `object`
 
-Defined in: [packages/core/src/pagination/PaginationHelper.ts:42](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/pagination/PaginationHelper.ts#L42)
+Defined in: [packages/core/src/pagination/PaginationHelper.ts:42](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/pagination/PaginationHelper.ts#L42)
 
 HAL-style links object — `next` contains the URL of the next page if present
 
@@ -36,6 +36,6 @@ HAL-style links object — `next` contains the URL of the next page if present
 
 > **results**: `T`[]
 
-Defined in: [packages/core/src/pagination/PaginationHelper.ts:40](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/pagination/PaginationHelper.ts#L40)
+Defined in: [packages/core/src/pagination/PaginationHelper.ts:40](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/pagination/PaginationHelper.ts#L40)
 
 Items on this page

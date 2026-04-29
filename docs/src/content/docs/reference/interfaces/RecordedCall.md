@@ -5,7 +5,7 @@ prev: false
 title: "RecordedCall"
 ---
 
-Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:22](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/test-utils/MockForgeAdapter.ts#L22)
+Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:22](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/test-utils/MockForgeAdapter.ts#L22)
 
 A recorded call to adapter.fetch()
 
@@ -15,7 +15,7 @@ A recorded call to adapter.fetch()
 
 > **authContext**: `unknown`
 
-Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:27](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/test-utils/MockForgeAdapter.ts#L27)
+Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:27](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/test-utils/MockForgeAdapter.ts#L27)
 
 ***
 
@@ -23,7 +23,7 @@ Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:27](https://github
 
 > `optional` **body?**: `unknown`
 
-Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:26](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/test-utils/MockForgeAdapter.ts#L26)
+Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:26](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/test-utils/MockForgeAdapter.ts#L26)
 
 ***
 
@@ -31,7 +31,7 @@ Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:26](https://github
 
 > `optional` **headers?**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:28](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/test-utils/MockForgeAdapter.ts#L28)
+Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:28](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/test-utils/MockForgeAdapter.ts#L28)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:28](https://github
 
 > **method**: `string`
 
-Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:23](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/test-utils/MockForgeAdapter.ts#L23)
+Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:23](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/test-utils/MockForgeAdapter.ts#L23)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:23](https://github
 
 > **path**: `string`
 
-Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:24](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/test-utils/MockForgeAdapter.ts#L24)
+Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:24](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/test-utils/MockForgeAdapter.ts#L24)
 
 ***
 
@@ -55,4 +55,4 @@ Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:24](https://github
 
 > `optional` **queryParams?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:25](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/test-utils/MockForgeAdapter.ts#L25)
+Defined in: [packages/core/src/test-utils/MockForgeAdapter.ts:25](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/test-utils/MockForgeAdapter.ts#L25)

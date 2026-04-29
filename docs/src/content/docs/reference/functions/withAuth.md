@@ -7,7 +7,7 @@ title: "withAuth"
 
 > **withAuth**(`client`, `authContext`): [`BoundClient`](/forge-clients/reference/interfaces/boundclient/)
 
-Defined in: [packages/core/src/client/BoundClient.ts:128](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/client/BoundClient.ts#L128)
+Defined in: [packages/core/src/client/BoundClient.ts:128](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/client/BoundClient.ts#L128)
 
 Create a new BoundClient with a different auth context, reusing the same
 underlying adapter. Useful for switching auth mid-handler.

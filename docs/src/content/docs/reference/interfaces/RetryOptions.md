@@ -5,7 +5,7 @@ prev: false
 title: "RetryOptions"
 ---
 
-Defined in: [packages/core/src/retry/RetryHandler.ts:10](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/retry/RetryHandler.ts#L10)
+Defined in: [packages/core/src/retry/RetryHandler.ts:10](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/retry/RetryHandler.ts#L10)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [packages/core/src/retry/RetryHandler.ts:10](https://github.com/robe
 
 > `optional` **backoffFactor?**: `number`
 
-Defined in: [packages/core/src/retry/RetryHandler.ts:16](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/retry/RetryHandler.ts#L16)
+Defined in: [packages/core/src/retry/RetryHandler.ts:16](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/retry/RetryHandler.ts#L16)
 
 Multiplier applied to delay after each retry (default: 2)
 
@@ -23,7 +23,7 @@ Multiplier applied to delay after each retry (default: 2)
 
 > `optional` **initialDelayMs?**: `number`
 
-Defined in: [packages/core/src/retry/RetryHandler.ts:14](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/retry/RetryHandler.ts#L14)
+Defined in: [packages/core/src/retry/RetryHandler.ts:14](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/retry/RetryHandler.ts#L14)
 
 Initial delay in milliseconds before first retry (default: 1000)
 
@@ -33,7 +33,7 @@ Initial delay in milliseconds before first retry (default: 1000)
 
 > `optional` **maxRetries?**: `number`
 
-Defined in: [packages/core/src/retry/RetryHandler.ts:12](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/retry/RetryHandler.ts#L12)
+Defined in: [packages/core/src/retry/RetryHandler.ts:12](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/retry/RetryHandler.ts#L12)
 
 Maximum number of retry attempts (default: 3)
 
@@ -43,7 +43,7 @@ Maximum number of retry attempts (default: 3)
 
 > `optional` **onRetry?**: (`attempt`, `error`, `delayMs`) => `void`
 
-Defined in: [packages/core/src/retry/RetryHandler.ts:20](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/retry/RetryHandler.ts#L20)
+Defined in: [packages/core/src/retry/RetryHandler.ts:20](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/retry/RetryHandler.ts#L20)
 
 Optional callback invoked before each retry
 
@@ -71,6 +71,6 @@ Optional callback invoked before each retry
 
 > `optional` **retryOn?**: `number`[]
 
-Defined in: [packages/core/src/retry/RetryHandler.ts:18](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/retry/RetryHandler.ts#L18)
+Defined in: [packages/core/src/retry/RetryHandler.ts:18](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/retry/RetryHandler.ts#L18)
 
 HTTP status codes that should trigger a retry (default: [429, 503])

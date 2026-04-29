@@ -5,7 +5,7 @@ prev: false
 title: "ForgeContainerAdapter"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:51](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeContainerAdapter.ts#L51)
+Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:51](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeContainerAdapter.ts#L51)
 
 Adapter for Forge Container backends.
 Routes requests through the Forge egress proxy using `forge-proxy-authorization` headers.
@@ -20,7 +20,7 @@ Routes requests through the Forge egress proxy using `forge-proxy-authorization`
 
 > **new ForgeContainerAdapter**(`options`): `ForgeContainerAdapter`
 
-Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:60](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeContainerAdapter.ts#L60)
+Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:60](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeContainerAdapter.ts#L60)
 
 Create a new ForgeContainerAdapter.
 
@@ -42,7 +42,7 @@ Configuration including product, proxy URL, and installation ID
 
 > `readonly` **product**: `"jira"` \| `"confluence"`
 
-Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:52](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeContainerAdapter.ts#L52)
+Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:52](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeContainerAdapter.ts#L52)
 
 The Atlassian product this adapter is configured to make requests to
 
@@ -56,7 +56,7 @@ The Atlassian product this adapter is configured to make requests to
 
 > **fetch**(`options`): `Promise`\<`Response`\>
 
-Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:70](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeContainerAdapter.ts#L70)
+Defined in: [packages/core/src/adapters/ForgeContainerAdapter.ts:70](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeContainerAdapter.ts#L70)
 
 Execute a request through the Forge egress proxy.
 Injects the appropriate `forge-proxy-authorization` header based on the auth context.

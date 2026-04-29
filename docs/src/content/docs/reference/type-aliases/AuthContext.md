@@ -7,7 +7,7 @@ title: "AuthContext"
 
 > **AuthContext** = \{ `type`: `"asApp"`; \} \| \{ `type`: `"asUser"`; `userId?`: `string`; \} \| \{ `accessToken`: `string`; `accountId`: `string`; `type`: `"offlineUser"`; \}
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:19](https://github.com/robertmassaioli/forge-clients/blob/79472dcf53ad828039cd1105df5678fccd6f16ba/packages/core/src/adapters/ForgeAdapter.ts#L19)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:19](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L19)
 
 Discriminated union describing who is making an API request.
 
