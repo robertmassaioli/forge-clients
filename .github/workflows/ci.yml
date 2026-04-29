@@ -33,7 +33,9 @@ jobs:
         run: pnpm -r run typecheck
 
       - name: Run tests
+        # Tests resolve workspace packages via vitest aliases to source — no build needed
         run: pnpm test
 
       - name: Build all packages
+        # Build after tests to verify all packages produce clean dist/ output
         run: pnpm -r run build
