@@ -11,7 +11,7 @@ export default defineConfig({
   },
   test: {
     name: 'jira',
-    include: ['tests/**/*.test.ts'],
+    include: ['tests/**/*.test.ts', 'src/__tests__/**/*.test.ts'],
     exclude: ['**/node_modules/**', '**/dist/**'],
     globals: false,
     environment: 'node',

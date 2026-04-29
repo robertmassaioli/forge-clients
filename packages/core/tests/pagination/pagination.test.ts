@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { collectAllPages, iteratePages } from '../../src/pagination/index.js';
+import { collectAllPages, iteratePages, iterateCursorPages } from '../../src/pagination/index.js';
 import type { OffsetPage } from '../../src/pagination/index.js';
 import { MockForgeAdapter } from '../../src/test-utils/MockForgeAdapter.js';
 
@@ -93,5 +93,71 @@ describe('iteratePages', () => {
 
     expect(items).toEqual(['ISS-1', 'ISS-2', 'ISS-3']);
     expect(mock.callCount).toBe(2);
+  });
+});
+
+describe('iterateCursorPages', () => {
+  it('yields all items across cursor-paginated pages', async () => {
+    let call = 0;
+    const pages = [
+      { results: ['a', 'b'], _links: { next: '/wiki/api/v2/pages?cursor=cursor-2' } },
+      { results: ['c'], _links: {} },
+    ];
+
+    const items: string[] = [];
+    for await (const item of iterateCursorPages<string>(
+      async (_cursor) => pages[call++]! as any,
+    )) {
+      items.push(item);
+    }
+
+    expect(items).toEqual(['a', 'b', 'c']);
+    expect(call).toBe(2);
+  });
+
+  it('passes undefined cursor on first page', async () => {
+    const cursors: (string | undefined)[] = [];
+    const pages = [
+      { results: ['x'], _links: { next: '/api?cursor=next' } },
+      { results: ['y'], _links: {} },
+    ];
+    let call = 0;
+
+    for await (const _ of iterateCursorPages<string>(
+      async (cursor) => { cursors.push(cursor); return pages[call++]! as any; },
+    )) { /* consume */ }
+
+    expect(cursors[0]).toBeUndefined();
+  });
+
+  it('extracts cursor from _links.next URL', async () => {
+    const cursors: (string | undefined)[] = [];
+    const pages = [
+      { results: ['x'], _links: { next: '/wiki/api/v2/pages?cursor=abc123&limit=25' } },
+      { results: ['y'], _links: {} },
+    ];
+    let call = 0;
+
+    for await (const _ of iterateCursorPages<string>(
+      async (cursor) => { cursors.push(cursor); return pages[call++]! as any; },
+    )) { /* consume */ }
+
+    expect(cursors[1]).toBe('abc123');
+  });
+
+  it('stops when _links.next is absent', async () => {
+    let call = 0;
+    for await (const _ of iterateCursorPages<string>(
+      async () => { call++; return { results: ['only'], _links: {} } as any; },
+    )) { /* consume */ }
+    expect(call).toBe(1);
+  });
+
+  it('handles empty results page', async () => {
+    const items: string[] = [];
+    for await (const item of iterateCursorPages<string>(
+      async () => ({ results: [], _links: {} } as any),
+    )) { items.push(item); }
+    expect(items).toEqual([]);
   });
 });

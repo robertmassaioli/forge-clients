@@ -18,6 +18,7 @@ export default defineConfig({
   test: {
     include: [
       'packages/*/tests/**/*.test.ts',
+      'packages/*/src/__tests__/**/*.test.ts',
     ],
     exclude: ['**/node_modules/**', '**/dist/**'],
     globals: false,
