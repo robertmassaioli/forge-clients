@@ -9,7 +9,7 @@
  */
 
 // All TypeScript types — zero runtime cost, erased at build time
-export * from './types.gen.js';
+export type * from './types.gen.js';
 
 // All named SDK functions — individually tree-shakeable
 export * from './sdk.gen.js';

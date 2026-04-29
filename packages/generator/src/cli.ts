@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * @forge-clients/generator CLI — Option 4 (Custom TypeScript AST Generator)
  * forge-clients-gen update-specs      Download and process Atlassian OpenAPI specs

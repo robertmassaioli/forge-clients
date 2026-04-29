@@ -66,11 +66,11 @@ export class ForgeFunctionAdapter implements ForgeAdapter {
 }
 
 function buildQueryString(
-  params?: Record<string, string | number | boolean | string[] | number[] | undefined>,
+  params?: Record<string, unknown>,
 ): string {
   if (!params) return '';
   const entries = Object.entries(params)
-    .filter((e): e is [string, string | number | boolean] => e[1] !== undefined)
+    .filter(([, v]) => v !== undefined)
     .map(([k, v]) => [k, String(v)]);
   if (entries.length === 0) return '';
   return '?' + new URLSearchParams(entries).toString();

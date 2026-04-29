@@ -2,6 +2,7 @@
 // Re-exports all public API surface areas
 
 export * from './adapters/index.js';
+export * from './client/index.js';
 export * from './errors/index.js';
 export * from './pagination/index.js';
 export * from './retry/index.js';
