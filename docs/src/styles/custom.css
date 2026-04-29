@@ -1,0 +1,32 @@
+/* @forge-clients documentation custom styles */
+
+:root {
+  --sl-color-accent-low: #0052cc1a;
+  --sl-color-accent: #0052cc;
+  --sl-color-accent-high: #003884;
+}
+
+/* Atlassian-flavoured blue accent for dark mode */
+[data-theme='dark'] {
+  --sl-color-accent-low: #0052cc33;
+  --sl-color-accent: #4c9aff;
+  --sl-color-accent-high: #b3d4ff;
+}
+
+/* Make inline code blocks slightly more prominent */
+.sl-markdown-content :not(pre) > code {
+  background-color: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 4px;
+  padding: 0.1em 0.3em;
+  font-size: 0.875em;
+}
+
+/* Callout: Forge-specific note style */
+.forge-note {
+  border-left: 4px solid var(--sl-color-accent);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background: var(--sl-color-accent-low);
+  border-radius: 0 4px 4px 0;
+}
