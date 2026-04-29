@@ -1,6 +1,11 @@
 # `@forge-clients` — TypeScript REST API Clients for Atlassian Forge
 
+[![CI](https://github.com/robertmassaioli/forge-clients/actions/workflows/ci.yml/badge.svg)](https://github.com/robertmassaioli/forge-clients/actions/workflows/ci.yml)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://robertmassaioli.github.io/forge-clients/)
+
 A monorepo containing a TypeScript-first OpenAPI client generator and generated REST API clients for [Atlassian Forge Apps](https://developer.atlassian.com/platform/forge/).
+
+**📖 Full documentation:** [robertmassaioli.github.io/forge-clients](https://robertmassaioli.github.io/forge-clients/)
 
 ## Packages
 
@@ -20,7 +25,7 @@ A monorepo containing a TypeScript-first OpenAPI client generator and generated 
 | **UI Kit 2** | `@forge-clients/core` → `ForgeBridgeAdapter` | `asUser` (implicit) |
 | **Custom UI** | `@forge-clients/core` → `ForgeBridgeAdapter` | `asUser` (implicit) |
 | **Forge Container** | `@forge-clients/core` → `ForgeContainerAdapter` | `asApp`, offline user impersonation |
-| **Forge Remote** | `@forge-clients/core` → `ForgeContainerAdapter` | `asApp`, offline user impersonation |
+| **Forge Remote** | `@forge-clients/core` → `ForgeRemoteAdapter` | `asApp`, `asUser`, offline user impersonation |
 
 ## Quick Start
 
@@ -30,13 +35,25 @@ npm install @forge-clients/jira @forge-clients/core
 ```
 
 ```typescript
-import { ForgeFunctionAdapter } from '@forge-clients/core';
-import { getIssue } from '@forge-clients/jira';
+import { ForgeFunctionAdapter, asApp, asUser } from '@forge-clients/core';
+import { getIssue, searchForIssuesUsingJql, createIssue } from '@forge-clients/jira';
 
-const client = new ForgeFunctionAdapter({ product: 'jira', context: 'asApp' });
-const issue = await getIssue(client, { issueIdOrKey: 'PROJ-123' });
-console.log(issue.fields.summary); // Fully typed!
+// Create an adapter for your execution context
+const adapter = new ForgeFunctionAdapter({ product: 'jira' });
+
+// Bind to an auth context — asApp() or asUser()
+const app  = asApp(adapter);   // make calls as the Forge app
+const user = asUser(adapter);  // make calls as the invoking user
+
+// Call named, fully-typed API functions
+const issue = await getIssue(app, { path: { issueIdOrKey: 'PROJ-123' } });
+console.log(issue.fields?.summary); // Fully typed! ✅
+
+const results = await searchForIssuesUsingJql(user, { body: { jql: 'assignee = currentUser()' } });
+console.log(results.issues?.length);
 ```
+
+For more examples and all supported adapters, see the [full documentation](https://robertmassaioli.github.io/forge-clients/).
 
 ## Development
 
