@@ -431,31 +431,171 @@ consideration.
 
 ---
 
-## 9. Deployment
+## 9. Deployment — GitHub Pages
 
-### Option A: Bitbucket/GitHub Pages (Recommended for MVP)
+The documentation site is deployed to **GitHub Pages** from the `forge-clients` repository.
+Astro has first-class GitHub Pages support via its official `@astrojs/starlight` adapter
+combined with the GitHub Actions `actions/deploy-pages` action.
 
-```yaml
-# .github/workflows/docs.yml  OR  bitbucket-pipelines.yml
-- run: cd docs && pnpm install && pnpm run build
-- deploy: dist/ → GitHub Pages / Bitbucket Pages
+### URL
+
+```
+https://rmassaioli.github.io/forge-clients/
 ```
 
-URL pattern: `https://rmassaioli.github.io/forge-clients/` or similar.
+If a custom domain is desired later, add a `CNAME` file to the `docs/public/` directory
+and configure the domain in the GitHub repository Settings → Pages → Custom domain.
 
-### Option B: Vercel / Netlify (Better DX)
+### Required: `astro.config.mjs` — set `base` and `site`
 
-One-click deploy with automatic preview deployments on every PR. Free tier covers static
-sites. Gives a cleaner custom domain story.
+GitHub Pages serves the site at a subpath (`/forge-clients/`), not at the root. Astro
+must be told about this so all internal links and asset paths are prefixed correctly:
 
-### Option C: Atlassian Developer Hub (Long-term)
+```javascript
+// docs/astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  // The full URL of the deployed site — used for sitemap, canonical URLs, etc.
+  site: 'https://rmassaioli.github.io',
+
+  // The base path where the site is served on GitHub Pages.
+  // Must match the repository name exactly.
+  base: '/forge-clients',
+
+  integrations: [
+    starlight({
+      title: '@forge-clients',
+      // ... rest of Starlight config
+    }),
+  ],
+});
+```
+
+**Without `base: '/forge-clients'`**, all internal links and static assets (CSS, JS,
+images) will return 404 because GitHub Pages serves at `/forge-clients/` not `/`.
+
+### GitHub Actions Workflow
+
+```yaml
+# .github/workflows/deploy-docs.yml
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'packages/*/src/**/*.ts'   # Rebuild if source changes (affects API reference)
+  workflow_dispatch:               # Allow manual trigger
+
+# Required permissions for deploying to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build @forge-clients packages (needed for API reference generation)
+        run: pnpm --filter @forge-clients/core --filter @forge-clients/jira --filter @forge-clients/confluence run build
+
+      - name: Build documentation site
+        run: pnpm --filter @forge-clients/docs run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/dist/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### GitHub Repository Settings
+
+Before the workflow runs successfully, configure GitHub Pages in the repository:
+
+1. Go to **Settings → Pages**
+2. Under **Source**, select **GitHub Actions** (not the legacy "Deploy from a branch" option)
+3. The workflow will handle the rest automatically on every push to `main`
+
+### Preview Deployments (Optional)
+
+GitHub Pages doesn't natively support preview deployments per PR the way Vercel does.
+Two options if preview deploys become important:
+
+**Option A: Separate `gh-pages-preview` branch per PR** — complex to maintain, not recommended.
+
+**Option B: Add Vercel as a secondary preview-only deployment** — the production site
+stays on GitHub Pages, but Vercel (free tier) provides PR preview URLs. Since Astro
+builds to static files, Vercel can deploy the same `dist/` output without any code change.
+This requires setting `VERCEL_TOKEN` as a repository secret and adding a second workflow
+job that runs only on PRs.
+
+For the initial launch, preview deployments are not required — the production GitHub Pages
+deployment is sufficient.
+
+### Astro GitHub Pages Adapter
+
+Astro requires a specific output adapter for static GitHub Pages deployment:
+
+```bash
+# In the docs/ directory
+pnpm add -D @astrojs/starlight
+# No separate adapter needed — Astro's default static output works for GitHub Pages
+# Only add @astrojs/node or @astrojs/vercel if switching to SSR (not needed here)
+```
+
+Starlight (and Astro in general) defaults to **static output** (`output: 'static'`),
+which generates a plain `dist/` folder of HTML, CSS, and JS files. This is exactly what
+`actions/upload-pages-artifact` expects. No additional adapter is needed.
+
+### Pagefind (Full-Text Search) on GitHub Pages
+
+Starlight uses [Pagefind](https://pagefind.app) for client-side full-text search.
+Pagefind indexes the built HTML files during the build step — it runs automatically as
+part of `astro build`. The resulting search index is included in `dist/` and uploaded
+with the rest of the site. No server is needed; search works entirely client-side.
+
+This is one of Starlight's key advantages for static hosting: full search with zero
+backend.
+
+### Atlassian Developer Hub (Long-term consideration)
 
 If `@forge-clients` becomes an official or widely-adopted community library, the docs
-could be submitted to `developer.atlassian.com/forge-marketplace` or similar. Not
-relevant for initial release.
-
-**Recommendation: Start with Vercel.** Zero-config Astro deployment, preview URLs on
-every commit, easy custom domain, free tier.
+could eventually be mirrored or submitted to `developer.atlassian.com`. Not relevant
+for the initial release — GitHub Pages is the right home for a community library.
 
 ---
 
@@ -482,11 +622,15 @@ be a workspace member to access the other packages via workspace links.
 
 ### Phase 1 — Scaffold (1–2 days)
 1. Create `docs/` directory, init Starlight project (`npm create astro@latest -- --template starlight`)
-2. Configure `astro.config.mjs` — sidebar structure, site title, favicon, social links
+2. Configure `astro.config.mjs`:
+   - Set `site: 'https://rmassaioli.github.io'` and `base: '/forge-clients'` (required for GitHub Pages subpath)
+   - Configure sidebar structure, site title, favicon, social links
 3. Add `@astrojs/starlight-typedoc` plugin, point at `packages/core/src/index.ts`
 4. Add pnpm workspace entry for `docs/`
 5. Add `docs:dev`, `docs:build`, `docs:preview` scripts to root `package.json`
-6. Set up Vercel deployment
+6. Create `.github/workflows/deploy-docs.yml` — the GitHub Actions workflow from Section 9
+7. Enable GitHub Pages in repository Settings → Pages → Source: **GitHub Actions**
+8. Push to `main` and verify the first deployment at `https://rmassaioli.github.io/forge-clients/`
 
 ### Phase 2 — Core Content (3–5 days)
 7. Write `index.mdx` — landing page with feature cards
