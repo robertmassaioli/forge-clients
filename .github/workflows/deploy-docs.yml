@@ -6,6 +6,11 @@ on:
     paths:
       - 'docs/**'
       - 'packages/*/src/**/*.ts'
+      - '.github/workflows/deploy-docs.yml'
+      - 'pnpm-lock.yaml'
+      - '.npmrc'
+      - 'pnpm-workspace.yaml'
+      - 'package.json'
   workflow_dispatch:
 
 permissions:
