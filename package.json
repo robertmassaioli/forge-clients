@@ -2,7 +2,7 @@
   "name": "forge-clients-monorepo",
   "version": "0.0.0",
   "private": true,
-  "description": "Monorepo for @forge-clients — TypeScript REST API clients for Atlassian Forge Apps",
+  "description": "Monorepo for @forge-clients \u2014 TypeScript REST API clients for Atlassian Forge Apps",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=9.0.0"
@@ -16,13 +16,16 @@
     "build:specs": "pnpm --filter @forge-clients/specs run build",
     "typecheck": "pnpm -r run typecheck",
     "lint": "pnpm -r run lint",
-    "test": "pnpm -r run test",
+    "test": "vitest run",
     "clean": "pnpm -r run clean && rm -rf node_modules",
     "generate": "pnpm --filter @forge-clients/generator run generate",
     "update-specs": "pnpm --filter @forge-clients/generator run update-specs",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish"
+    "release": "pnpm build && changeset publish",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",

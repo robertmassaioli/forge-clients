@@ -23,7 +23,10 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -31,7 +34,9 @@
     "lint": "eslint src --ext .ts",
     "test": "vitest run",
     "clean": "rm -rf dist *.tsbuildinfo",
-    "generate": "pnpm --filter @forge-clients/generator run generate -- --spec confluence-v2,confluence-v1"
+    "generate": "pnpm --filter @forge-clients/generator run generate -- --spec confluence-v2,confluence-v1",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@forge-clients/core": "workspace:*"
@@ -46,5 +51,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": ["atlassian", "forge", "confluence", "rest-api", "typescript", "client"]
+  "keywords": [
+    "atlassian",
+    "forge",
+    "confluence",
+    "rest-api",
+    "typescript",
+    "client"
+  ]
 }
