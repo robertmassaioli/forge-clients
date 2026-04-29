@@ -64,6 +64,25 @@ export class OfflineTokenManager {
     this.cache.clear();
   }
 
+  /**
+   * Convenience method — fetch a valid token and return a BoundClient
+   * for offline user impersonation. Caches the token internally.
+   *
+   * @example
+   * const client = await tokenManager.boundClient(adapter, accountId);
+   * const issue = await getIssue(client, { issueIdOrKey: 'PROJ-1' });
+   */
+  async boundClient(
+    adapter: import('../adapters/ForgeAdapter.js').ForgeAdapter,
+    accountId: string,
+  ): Promise<import('../client/BoundClient.js').BoundClient> {
+    const token = await this.getToken(accountId);
+    return {
+      adapter,
+      authContext: { type: 'offlineUser', accountId, accessToken: token.accessToken },
+    };
+  }
+
   private async fetchToken(accountId: string): Promise<OfflineUserToken> {
     const response = await fetch(`${this.opts.proxyUrl}/graphql`, {
       method: 'POST',

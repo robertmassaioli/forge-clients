@@ -197,22 +197,7 @@ describe('ForgeRemoteAdapter', () => {
   });
 
   describe('fetch — offlineUser', () => {
-    it('fetches an offline token and sets Authorization header', async () => {
-      // First call: offline token GraphQL response
-      // Second call: actual API request
-      fetchMock
-        .mockResolvedValueOnce(
-          makeOkResponse({
-            data: {
-              offlineUserAuthToken: {
-                accessToken: 'offline-token-abc',
-                expiry: Math.floor(Date.now() / 1000) + 3600,
-              },
-            },
-          }),
-        )
-        .mockResolvedValueOnce(makeOkResponse({ accountId: 'user-123' }));
-
+    it('uses the provided accessToken in Authorization header', async () => {
       const adapter = new ForgeRemoteAdapter({
         product: 'jira',
         proxyUrl: PROXY_URL,
@@ -223,31 +208,21 @@ describe('ForgeRemoteAdapter', () => {
       await adapter.fetch({
         method: 'GET',
         path: '/rest/api/3/myself',
-        authContext: { type: 'offlineUser', accountId: 'user-123' },
+        authContext: { type: 'offlineUser', accountId: 'user-123', accessToken: 'pre-fetched-token' },
       });
 
-      // Should have made 2 fetch calls: token + API
-      expect(fetchMock).toHaveBeenCalledTimes(2);
+      // Should have made exactly 1 fetch call — adapter does NOT fetch the token
+      expect(fetchMock).toHaveBeenCalledTimes(1);
 
-      // Second call should have Authorization header with offline token
-      const [, apiInit] = fetchMock.mock.calls[1] as [string, RequestInit];
+      const [, apiInit] = fetchMock.mock.calls[0] as [string, RequestInit];
       const apiHeaders = apiInit.headers as Record<string, string>;
-      expect(apiHeaders['Authorization']).toBe('Bearer offline-token-abc');
+      expect(apiHeaders['Authorization']).toBe('Bearer pre-fetched-token');
+      expect(apiHeaders['forge-proxy-authorization']).toContain('as=user');
+      expect(apiHeaders['forge-proxy-authorization']).toContain('accountId=user-123');
     });
 
-    it('caches offline tokens within the same adapter instance', async () => {
-      fetchMock
-        .mockResolvedValueOnce(
-          makeOkResponse({
-            data: {
-              offlineUserAuthToken: {
-                accessToken: 'cached-token',
-                expiry: Math.floor(Date.now() / 1000) + 3600,
-              },
-            },
-          }),
-        )
-        .mockResolvedValue(makeOkResponse({}));
+    it('uses different tokens for different users in the same call sequence', async () => {
+      fetchMock.mockResolvedValue(makeOkResponse({}));
 
       const adapter = new ForgeRemoteAdapter({
         product: 'jira',
@@ -256,20 +231,23 @@ describe('ForgeRemoteAdapter', () => {
         appSystemToken: APP_SYSTEM_TOKEN,
       });
 
-      // Make two calls for the same user
       await adapter.fetch({
         method: 'GET',
         path: '/rest/api/3/myself',
-        authContext: { type: 'offlineUser', accountId: 'user-123' },
+        authContext: { type: 'offlineUser', accountId: 'user-123', accessToken: 'token-for-user-123' },
       });
       await adapter.fetch({
         method: 'GET',
         path: '/rest/api/3/project',
-        authContext: { type: 'offlineUser', accountId: 'user-123' },
+        authContext: { type: 'offlineUser', accountId: 'user-456', accessToken: 'token-for-user-456' },
       });
 
-      // Should only fetch the token once (3 calls total: 1 token + 2 API)
-      expect(fetchMock).toHaveBeenCalledTimes(3);
+      // Each call uses its own pre-fetched token — no extra fetch calls
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+      const [, firstInit] = fetchMock.mock.calls[0] as [string, RequestInit];
+      const [, secondInit] = fetchMock.mock.calls[1] as [string, RequestInit];
+      expect((firstInit.headers as Record<string, string>)['Authorization']).toBe('Bearer token-for-user-123');
+      expect((secondInit.headers as Record<string, string>)['Authorization']).toBe('Bearer token-for-user-456');
     });
   });
 });

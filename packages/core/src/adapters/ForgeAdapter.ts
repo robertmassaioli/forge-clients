@@ -13,11 +13,17 @@ export type AuthContext =
       type: 'offlineUser';
       accountId: string;
       /**
-       * Optional pre-fetched access token. If provided, it is used directly.
-       * If omitted, the adapter fetches one via its internal token manager
-       * (ForgeContainerAdapter / ForgeRemoteAdapter).
+       * A short-lived access token for the given accountId.
+       * Obtain this via OfflineTokenManager.getToken() or
+       * ForgeRemoteTokenManager.getToken() before constructing the auth context.
+       * Token fetching is always the caller's responsibility — the adapter
+       * uses the token as-is and never fetches one internally.
+       *
+       * @example
+       * const token = await tokenManager.getToken(accountId);
+       * const client = asOfflineUser(adapter, token.accountId, token.accessToken);
        */
-      accessToken?: string;
+      accessToken: string;
     };
 
 export interface ForgeRequestOptions {

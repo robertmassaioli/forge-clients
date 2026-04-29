@@ -49,7 +49,6 @@
  */
 
 import type { ForgeAdapter, ForgeRequestOptions } from './ForgeAdapter.js';
-import { ForgeRemoteTokenManager } from '../auth/ForgeRemoteTokenManager.js';
 
 export interface ForgeRemoteAdapterOptions {
   /** Which Atlassian product to make requests to */
@@ -75,11 +74,6 @@ export interface ForgeRemoteAdapterOptions {
    */
   appSystemToken: string;
 
-  /**
-   * How many seconds before expiry to proactively refresh offline user tokens.
-   * Default: 60 seconds.
-   */
-  tokenRefreshBufferSeconds?: number;
 }
 
 export class ForgeRemoteAdapter implements ForgeAdapter {
@@ -87,21 +81,12 @@ export class ForgeRemoteAdapter implements ForgeAdapter {
   private readonly proxyUrl: string;
   private readonly installationId: string;
   private readonly appSystemToken: string;
-  private readonly tokenManager: ForgeRemoteTokenManager;
 
   constructor(options: ForgeRemoteAdapterOptions) {
     this.product = options.product;
     this.proxyUrl = options.proxyUrl.replace(/\/$/, '');
     this.installationId = options.installationId;
     this.appSystemToken = options.appSystemToken;
-    this.tokenManager = new ForgeRemoteTokenManager({
-      proxyUrl: this.proxyUrl,
-      installationId: this.installationId,
-      appSystemToken: this.appSystemToken,
-      ...(options.tokenRefreshBufferSeconds !== undefined && {
-        refreshBufferSeconds: options.tokenRefreshBufferSeconds,
-      }),
-    });
   }
 
   async fetch(options: ForgeRequestOptions): Promise<Response> {
@@ -127,14 +112,12 @@ export class ForgeRemoteAdapter implements ForgeAdapter {
         proxyAuth = `Forge as=user,accountId=${authContext.userId ?? ''},installationId=${this.installationId},token=${this.appSystemToken}`;
         break;
 
-      case 'offlineUser': {
-        // Offline user impersonation — fetch a short-lived user token via
-        // the Forge egress proxy GraphQL endpoint.
-        const token = await this.tokenManager.getToken(authContext.accountId);
+      case 'offlineUser':
+        // Offline user impersonation — caller provides a pre-fetched accessToken
+        // obtained via ForgeRemoteTokenManager.getToken(accountId).
         proxyAuth = `Forge as=user,accountId=${authContext.accountId},installationId=${this.installationId},token=${this.appSystemToken}`;
-        extraHeaders['Authorization'] = `Bearer ${token.accessToken}`;
+        extraHeaders['Authorization'] = `Bearer ${authContext.accessToken}`;
         break;
-      }
     }
 
     extraHeaders['forge-proxy-authorization'] = proxyAuth;
@@ -142,21 +125,6 @@ export class ForgeRemoteAdapter implements ForgeAdapter {
     return fetch(url, buildFetchInit(method, { ...headers, ...extraHeaders }, body));
   }
 
-  /**
-   * Pre-fetch and cache an offline user token for the given accountId.
-   * Useful for warming the token cache before making multiple requests.
-   */
-  async prefetchOfflineToken(accountId: string): Promise<void> {
-    await this.tokenManager.getToken(accountId);
-  }
-
-  /**
-   * Invalidate the cached offline token for the given accountId,
-   * forcing a fresh fetch on the next request.
-   */
-  invalidateOfflineToken(accountId: string): void {
-    this.tokenManager.invalidate(accountId);
-  }
 }
 
 function buildFetchInit(
