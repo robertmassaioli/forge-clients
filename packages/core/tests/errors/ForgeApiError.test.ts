@@ -33,7 +33,7 @@ describe('ForgeApiError', () => {
 
 describe('Specific error subclasses', () => {
   it('BadRequestError has status 400', () => {
-    const err = new BadRequestError({ message: 'bad' }, '/test');
+    const err = new BadRequestError({ errorMessages: ['bad input'] }, '/test');
     expect(err).toBeInstanceOf(ForgeApiError);
     expect(err.status).toBe(400);
   });
