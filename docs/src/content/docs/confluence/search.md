@@ -44,3 +44,39 @@ const recent = await search(asApp(adapter), {
   expand: ['version'],
 });
 ```
+
+## Paginate through all search results
+
+The `search` endpoint returns cursor-based pagination via `_links.next`.
+Use `iterateCursorPages` to iterate through all results without loading them all into memory:
+
+```typescript
+import { iterateCursorPages } from '@forge-clients/core';
+import { search } from '@forge-clients/confluence/v1';
+
+const appClient = asApp(adapter);
+
+// iterateCursorPages yields individual search result items
+for await (const result of iterateCursorPages(
+  (cursor) => search(appClient, {
+    cql: 'space = "MYSPACE" AND type = page ORDER BY lastModified DESC',
+    limit: 25,
+    cursor,
+  }),
+)) {
+  // result is a SearchResult — fully typed
+  console.log(result.content?.title);
+  console.log(result.url);
+}
+```
+
+For smaller result sets where you want everything in one array, collect them manually:
+
+```typescript
+const allResults: SearchResult[] = [];
+for await (const result of iterateCursorPages(
+  (cursor) => search(appClient, { cql: 'space = "MYSPACE"', limit: 50, cursor }),
+)) {
+  allResults.push(result);
+}
+```
