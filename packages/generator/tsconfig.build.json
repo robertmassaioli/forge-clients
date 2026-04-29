@@ -8,5 +8,6 @@
     "noEmit": false,
     "composite": false
   },
+  "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]
 }

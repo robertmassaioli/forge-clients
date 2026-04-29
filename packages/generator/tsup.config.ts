@@ -15,9 +15,10 @@ export default defineConfig([
   {
     entry: { index: 'src/index.ts' },
     format: ['esm', 'cjs'],
-    dts: { resolve: true },
+    dts: { resolve: true, tsconfig: './tsconfig.build.json' },
     sourcemap: true,
     clean: true,
     splitting: false,
+    tsconfig: './tsconfig.build.json',
   },
 ]);

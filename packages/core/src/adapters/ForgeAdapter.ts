@@ -15,7 +15,7 @@ export interface ForgeRequestOptions {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   /** Relative API path, e.g. /rest/api/3/issue/PROJ-123 */
   path: string;
-  queryParams?: Record<string, string | number | boolean | string[] | number[] | undefined>;
+  queryParams?: Record<string, unknown>;
   body?: unknown;
   headers?: Record<string, string>;
   authContext: AuthContext;

@@ -71,7 +71,7 @@ export class TypeEmitter {
       case 'object': {
         if (type.properties.length === 0) return 'Record<string, unknown>';
         const props = type.properties.map(p =>
-          `${p.readonly ? 'readonly ' : ''}${/^\d/.test(p.name) ? `'${p.name}'` : p.name}${p.required ? '' : '?'}: ${this.irTypeToString(p.type)}`
+          `${p.readonly ? 'readonly ' : ''}${/^\d/.test(p.name) ? `'${p.name}'` : p.name}${p.required ? '' : '?'}: ${this.irTypeToString(p.type, namespace)}`
         ).join('; ');
         return `{ ${props} }`;
       }

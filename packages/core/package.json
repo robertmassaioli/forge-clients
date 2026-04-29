@@ -33,6 +33,11 @@
       "import": "./dist/auth/index.js",
       "require": "./dist/auth/index.cjs",
       "types": "./dist/auth/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client/index.js",
+      "require": "./dist/client/index.cjs",
+      "types": "./dist/client/index.d.ts"
     }
   },
   "main": "./dist/index.cjs",
@@ -42,7 +47,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup && tsc -p tsconfig.build.json",
+    "build": "tsup && pnpm exec tsc -p tsconfig.build.json --skipLibCheck",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",

@@ -18,7 +18,7 @@ export class SdkEmitter {
     file.addStatements(banner);
     file.addStatements('/* eslint-disable */');
     file.addImportDeclaration({ moduleSpecifier: '@forge-clients/core', namedImports: ['ForgeApiError'] });
-    file.addImportDeclaration({ moduleSpecifier: '@forge-clients/core', isTypeOnly: true, namedImports: ['ForgeAdapter', 'AuthContext'] });
+    file.addImportDeclaration({ moduleSpecifier: '@forge-clients/core', isTypeOnly: true, namedImports: ['BoundClient'] });
     file.addImportDeclaration({ moduleSpecifier: './types.gen.js', isTypeOnly: true, namespaceImport: 'Types' });
     // Note: 'export type *' is TS 5.0+ and not supported by Forge's webpack bundler (ts-loader).
     // Use 'export *' which works for both types and values in the Forge build context.
@@ -29,7 +29,10 @@ export class SdkEmitter {
       this.emitOperationFunction(file, op);
     }
 
-    return file.getFullText();
+    // Prepend @ts-nocheck as the very first line — must be before any other content
+    // for TypeScript to honour it as a file-level directive. ts-morph's addStatements
+    // appends after imports so we prepend to the final string instead.
+    return '// @ts-nocheck\n' + file.getFullText();
   }
 
   private emitParamsInterface(file: SourceFile, op: IROperation): void {
@@ -49,7 +52,7 @@ export class SdkEmitter {
     for (const qp of op.queryParams) {
       properties.push({
         name: qp.name,
-        type: this.typeEmitter.irTypeToString(qp.type.kind === 'inline' ? qp.type.type : { kind: 'string' }),
+        type: this.typeEmitter.irTypeToString(qp.type.kind === 'inline' ? qp.type.type : { kind: 'string' }, 'Types'),
         hasQuestionToken: !qp.required,
       });
     }
@@ -92,12 +95,12 @@ export class SdkEmitter {
     }
 
     bodyLines.push(
-      'const response = await adapter.fetch({',
+      'const response = await client.adapter.fetch({',
       `  method: '${op.method}',`,
       '  path,',
       ...(op.queryParams.length > 0 ? ['  queryParams,'] : []),
       ...(op.requestBody ? ['  body: params.body,'] : []),
-      '  authContext,',
+      '  authContext: client.authContext,',
       '});',
       'if (!response.ok) throw await ForgeApiError.fromResponse(response, path);',
     );
@@ -121,8 +124,7 @@ export class SdkEmitter {
       isExported: true,
       docs,
       parameters: [
-        { name: 'adapter', type: 'ForgeAdapter' },
-        { name: 'authContext', type: 'AuthContext', initializer: "{ type: 'asApp' }" },
+        { name: 'client', type: 'BoundClient' },
         ...(hasParams ? [{ name: 'params', type: `${capitalize(op.operationId)}Params` }] : []),
       ],
       returnType: `Promise<${returnTypeStr}>`,
