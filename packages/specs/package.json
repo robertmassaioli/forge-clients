@@ -11,15 +11,20 @@
     "./jira-software": "./src/cleaned/jira-software.json",
     "./jira-sm": "./src/cleaned/jira-sm.json"
   },
-  "files": ["src/cleaned"],
+  "files": [
+    "src/cleaned"
+  ],
   "scripts": {
-    "build": "echo 'No build step needed — specs are JSON files'",
+    "build": "echo 'No build step needed \u2014 specs are JSON files'",
     "typecheck": "echo 'No TypeScript sources in specs package'",
     "clean": "rm -rf src/raw src/diffs",
     "download": "node scripts/download-specs.js",
     "patch": "node scripts/patch-specs.js",
     "diff": "node scripts/diff-specs.js",
-    "update": "pnpm download && pnpm patch && pnpm diff"
+    "update": "pnpm download && pnpm patch && pnpm diff",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "publishConfig": {
     "access": "public"

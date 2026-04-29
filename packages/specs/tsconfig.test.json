@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "noEmit": true,
+    "composite": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["dist", "node_modules"]
+}

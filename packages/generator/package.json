@@ -27,7 +27,9 @@
     "test": "vitest run",
     "clean": "rm -rf dist *.tsbuildinfo",
     "generate": "node dist/cli.js generate",
-    "update-specs": "node dist/cli.js update-specs"
+    "update-specs": "node dist/cli.js update-specs",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.0",
