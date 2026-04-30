@@ -5,7 +5,7 @@ prev: false
 title: "RateLimitError"
 ---
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:143](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/errors/ForgeApiError.ts#L143)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:143](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L143)
 
 Thrown when the API returns HTTP 429 Too Many Requests.
 Use [withRetry](/forge-clients/reference/functions/withretry/) to automatically handle rate limit errors with exponential backoff.
@@ -20,7 +20,7 @@ Use [withRetry](/forge-clients/reference/functions/withretry/) to automatically 
 
 > **new RateLimitError**(`body`, `path`, `retryAfter`): `RateLimitError`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:147](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/errors/ForgeApiError.ts#L147)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:147](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L147)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [packages/core/src/errors/ForgeApiError.ts:147](https://github.com/r
 
 > `readonly` **body**: `unknown`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:35](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/errors/ForgeApiError.ts#L35)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:35](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L35)
 
 The parsed JSON response body
 
@@ -100,7 +100,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` **path**: `string`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:37](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/errors/ForgeApiError.ts#L37)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:37](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L37)
 
 The API path that returned this error
 
@@ -114,7 +114,7 @@ The API path that returned this error
 
 > `readonly` **retryAfterSeconds**: `number` \| `null`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:145](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/errors/ForgeApiError.ts#L145)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:145](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L145)
 
 Seconds to wait before retrying, parsed from the `Retry-After` response header. `null` if the header was absent.
 
@@ -136,7 +136,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` **status**: `number`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:33](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/errors/ForgeApiError.ts#L33)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:33](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L33)
 
 The HTTP status code returned by the API
 
@@ -242,7 +242,7 @@ a();
 
 > `static` **fromResponse**(`response`, `path`): `Promise`\<[`ForgeApiError`](/forge-clients/reference/classes/forgeapierror/)\>
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:52](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/errors/ForgeApiError.ts#L52)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:52](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L52)
 
 Parse an error `Response` and return the appropriate typed subclass.
 Used internally by generated client functions after receiving a non-2xx response.

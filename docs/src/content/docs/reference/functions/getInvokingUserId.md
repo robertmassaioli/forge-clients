@@ -7,7 +7,7 @@ title: "getInvokingUserId"
 
 > **getInvokingUserId**(`payload`): `string` \| `undefined`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:172](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L172)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:172](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L172)
 
 Extract the invoking user's account ID from a Forge Remote payload.
 Returns undefined if the invocation was not triggered by a user

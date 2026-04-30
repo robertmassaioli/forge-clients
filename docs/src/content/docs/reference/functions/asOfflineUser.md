@@ -7,7 +7,7 @@ title: "asOfflineUser"
 
 > **asOfflineUser**(`adapter`, `accountId`, `accessToken`): [`BoundClient`](/forge-clients/reference/interfaces/boundclient/)
 
-Defined in: [packages/core/src/client/BoundClient.ts:107](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/client/BoundClient.ts#L107)
+Defined in: [packages/core/src/client/BoundClient.ts:107](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/client/BoundClient.ts#L107)
 
 Make API calls on behalf of a user via offline impersonation.
 

@@ -5,7 +5,7 @@ prev: false
 title: "ForgeInvocationContext"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:28](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L28)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:28](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L28)
 
 The context object within a Forge Remote invocation payload.
 Contains information about the user and site that triggered the invocation.
@@ -16,7 +16,7 @@ Contains information about the user and site that triggered the invocation.
 
 > `optional` **accountId?**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:30](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L30)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:30](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L30)
 
 The Atlassian account ID of the user who triggered the invocation, if any
 
@@ -26,7 +26,7 @@ The Atlassian account ID of the user who triggered the invocation, if any
 
 > `optional` **appVersion?**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:40](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L40)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:40](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L40)
 
 The app version
 
@@ -36,7 +36,7 @@ The app version
 
 > `optional` **cloudId?**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:32](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L32)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:32](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L32)
 
 The Atlassian cloud ID of the site
 
@@ -46,7 +46,7 @@ The Atlassian cloud ID of the site
 
 > `optional` **environmentId?**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:38](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L38)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:38](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L38)
 
 The environment ID
 
@@ -56,7 +56,7 @@ The environment ID
 
 > `optional` **environmentType?**: `"DEVELOPMENT"` \| `"STAGING"` \| `"PRODUCTION"`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:36](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L36)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:36](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L36)
 
 The environment type (development, staging, production)
 
@@ -66,7 +66,7 @@ The environment type (development, staging, production)
 
 > `optional` **moduleKey?**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:42](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L42)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:42](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L42)
 
 The module key that was invoked
 
@@ -76,6 +76,6 @@ The module key that was invoked
 
 > `optional` **siteUrl?**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:34](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L34)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:34](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L34)
 
 The site URL (e.g. https://your-site.atlassian.net)

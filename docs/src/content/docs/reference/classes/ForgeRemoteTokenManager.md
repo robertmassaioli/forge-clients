@@ -5,7 +5,7 @@ prev: false
 title: "ForgeRemoteTokenManager"
 ---
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:64](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L64)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:64](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L64)
 
 Manages offline user impersonation tokens for Forge Remote backends.
 
@@ -39,7 +39,7 @@ export async function handler(payload: ForgeInvocationPayload) {
 
 > **new ForgeRemoteTokenManager**(`opts`): `ForgeRemoteTokenManager`
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:72](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L72)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:72](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L72)
 
 Create a new ForgeRemoteTokenManager.
 
@@ -61,7 +61,7 @@ Configuration including the proxy URL, installation ID, and app system token
 
 > **boundClient**(`adapter`, `accountId`): `Promise`\<[`BoundClient`](/forge-clients/reference/interfaces/boundclient/)\>
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:112](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L112)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:112](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L112)
 
 Convenience method — fetch a valid token and return a BoundClient
 for offline user impersonation. Caches the token internally.
@@ -94,7 +94,7 @@ const issue = await getIssue(client, { issueIdOrKey: 'PROJ-1' });
 
 > **getToken**(`accountId`): `Promise`\<[`ForgeRemoteUserToken`](/forge-clients/reference/interfaces/forgeremoteusertoken/)\>
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:80](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L80)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:80](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L80)
 
 Get a valid offline user token for the given accountId.
 Returns the cached token if it is still valid, otherwise fetches a new one.
@@ -115,7 +115,7 @@ Returns the cached token if it is still valid, otherwise fetches a new one.
 
 > **invalidate**(`accountId`): `void`
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:94](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L94)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:94](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L94)
 
 Remove a cached token, forcing a fresh fetch on next getToken() call
 
@@ -135,7 +135,7 @@ Remove a cached token, forcing a fresh fetch on next getToken() call
 
 > **invalidateAll**(): `void`
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:99](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L99)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:99](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L99)
 
 Remove all cached tokens
 

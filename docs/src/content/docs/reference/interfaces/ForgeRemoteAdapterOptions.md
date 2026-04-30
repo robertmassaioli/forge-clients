@@ -5,7 +5,7 @@ prev: false
 title: "ForgeRemoteAdapterOptions"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:53](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L53)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:53](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeRemoteAdapter.ts#L53)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:53](https://github
 
 > **appSystemToken**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:75](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L75)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:75](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeRemoteAdapter.ts#L75)
 
 The app system token for this invocation.
 Provided in every Forge Remote invocation payload as `appSystemToken`.
@@ -25,7 +25,7 @@ Used in the `forge-proxy-authorization` header for asApp requests.
 
 > **installationId**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:68](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L68)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:68](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeRemoteAdapter.ts#L68)
 
 The installation ID for this app installation.
 Provided in every Forge Remote invocation payload as `installationId`.
@@ -36,7 +36,7 @@ Provided in every Forge Remote invocation payload as `installationId`.
 
 > **product**: `"jira"` \| `"confluence"`
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:55](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L55)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:55](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeRemoteAdapter.ts#L55)
 
 Which Atlassian product to make requests to
 
@@ -46,7 +46,7 @@ Which Atlassian product to make requests to
 
 > **proxyUrl**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:62](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeRemoteAdapter.ts#L62)
+Defined in: [packages/core/src/adapters/ForgeRemoteAdapter.ts:62](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeRemoteAdapter.ts#L62)
 
 The Forge egress proxy URL.
 In a Forge Remote, this is available via the environment variable

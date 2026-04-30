@@ -5,7 +5,7 @@ prev: false
 title: "OfflineTokenManager"
 ---
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:51](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L51)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:51](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L51)
 
 Manages offline user impersonation tokens for Forge Containers.
 
@@ -33,7 +33,7 @@ const issue = await getIssue(client, { path: { issueIdOrKey: 'PROJ-1' } });
 
 > **new OfflineTokenManager**(`opts`): `OfflineTokenManager`
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:59](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L59)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:59](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L59)
 
 Create a new OfflineTokenManager.
 
@@ -55,7 +55,7 @@ Configuration including the proxy URL and installation ID
 
 > **boundClient**(`adapter`, `accountId`): `Promise`\<[`BoundClient`](/forge-clients/reference/interfaces/boundclient/)\>
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:99](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L99)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:99](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L99)
 
 Convenience method — fetch a valid token and return a BoundClient
 for offline user impersonation. Caches the token internally.
@@ -87,7 +87,7 @@ const issue = await getIssue(client, { issueIdOrKey: 'PROJ-1' });
 
 > **getToken**(`accountId`): `Promise`\<[`OfflineUserToken`](/forge-clients/reference/interfaces/offlineusertoken/)\>
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:68](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L68)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:68](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L68)
 
 Get a valid offline user token for the given accountId.
 Automatically fetches a new token if none is cached or if the cached
@@ -109,7 +109,7 @@ token is within refreshBufferSeconds of expiry.
 
 > **invalidate**(`accountId`): `void`
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:82](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L82)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:82](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L82)
 
 Remove a cached token, forcing a fresh fetch on next getToken() call
 
@@ -129,7 +129,7 @@ Remove a cached token, forcing a fresh fetch on next getToken() call
 
 > **invalidateAll**(): `void`
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:87](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L87)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:87](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L87)
 
 Remove all cached tokens
 

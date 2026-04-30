@@ -23,6 +23,7 @@ const TARGETS = [
   { id: 'jira-software', specPath: 'packages/specs/src/cleaned/jira-software.json', outDir: 'packages/jira/src/software',             title: 'Jira Software Cloud REST API' },
   { id: 'jira-sm',       specPath: 'packages/specs/src/cleaned/jira-sm.json',       outDir: 'packages/jira/src/service-management',   title: 'Jira Service Management Cloud REST API' },
   { id: 'confluence-v1', specPath: 'packages/specs/src/cleaned/confluence-v1.json', outDir: 'packages/confluence/src/v1',             title: 'Confluence Cloud REST API v1' },
+  { id: 'confluence-v2', specPath: 'packages/specs/src/cleaned/confluence-v2.json', outDir: 'packages/confluence/src/v2',             title: 'Confluence Cloud REST API v2' },
 ];
 
 const program = new Command();

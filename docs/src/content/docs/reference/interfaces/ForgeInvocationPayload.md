@@ -5,7 +5,7 @@ prev: false
 title: "ForgeInvocationPayload"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:54](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L54)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:54](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L54)
 
 The top-level Forge Remote invocation payload.
 
@@ -28,7 +28,7 @@ the invocation context and module type.
 
 > **appSystemToken**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:70](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L70)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:70](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L70)
 
 Short-lived app system token for authenticating requests through the
 Forge egress proxy (FORGE_EGRESS_PROXY_URL).
@@ -44,7 +44,7 @@ This token:
 
 > **context**: [`ForgeInvocationContext`](/forge-clients/reference/interfaces/forgeinvocationcontext/)
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:75](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L75)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:75](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L75)
 
 Invocation context — user, site, and app information.
 
@@ -54,7 +54,7 @@ Invocation context — user, site, and app information.
 
 > **installationId**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:59](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L59)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:59](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L59)
 
 The installation ID for this app installation.
 Use this to identify which installation is making the request.
@@ -65,7 +65,7 @@ Use this to identify which installation is making the request.
 
 > `optional` **payload?**: `unknown`
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:81](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L81)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:81](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L81)
 
 The payload sent by the Forge module that triggered this invocation.
 Shape depends on the module type (webtrigger, custom-ui, etc.)

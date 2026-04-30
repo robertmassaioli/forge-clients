@@ -3,7 +3,7 @@ import { MockForgeAdapter, asApp } from '@forge-clients/core';
 import {
   getCurrentUser,
   getAuditRecords,
-} from '@forge-clients/confluence';
+} from '@forge-clients/confluence/v1';
 
 let mock: MockForgeAdapter;
 beforeEach(() => { mock = new MockForgeAdapter('confluence'); });

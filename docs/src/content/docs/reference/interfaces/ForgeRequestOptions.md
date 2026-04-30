@@ -5,7 +5,7 @@ prev: false
 title: "ForgeRequestOptions"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:44](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L44)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:44](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L44)
 
 Low-level options passed to [ForgeAdapter.fetch](/forge-clients/reference/interfaces/forgeadapter/#fetch).
 Generated client functions construct this automatically — you rarely need
@@ -17,7 +17,7 @@ to interact with `ForgeRequestOptions` directly.
 
 > **authContext**: [`AuthContext`](/forge-clients/reference/type-aliases/authcontext/)
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:56](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L56)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:56](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L56)
 
 Who is making the request
 
@@ -27,7 +27,7 @@ Who is making the request
 
 > `optional` **body?**: `unknown`
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:52](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L52)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:52](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L52)
 
 Request body — will be JSON-serialised
 
@@ -37,7 +37,7 @@ Request body — will be JSON-serialised
 
 > `optional` **headers?**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:54](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L54)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:54](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L54)
 
 Additional HTTP headers to include
 
@@ -47,7 +47,7 @@ Additional HTTP headers to include
 
 > **method**: `"GET"` \| `"POST"` \| `"PUT"` \| `"PATCH"` \| `"DELETE"`
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:46](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L46)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:46](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L46)
 
 HTTP method for the request
 
@@ -57,7 +57,7 @@ HTTP method for the request
 
 > **path**: `string`
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:48](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L48)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:48](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L48)
 
 Relative API path, e.g. `/rest/api/3/issue/PROJ-123`
 
@@ -67,7 +67,7 @@ Relative API path, e.g. `/rest/api/3/issue/PROJ-123`
 
 > `optional` **queryParams?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:50](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L50)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:50](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L50)
 
 Query string parameters — undefined values are omitted
 
@@ -77,6 +77,6 @@ Query string parameters — undefined values are omitted
 
 > `optional` **signal?**: `AbortSignal`
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:58](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L58)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:58](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L58)
 
 Optional AbortSignal for cancellation

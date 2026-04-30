@@ -71,4 +71,13 @@ export const SPEC_TARGETS: SpecTarget[] = [
     diffPath: 'packages/specs/src/diffs/confluence-v1.diff.json',
     targetPackage: 'confluence',
   },
+  {
+    id: 'confluence-v2',
+    name: 'Confluence Cloud REST API v2',
+    downloadUrl: 'https://dac-static.atlassian.com/cloud/confluence/openapi-v2.v3.json?_v=1.8486.0',
+    rawPath: 'packages/specs/src/raw/confluence-v2.json',
+    cleanedPath: 'packages/specs/src/cleaned/confluence-v2.json',
+    diffPath: 'packages/specs/src/diffs/confluence-v2.diff.json',
+    targetPackage: 'confluence',
+  },
 ];

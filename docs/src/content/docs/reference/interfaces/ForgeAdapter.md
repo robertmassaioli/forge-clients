@@ -5,7 +5,7 @@ prev: false
 title: "ForgeAdapter"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:72](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L72)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:72](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L72)
 
 The core transport interface implemented by every Forge execution context adapter.
 
@@ -23,7 +23,7 @@ adapters: [ForgeFunctionAdapter](/forge-clients/reference/classes/forgefunctiona
 
 > `readonly` **product**: `"jira"` \| `"confluence"`
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:74](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L74)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:74](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L74)
 
 The Atlassian product this adapter is configured to make requests to
 
@@ -33,7 +33,7 @@ The Atlassian product this adapter is configured to make requests to
 
 > **fetch**(`options`): `Promise`\<`Response`\>
 
-Defined in: [packages/core/src/adapters/ForgeAdapter.ts:80](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeAdapter.ts#L80)
+Defined in: [packages/core/src/adapters/ForgeAdapter.ts:80](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeAdapter.ts#L80)
 
 Execute an HTTP request and return a standard `Response`.
 Implementations are responsible for authentication header injection,

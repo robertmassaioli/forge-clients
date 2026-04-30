@@ -5,7 +5,7 @@ prev: false
 title: "ForgeRemoteUserToken"
 ---
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:14](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L14)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:14](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L14)
 
 Token manager for Forge Remote backends.
 
@@ -24,7 +24,7 @@ invocations where the handler module is kept alive.
 
 > **accessToken**: `string`
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:15](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L15)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:15](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L15)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:15](https://githu
 
 > **accountId**: `string`
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:18](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L18)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:18](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L18)
 
 ***
 
@@ -40,6 +40,6 @@ Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:18](https://githu
 
 > **expiry**: `number`
 
-Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:17](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/ForgeRemoteTokenManager.ts#L17)
+Defined in: [packages/core/src/auth/ForgeRemoteTokenManager.ts:17](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/ForgeRemoteTokenManager.ts#L17)
 
 Unix timestamp (seconds) when the token expires

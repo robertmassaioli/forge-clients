@@ -5,7 +5,7 @@ prev: false
 title: "OfflineTokenManagerOptions"
 ---
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:19](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L19)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:19](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L19)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Defined in: [packages/core/src/auth/OfflineTokenManager.ts:19](https://github.co
 
 > **installationId**: `string`
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:23](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L23)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:23](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L23)
 
 The installation ID for this app installation
 
@@ -23,7 +23,7 @@ The installation ID for this app installation
 
 > **proxyUrl**: `string`
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:21](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L21)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:21](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L21)
 
 The Forge egress proxy URL (process.env.FORGE_EGRESS_PROXY_URL)
 
@@ -33,7 +33,7 @@ The Forge egress proxy URL (process.env.FORGE_EGRESS_PROXY_URL)
 
 > `optional` **refreshBufferSeconds?**: `number`
 
-Defined in: [packages/core/src/auth/OfflineTokenManager.ts:28](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/auth/OfflineTokenManager.ts#L28)
+Defined in: [packages/core/src/auth/OfflineTokenManager.ts:28](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/auth/OfflineTokenManager.ts#L28)
 
 How many seconds before expiry to proactively refresh the token.
 Default: 60 seconds

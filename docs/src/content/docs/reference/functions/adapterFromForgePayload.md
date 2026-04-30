@@ -7,7 +7,7 @@ title: "adapterFromForgePayload"
 
 > **adapterFromForgePayload**(`payload`, `product`, `options?`): [`ForgeRemoteAdapter`](/forge-clients/reference/classes/forgeremoteadapter/)
 
-Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:125](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeInvocationPayload.ts#L125)
+Defined in: [packages/core/src/adapters/ForgeInvocationPayload.ts:125](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeInvocationPayload.ts#L125)
 
 Create a ForgeRemoteAdapter from a Forge Remote invocation payload.
 

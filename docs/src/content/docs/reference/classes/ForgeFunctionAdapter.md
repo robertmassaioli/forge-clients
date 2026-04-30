@@ -5,7 +5,7 @@ prev: false
 title: "ForgeFunctionAdapter"
 ---
 
-Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:54](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeFunctionAdapter.ts#L54)
+Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:54](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeFunctionAdapter.ts#L54)
 
 Adapter for Forge Functions (serverless backend).
 
@@ -40,7 +40,7 @@ const me = await getMyself(userClient);
 
 > **new ForgeFunctionAdapter**(`options`): `ForgeFunctionAdapter`
 
-Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:62](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeFunctionAdapter.ts#L62)
+Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:62](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeFunctionAdapter.ts#L62)
 
 Create a new ForgeFunctionAdapter.
 
@@ -62,7 +62,7 @@ Configuration including the target product and optional default auth context
 
 > `readonly` **product**: `"jira"` \| `"confluence"`
 
-Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:55](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeFunctionAdapter.ts#L55)
+Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:55](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeFunctionAdapter.ts#L55)
 
 The Atlassian product this adapter is configured to make requests to
 
@@ -76,7 +76,7 @@ The Atlassian product this adapter is configured to make requests to
 
 > **fetch**(`options`): `Promise`\<`Response`\>
 
-Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:71](https://github.com/robertmassaioli/forge-clients/blob/3f7c32ba25aedbdd980cdc60fc4d14b74ddfa0e2/packages/core/src/adapters/ForgeFunctionAdapter.ts#L71)
+Defined in: [packages/core/src/adapters/ForgeFunctionAdapter.ts:71](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/adapters/ForgeFunctionAdapter.ts#L71)
 
 Execute a request via `@forge/api` (requestJira or requestConfluence).
 Authentication is handled automatically by the Forge runtime.
