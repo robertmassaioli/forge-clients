@@ -7,7 +7,7 @@ title: "iteratePages"
 
 > **iteratePages**\<`T`\>(`fetchPage`, `pageSize?`): `AsyncGenerator`\<`T`\>
 
-Defined in: [packages/core/src/pagination/PaginationHelper.ts:115](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/pagination/PaginationHelper.ts#L115)
+Defined in: [packages/core/src/pagination/PaginationHelper.ts:115](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/pagination/PaginationHelper.ts#L115)
 
 Async generator for memory-efficient iteration over offset-paginated results.
 

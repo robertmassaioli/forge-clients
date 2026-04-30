@@ -22,12 +22,46 @@ text fields and is the actively developed version. Jira v2 is maintained for bac
 compatibility only.
 
 ```typescript
-// ✅ Recommended
-import { getIssue, createIssue } from '@forge-clients/jira/v3';
+// ✅ Recommended — v3 is the default export
+import { getIssue, createIssue } from '@forge-clients/jira';
+import { getIssue, createIssue } from '@forge-clients/jira/v3'; // explicit
 
 // ⚠️ Legacy — use only if you have a specific reason
 import { getIssue } from '@forge-clients/jira/v2';
+
+// Jira Software and Service Management are always explicit sub-path imports
+import { getBoard, getSprint } from '@forge-clients/jira/software';
+import { getQueue, getRequestTypes } from '@forge-clients/jira/service-management';
 ```
+
+## Root import and namespaces
+
+The root `@forge-clients/jira` import defaults to v3. It also re-exports v2, Software,
+and Service Management as named namespaces for cases where you need multiple APIs:
+
+```typescript
+import {
+  getIssue,    // v3 function (default)
+  JiraV2,      // v2 namespace
+  JiraSoftware, // Jira Software namespace
+  JiraSM,      // Jira Service Management namespace
+} from '@forge-clients/jira';
+
+// Use v3 (default)
+const issue = await getIssue(client, { path: { issueIdOrKey: 'PROJ-1' } });
+
+// Use v2 via namespace
+const legacyIssue = await JiraV2.getIssue(client, { path: { issueIdOrKey: 'PROJ-1' } });
+
+// Use Jira Software via namespace
+const board = await JiraSoftware.getBoard(client, { path: { boardId: 1 } });
+```
+
+:::tip[Prefer sub-path imports]
+For production Forge apps, import from the explicit sub-path (`@forge-clients/jira/v3`)
+rather than the root. This gives bundlers the best opportunity to tree-shake unused functions
+from the other modules (v2, Software, Service Management).
+:::
 
 ## Function naming
 

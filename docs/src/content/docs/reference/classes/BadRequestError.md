@@ -5,7 +5,7 @@ prev: false
 title: "BadRequestError"
 ---
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:75](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L75)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:75](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L75)
 
 Thrown when the API returns HTTP 400 Bad Request.
 Typically indicates malformed request parameters or invalid field values.
@@ -21,7 +21,7 @@ Inspect `errorMessages` and `fieldErrors` for details from the Atlassian API.
 
 > **new BadRequestError**(`body`, `path`): `BadRequestError`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:76](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L76)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:76](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L76)
 
 #### Parameters
 
@@ -53,7 +53,7 @@ Defined in: [packages/core/src/errors/ForgeApiError.ts:76](https://github.com/ro
 
 > `readonly` **body**: `unknown`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:35](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L35)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:35](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L35)
 
 The parsed JSON response body
 
@@ -103,7 +103,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` **path**: `string`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:37](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L37)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:37](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L37)
 
 The API path that returned this error
 
@@ -129,7 +129,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` **status**: `number`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:33](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L33)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:33](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L33)
 
 The HTTP status code returned by the API
 
@@ -167,7 +167,7 @@ not capture any frames.
 
 > **get** **errorMessages**(): `string`[]
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:84](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L84)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:84](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L84)
 
 Top-level error messages from the API response body
 
@@ -183,7 +183,7 @@ Top-level error messages from the API response body
 
 > **get** **fieldErrors**(): `Record`\<`string`, `string`\>
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:88](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L88)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:88](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L88)
 
 Per-field validation errors from the API response body
 
@@ -267,7 +267,7 @@ a();
 
 > `static` **fromResponse**(`response`, `path`): `Promise`\<[`ForgeApiError`](/forge-clients/reference/classes/forgeapierror/)\>
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:52](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L52)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:52](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L52)
 
 Parse an error `Response` and return the appropriate typed subclass.
 Used internally by generated client functions after receiving a non-2xx response.

@@ -51,13 +51,18 @@ const adapter = new ForgeBridgeAdapter({ product: 'jira' });
 
 Use this in **Forge Containers** (long-running Docker services). It uses the
 `FORGE_EGRESS_PROXY_URL` sidecar proxy with explicit `forge-proxy-authorization` headers.
+The `installationId` must be fetched at startup from `GET <proxyUrl>/v0/installations`.
 
 ```typescript
 import { ForgeContainerAdapter } from '@forge-clients/core';
+
+const proxyUrl = process.env.FORGE_EGRESS_PROXY_URL!;
+const { installationId } = await fetch(`${proxyUrl}/v0/installations`).then(r => r.json());
+
 const adapter = new ForgeContainerAdapter({
   product: 'jira',
-  installationId: process.env.FORGE_INSTALLATION_ID!,
-  egressProxyUrl: process.env.FORGE_EGRESS_PROXY_URL!,
+  proxyUrl,
+  installationId,
 });
 ```
 
@@ -111,13 +116,16 @@ See the [Auth Contexts guide](/forge-clients/guides/auth-contexts/) for full det
 Every Atlassian REST API endpoint becomes a named async function:
 
 ```typescript
-// Jira v3
+// Jira v3 (default — recommended)
 import { getIssue, createIssue, searchForIssuesUsingJqlPost } from '@forge-clients/jira/v3';
 
 // Jira Software
 import { getBoard, getSprint } from '@forge-clients/jira/software';
 
-// Confluence v1
+// Confluence v2 (default — recommended)
+import { getPages, getPageById } from '@forge-clients/confluence/v2';
+
+// Confluence v1 (legacy)
 import { getContentById, createContent } from '@forge-clients/confluence/v1';
 ```
 

@@ -5,7 +5,7 @@ prev: false
 title: "ForgeApiError"
 ---
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:25](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L25)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:25](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L25)
 
 Base class for all HTTP errors thrown by `@forge-clients` API calls.
 Subclasses are thrown for specific HTTP status codes.
@@ -45,7 +45,7 @@ try {
 
 > **new ForgeApiError**(`status`, `body`, `path`): `ForgeApiError`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:31](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L31)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:31](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L31)
 
 #### Parameters
 
@@ -81,7 +81,7 @@ The API path that was requested
 
 > `readonly` **body**: `unknown`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:35](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L35)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:35](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L35)
 
 The parsed JSON response body
 
@@ -127,7 +127,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` **path**: `string`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:37](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L37)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:37](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L37)
 
 The API path that returned this error
 
@@ -149,7 +149,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` **status**: `number`
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:33](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L33)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:33](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L33)
 
 The HTTP status code returned by the API
 
@@ -251,7 +251,7 @@ a();
 
 > `static` **fromResponse**(`response`, `path`): `Promise`\<`ForgeApiError`\>
 
-Defined in: [packages/core/src/errors/ForgeApiError.ts:52](https://github.com/robertmassaioli/forge-clients/blob/001365db831fa8cdb4890f8532a0b0a0d5598f6c/packages/core/src/errors/ForgeApiError.ts#L52)
+Defined in: [packages/core/src/errors/ForgeApiError.ts:52](https://github.com/robertmassaioli/forge-clients/blob/e2a10777386c183b5e970b14c7356486235d520c/packages/core/src/errors/ForgeApiError.ts#L52)
 
 Parse an error `Response` and return the appropriate typed subclass.
 Used internally by generated client functions after receiving a non-2xx response.
