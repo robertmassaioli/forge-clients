@@ -36,7 +36,7 @@ describe('OfflineTokenManager', () => {
       mockFetch('tok', 3600);
       const mgr = new OfflineTokenManager({ proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await mgr.getToken('user-123');
-      const calledUrl = (global.fetch as ReturnType<typeof vi.fn>).mock.calls[0][0];
+      const calledUrl = (global.fetch as ReturnType<typeof vi.fn>).mock.calls[0]![0];
       expect(calledUrl).toBe(`${PROXY_URL}/graphql`);
     });
 
@@ -44,7 +44,7 @@ describe('OfflineTokenManager', () => {
       mockFetch('tok', 3600);
       const mgr = new OfflineTokenManager({ proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await mgr.getToken('user-123');
-      const init = (global.fetch as ReturnType<typeof vi.fn>).mock.calls[0][1];
+      const init = (global.fetch as ReturnType<typeof vi.fn>).mock.calls[0]![1];
       expect(init.headers['forge-proxy-authorization']).toBe(
         `Forge as=app,installationId=${INSTALL_ID}`,
       );
@@ -54,7 +54,7 @@ describe('OfflineTokenManager', () => {
       mockFetch('tok', 3600);
       const mgr = new OfflineTokenManager({ proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await mgr.getToken('user-abc');
-      const init = (global.fetch as ReturnType<typeof vi.fn>).mock.calls[0][1];
+      const init = (global.fetch as ReturnType<typeof vi.fn>).mock.calls[0]![1];
       const body = JSON.parse(init.body as string);
       expect(body.variables.userId).toBe('user-abc');
     });

@@ -41,7 +41,7 @@ describe('ForgeContainerAdapter', () => {
         installationId: INSTALL_ID,
       });
       await adapter.fetch({ method: 'GET', path: '/rest/api/3/myself', authContext: { type: 'asApp' } });
-      const calledUrl = fetchMock.mock.calls[0][0] as string;
+      const calledUrl = fetchMock.mock.calls[0]![0] as string;
       expect(calledUrl).not.toContain('//jira');
       expect(calledUrl).toContain(`${PROXY_URL}/jira`);
     });
@@ -51,13 +51,13 @@ describe('ForgeContainerAdapter', () => {
     it('constructs correct URL for jira product', async () => {
       const adapter = new ForgeContainerAdapter({ product: 'jira', proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await adapter.fetch({ method: 'GET', path: '/rest/api/3/myself', authContext: { type: 'asApp' } });
-      expect(fetchMock.mock.calls[0][0]).toBe(`${PROXY_URL}/jira/rest/api/3/myself`);
+      expect(fetchMock.mock.calls[0]![0]).toBe(`${PROXY_URL}/jira/rest/api/3/myself`);
     });
 
     it('constructs correct URL for confluence product', async () => {
       const adapter = new ForgeContainerAdapter({ product: 'confluence', proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await adapter.fetch({ method: 'GET', path: '/wiki/rest/api/space', authContext: { type: 'asApp' } });
-      expect(fetchMock.mock.calls[0][0]).toBe(`${PROXY_URL}/confluence/wiki/rest/api/space`);
+      expect(fetchMock.mock.calls[0]![0]).toBe(`${PROXY_URL}/confluence/wiki/rest/api/space`);
     });
 
     it('appends query params to URL', async () => {
@@ -68,7 +68,7 @@ describe('ForgeContainerAdapter', () => {
         queryParams: { fields: 'summary', expand: 'changelog' },
         authContext: { type: 'asApp' },
       });
-      const url = fetchMock.mock.calls[0][0] as string;
+      const url = fetchMock.mock.calls[0]![0] as string;
       expect(url).toContain('fields=summary');
       expect(url).toContain('expand=changelog');
     });
@@ -81,7 +81,7 @@ describe('ForgeContainerAdapter', () => {
         queryParams: { fields: 'summary', expand: undefined },
         authContext: { type: 'asApp' },
       });
-      const url = fetchMock.mock.calls[0][0] as string;
+      const url = fetchMock.mock.calls[0]![0] as string;
       expect(url).not.toContain('expand');
     });
   });
@@ -90,7 +90,7 @@ describe('ForgeContainerAdapter', () => {
     it('sets header for asApp context', async () => {
       const adapter = new ForgeContainerAdapter({ product: 'jira', proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await adapter.fetch({ method: 'GET', path: '/rest/api/3/myself', authContext: { type: 'asApp' } });
-      const init = fetchMock.mock.calls[0][1] as RequestInit;
+      const init = fetchMock.mock.calls[0]![1] as RequestInit;
       const headers = init.headers as Record<string, string>;
       expect(headers['forge-proxy-authorization']).toContain('as=app');
       expect(headers['forge-proxy-authorization']).toContain(INSTALL_ID);
@@ -99,7 +99,7 @@ describe('ForgeContainerAdapter', () => {
     it('sets header for asUser context with userId', async () => {
       const adapter = new ForgeContainerAdapter({ product: 'jira', proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await adapter.fetch({ method: 'GET', path: '/rest/api/3/myself', authContext: { type: 'asUser', userId: 'user-abc' } });
-      const init = fetchMock.mock.calls[0][1] as RequestInit;
+      const init = fetchMock.mock.calls[0]![1] as RequestInit;
       const headers = init.headers as Record<string, string>;
       expect(headers['forge-proxy-authorization']).toContain('as=user');
       expect(headers['forge-proxy-authorization']).toContain('user-abc');
@@ -112,7 +112,7 @@ describe('ForgeContainerAdapter', () => {
         path: '/rest/api/3/myself',
         authContext: { type: 'offlineUser', accountId: 'user-456', accessToken: 'tok123' },
       });
-      const init = fetchMock.mock.calls[0][1] as RequestInit;
+      const init = fetchMock.mock.calls[0]![1] as RequestInit;
       const headers = init.headers as Record<string, string>;
       expect(headers['forge-proxy-authorization']).toContain('user-456');
       expect(headers['Authorization']).toBe('Bearer tok123');
@@ -124,14 +124,14 @@ describe('ForgeContainerAdapter', () => {
       const adapter = new ForgeContainerAdapter({ product: 'jira', proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       const body = { fields: { summary: 'Test issue' } };
       await adapter.fetch({ method: 'POST', path: '/rest/api/3/issue', body, authContext: { type: 'asApp' } });
-      const init = fetchMock.mock.calls[0][1] as RequestInit;
+      const init = fetchMock.mock.calls[0]![1] as RequestInit;
       expect(init.body).toBe(JSON.stringify(body));
     });
 
     it('does not include body for GET', async () => {
       const adapter = new ForgeContainerAdapter({ product: 'jira', proxyUrl: PROXY_URL, installationId: INSTALL_ID });
       await adapter.fetch({ method: 'GET', path: '/rest/api/3/myself', authContext: { type: 'asApp' } });
-      const init = fetchMock.mock.calls[0][1] as RequestInit;
+      const init = fetchMock.mock.calls[0]![1] as RequestInit;
       expect(init.body).toBeUndefined();
     });
   });
