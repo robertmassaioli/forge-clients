@@ -3,6 +3,7 @@ name: Release
 # Trigger options:
 # 1. Push a version tag: git tag v0.2.0 && git push origin v0.2.0
 # 2. Manual dispatch from the GitHub Actions UI (useful for first publish or reruns)
+#    When triggered manually (no tag), packages are published at their current versions.
 on:
   push:
     tags:
@@ -19,13 +20,16 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # Needed for changeset to push version bump commits/tags
+      contents: write  # Needed to push version-bump commits back to the repo
 
     steps:
       - uses: actions/checkout@v4
         with:
-          # Full history is required for changeset to determine what changed
+          # Full history so we can push version-bump commits back
           fetch-depth: 0
+          # Use a PAT so that the version-bump commit can trigger other workflows.
+          # Falls back to GITHUB_TOKEN (push won't trigger CI but publish still works).
+          token: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v4
         # Reads pnpm version from "packageManager" field in package.json
@@ -40,6 +44,59 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      # ── Version sync ───────────────────────────────────────────────────────
+      # When triggered by a tag push, extract the semver from the tag (strips
+      # the leading 'v') and update every publishable package that is not
+      # already at that version. Changes are committed and pushed back so that
+      # the repo stays in sync with what was actually published.
+      #
+      # When triggered via workflow_dispatch (no tag), this step is skipped
+      # and packages are published at their current package.json versions.
+      - name: Sync package versions to tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          echo "Tag version: $TAG_VERSION"
+
+          CHANGED=0
+
+          for pkg_json in packages/*/package.json; do
+            # Skip private packages (e.g. monorepo root, docs)
+            IS_PRIVATE=$(node -p "require('./$pkg_json').private ?? false")
+            if [ "$IS_PRIVATE" = "true" ]; then
+              echo "Skipping private package: $pkg_json"
+              continue
+            fi
+
+            CURRENT=$(node -p "require('./$pkg_json').version")
+            PKG_NAME=$(node -p "require('./$pkg_json').name")
+
+            if [ "$CURRENT" = "$TAG_VERSION" ]; then
+              echo "✓ $PKG_NAME is already at $TAG_VERSION"
+            else
+              echo "↑ $PKG_NAME: $CURRENT → $TAG_VERSION"
+              # node -e reads the file, updates only the version field, writes back
+              node -e "
+                const fs = require('fs');
+                const p = require('./$pkg_json');
+                p.version = '$TAG_VERSION';
+                fs.writeFileSync('./$pkg_json', JSON.stringify(p, null, 2) + '\n');
+              "
+              CHANGED=1
+            fi
+          done
+
+          if [ "$CHANGED" = "1" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add packages/*/package.json
+            git commit -m "chore: bump packages to $TAG_VERSION [skip ci]"
+            # Push to the branch the tag points at (usually main)
+            git push origin HEAD:main
+          else
+            echo "All packages already at $TAG_VERSION — no commit needed."
+          fi
 
       - name: Typecheck all packages
         run: pnpm -r run typecheck
